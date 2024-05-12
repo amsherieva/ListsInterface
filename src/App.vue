@@ -1,6 +1,6 @@
 <template>
-    <Header />
-    <ListSelector />
+  <Header />
+  <ListSelector />
 </template>
 
 <script>
@@ -16,15 +16,17 @@ export default {
 
 <style>
 @font-face {
-    font-family: 'Roboto-Black';
-    src: url('/src/assets/fonts/Roboto-Black.ttf');
+  font-family: 'Roboto-Black';
+  src: url('/src/assets/fonts/Roboto-Black.ttf');
 }
+
 @font-face {
-    font-family: 'Roboto-Medium';
-    src: url('/src/assets/fonts/Roboto-Medium.ttf');
+  font-family: 'Roboto-Medium';
+  src: url('/src/assets/fonts/Roboto-Medium.ttf');
 }
+
 @font-face {
-    font-family: 'Roboto-Regular';
-    src: url('/src/assets/fonts/Roboto-Regular.ttf');
+  font-family: 'Roboto-Regular';
+  src: url('/src/assets/fonts/Roboto-Regular.ttf');
 }
 </style>

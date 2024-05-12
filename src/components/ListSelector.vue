@@ -35,7 +35,51 @@
                                                 class="accordion-collapse collapse"
                                                 aria-labelledby="panelsListSelector-headingBak_applicants">
                                                 <div class="accordion-body">
-                                                    Блядство
+                                                    <!-- Free -->
+                                                    <div class="form-check">
+
+
+                                                        <div class="accordion flex-fill"
+                                                            id="accordionPanelsListSelector_bak_budget">
+                                                            <div class="accordion-item">
+                                                                <h2 class="accordion-header"
+                                                                    id="panelsListSelector-headingBak_contest_budget">
+                                                                    <button class="accordion-button collapsed"
+                                                                        type="button" data-bs-toggle="collapse"
+                                                                        data-bs-target="#panelsListSelector-collapseBak_contest_budget"
+                                                                        aria-expanded="false"
+                                                                        aria-controls="panelsListSelector-collapseBak_contest_budget">
+                                                                        <input class="form-check-input m-1"
+                                                                            type="checkbox" v-model="bakBudget"
+                                                                            id="flexCheckBudget" @click.stop>
+                                                                        <label
+                                                                            class="form-check-label direction-info__name direction-info__body"
+                                                                            for="flexCheckBudget"
+                                                                            style="display:block;">&nbsp;Бюджет
+                                                                        </label>
+                                                                    </button>
+                                                                </h2>
+                                                                <div id="panelsListSelector-collapseBak_contest_budget"
+                                                                    class="accordion-collapse collapse"
+                                                                    aria-labelledby="panelsListSelector-headingBak_contest_budget">
+                                                                    <div class="accordion-body">
+                                                                        Мудоебство
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <!-- Paid -->
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            v-model="bakContract" id="flexCheckContract">
+                                                        <label
+                                                            class="form-check-label direction-info__name direction-info__body"
+                                                            for="flexCheckContract" style="display:block;">Контракт
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -119,7 +163,7 @@
                                                 class="accordion-collapse collapse"
                                                 aria-labelledby="panelsListSelector-headingMag_applicants">
                                                 <div class="accordion-body">
-                                                    Блядство
+                                                    Абоба 4
                                                 </div>
                                             </div>
                                         </div>
@@ -140,7 +184,7 @@
                                                 class="accordion-collapse collapse"
                                                 aria-labelledby="panelsListSelector-headingMag_contest">
                                                 <div class="accordion-body">
-                                                    Мудоебство
+                                                    Абоба 5
                                                 </div>
                                             </div>
                                         </div>
@@ -161,7 +205,7 @@
                                                 class="accordion-collapse collapse"
                                                 aria-labelledby="panelsListSelector-headingMag_enrolled">
                                                 <div class="accordion-body">
-                                                    Автоматом проебал
+                                                    Абоба 6
                                                 </div>
                                             </div>
                                         </div>
@@ -204,7 +248,7 @@
                                                 class="accordion-collapse collapse"
                                                 aria-labelledby="panelsListSelector-headingAsp_contest">
                                                 <div class="accordion-body">
-                                                    Мудоебство
+                                                    Абоба 7
                                                 </div>
                                             </div>
                                         </div>
@@ -225,7 +269,7 @@
                                                 class="accordion-collapse collapse"
                                                 aria-labelledby="panelsListSelector-headingAsp_enrolled">
                                                 <div class="accordion-body">
-                                                    Автоматом проебал
+                                                    Абоба 8
                                                 </div>
                                             </div>
                                         </div>
@@ -241,7 +285,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            bakBudget: false,
+            bakContract: false,
+        }
+    }
+};
 </script>
 
 <style scoped>
