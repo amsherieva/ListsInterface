@@ -1,15 +1,17 @@
 <template>
   <Header />
   <ListSelector />
+  <Test />
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
 import ListSelector from "@/components/ListSelector.vue"
+import Test from "@/components/Test.vue";
 
 export default {
   components: {
-    Header, ListSelector
+    Header, ListSelector, Test
   },
 };
 </script>
