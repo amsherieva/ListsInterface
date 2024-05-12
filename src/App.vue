@@ -16,7 +16,15 @@ export default {
 
 <style>
 @font-face {
-  font-family: "Roboto-Black";
-  src: url("/src/assets/fonts/Roboto-Black.ttf") format("ttf");
+    font-family: 'Roboto-Black';
+    src: url('/src/assets/fonts/Roboto-Black.ttf');
+}
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('/src/assets/fonts/Roboto-Medium.ttf');
+}
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('/src/assets/fonts/Roboto-Regular.ttf');
 }
 </style>

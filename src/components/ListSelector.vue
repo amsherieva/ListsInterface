@@ -1,63 +1,274 @@
 <template>
-<div class="m-2 d-flex justify-content-evenly">
-    <div class="accordion" id="accordionPanelsListSelector">
-        <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsListSelector-headingOne">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsListSelector-collapseOne" aria-expanded="false" aria-controls="panelsListSelector-collapseOne">
-            Accordion Item #1
-            </button>
-        </h2>
-        <div id="panelsListSelector-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsListSelector-headingOne">
-            <div class="accordion-body">
-            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-            </div>
-        </div>
-        </div>
+    <div class="row container-fluid mx-auto mt-4 mb-4">
+        <div class="col-lg-7 col p-0 mx-auto">
+            <div class="d-flex justify-content-evenly">
+                <div class="accordion flex-fill" id="accordionPanelsListSelector">
+                    <!-- Bak -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsListSelector-headingBak">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsListSelector-collapseBak" aria-expanded="false"
+                                aria-controls="panelsListSelector-collapseBak">
+                                <p class="direction-info__name" style="display:block;"><b><span
+                                            style="color: #0152a3;">Б</span></b>акалавриат</p>
+                            </button>
+                        </h2>
+                        <div id="panelsListSelector-collapseBak" class="accordion-collapse collapse"
+                            aria-labelledby="panelsListSelector-headingBak">
+                            <div class="accordion-body">
+                                <!-- List of applicants -->
+                                <div class="d-flex justify-content-evenly">
+                                    <div class="accordion flex-fill" id="accordionPanelsListSelector_bak">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="panelsListSelector-headingBak_applicants">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsListSelector-collapseBak_applicants"
+                                                    aria-expanded="false"
+                                                    aria-controls="panelsListSelector-collapseBak_applicants">
+                                                    <p class="direction-info__name direction-info__body"
+                                                        style="display:block;">Списки
+                                                        подавших заявление</p>
+                                                </button>
+                                            </h2>
+                                            <div id="panelsListSelector-collapseBak_applicants"
+                                                class="accordion-collapse collapse"
+                                                aria-labelledby="panelsListSelector-headingBak_applicants">
+                                                <div class="accordion-body">
+                                                    Блядство
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Contest list -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="panelsListSelector-headingBak_contest">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsListSelector-collapseBak_contest"
+                                                    aria-expanded="false"
+                                                    aria-controls="panelsListSelector-collapseBak_contest">
+                                                    <p class="direction-info__name direction-info__body"
+                                                        style="display:block;">Конкурсные
+                                                        списки</p>
+                                                </button>
+                                            </h2>
+                                            <div id="panelsListSelector-collapseBak_contest"
+                                                class="accordion-collapse collapse"
+                                                aria-labelledby="panelsListSelector-headingBak_contest">
+                                                <div class="accordion-body">
+                                                    Мудоебство
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Enrolled list -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="panelsListSelector-headingBak_enrolled">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsListSelector-collapseBak_enrolled"
+                                                    aria-expanded="false"
+                                                    aria-controls="panelsListSelector-collapseBak_enrolled">
+                                                    <p class="direction-info__name direction-info__body"
+                                                        style="display:block;">Списки
+                                                        зачисленных</p>
+                                                </button>
+                                            </h2>
+                                            <div id="panelsListSelector-collapseBak_enrolled"
+                                                class="accordion-collapse collapse"
+                                                aria-labelledby="panelsListSelector-headingBak_enrolled">
+                                                <div class="accordion-body">
+                                                    Автоматом проебал
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsListSelector-headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsListSelector-collapseTwo" aria-expanded="false" aria-controls="panelsListSelector-collapseTwo">
-            Accordion Item #2
-            </button>
-        </h2>
-        <div id="panelsListSelector-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsListSelector-headingTwo">
-            <div class="accordion-body">
-            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-            </div>
-        </div>
-        </div>
+                    <!-- Mag -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsListSelector-headingMag">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsListSelector-collapseMag" aria-expanded="false"
+                                aria-controls="panelsListSelector-collapseMag">
+                                <p class="direction-info__name" style="display:block;"><b><span
+                                            style="color: #fd4239;">М</span></b>агистратура</p>
+                            </button>
+                        </h2>
+                        <div id="panelsListSelector-collapseMag" class="accordion-collapse collapse"
+                            aria-labelledby="panelsListSelector-headingMag">
+                            <div class="accordion-body">
+                                <!-- List of applicants -->
+                                <div class="d-flex justify-content-evenly">
+                                    <div class="accordion flex-fill" id="accordionPanelsListSelector_mag">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="panelsListSelector-headingMag_applicants">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsListSelector-collapseMag_applicants"
+                                                    aria-expanded="false"
+                                                    aria-controls="panelsListSelector-collapseMag_applicants">
+                                                    <p class="direction-info__name direction-info__body"
+                                                        style="display:block;">Списки
+                                                        подавших заявление</p>
+                                                </button>
+                                            </h2>
+                                            <div id="panelsListSelector-collapseMag_applicants"
+                                                class="accordion-collapse collapse"
+                                                aria-labelledby="panelsListSelector-headingMag_applicants">
+                                                <div class="accordion-body">
+                                                    Блядство
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Contest list -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="panelsListSelector-headingMag_contest">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsListSelector-collapseMag_contest"
+                                                    aria-expanded="false"
+                                                    aria-controls="panelsListSelector-collapseMag_contest">
+                                                    <p class="direction-info__name direction-info__body"
+                                                        style="display:block;">Конкурсные
+                                                        списки</p>
+                                                </button>
+                                            </h2>
+                                            <div id="panelsListSelector-collapseMag_contest"
+                                                class="accordion-collapse collapse"
+                                                aria-labelledby="panelsListSelector-headingMag_contest">
+                                                <div class="accordion-body">
+                                                    Мудоебство
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Enrolled list -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="panelsListSelector-headingMag_enrolled">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsListSelector-collapseMag_enrolled"
+                                                    aria-expanded="false"
+                                                    aria-controls="panelsListSelector-collapseMag_enrolled">
+                                                    <p class="direction-info__name direction-info__body"
+                                                        style="display:block;">Списки
+                                                        зачисленных</p>
+                                                </button>
+                                            </h2>
+                                            <div id="panelsListSelector-collapseMag_enrolled"
+                                                class="accordion-collapse collapse"
+                                                aria-labelledby="panelsListSelector-headingMag_enrolled">
+                                                <div class="accordion-body">
+                                                    Автоматом проебал
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsListSelector-headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsListSelector-collapseThree" aria-expanded="false" aria-controls="panelsListSelector-collapseThree">
-            Accordion Item #3
-            </button>
-        </h2>
-        <div id="panelsListSelector-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsListSelector-headingThree">
-            <div class="accordion-body">
-            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    <!-- Asp -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsListSelector-headingAsp">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsListSelector-collapseAsp" aria-expanded="false"
+                                aria-controls="panelsListSelector-collapseAsp">
+                                <p class="direction-info__name" style="display:block;"><b><span
+                                            style="color: #FF992C;">А</span></b>спирантура</p>
+                            </button>
+                        </h2>
+                        <div id="panelsListSelector-collapseAsp" class="accordion-collapse collapse"
+                            aria-labelledby="panelsListSelector-headingAsp">
+                            <div class="accordion-body">
+                                <!-- List of applicants -->
+                                <div class="d-flex justify-content-evenly">
+                                    <div class="accordion flex-fill" id="accordionPanelsListSelector_asp">
+                                        <!-- Contest list -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="panelsListSelector-headingAsp_contest">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsListSelector-collapseAsp_contest"
+                                                    aria-expanded="false"
+                                                    aria-controls="panelsListSelector-collapseAsp_contest">
+                                                    <p class="direction-info__name direction-info__body"
+                                                        style="display:block;">Конкурсные
+                                                        списки</p>
+                                                </button>
+                                            </h2>
+                                            <div id="panelsListSelector-collapseAsp_contest"
+                                                class="accordion-collapse collapse"
+                                                aria-labelledby="panelsListSelector-headingAsp_contest">
+                                                <div class="accordion-body">
+                                                    Мудоебство
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Enrolled list -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="panelsListSelector-headingAsp_enrolled">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsListSelector-collapseAsp_enrolled"
+                                                    aria-expanded="false"
+                                                    aria-controls="panelsListSelector-collapseAsp_enrolled">
+                                                    <p class="direction-info__name direction-info__body"
+                                                        style="display:block;">Списки
+                                                        зачисленных</p>
+                                                </button>
+                                            </h2>
+                                            <div id="panelsListSelector-collapseAsp_enrolled"
+                                                class="accordion-collapse collapse"
+                                                aria-labelledby="panelsListSelector-headingAsp_enrolled">
+                                                <div class="accordion-body">
+                                                    Автоматом проебал
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
-    </div> 
-</div>
+    </div>
 </template>
-  
+
 <script>
 export default {};
 </script>
-  
-<style scoped>
 
+<style scoped>
 .accordion {
-	--bs-accordion-btn-bg: white;
-	--bs-accordion-active-bg: white;
+    --bs-accordion-btn-bg: white;
+    --bs-accordion-active-bg: white;
 }
 
-.accordion-button button:active, .accordion-button button:focus, .accordion-button button:hover, .accordion-button:active, .accordion-button:focus, .accordion-button:hover {
+.accordion-button button:active,
+.accordion-button button:focus,
+.accordion-button button:hover,
+.accordion-button:active,
+.accordion-button:focus,
+.accordion-button:hover {
     background-color: #e8eff7;
     box-shadow: 0 0 0 4px #c2d6e8;
     color: #0152a3;
 }
+
+.direction-info__name {
+    font-family: Roboto-Medium;
+    color: #404040;
+    margin: 0px;
+    font-size: calc(1rem + 0.3vw);
+}
+
+.direction-info__body {
+    font-size: calc(1rem + 0.2vw);
+}
 </style>
-  
