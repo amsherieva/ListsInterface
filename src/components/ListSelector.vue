@@ -7,14 +7,14 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsListSelector-headingBak">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#panelsListSelector-collapseBak" aria-expanded="false"
-                                aria-controls="panelsListSelector-collapseBak">
+                                    data-bs-target="#panelsListSelector-collapseBak" aria-expanded="false"
+                                    aria-controls="panelsListSelector-collapseBak">
                                 <p class="direction-info__name" style="display:block;"><b><span
-                                            style="color: #0152a3;">Б</span></b>акалавриат</p>
+                                    style="color: #0152a3;">Б</span></b>акалавриат</p>
                             </button>
                         </h2>
                         <div id="panelsListSelector-collapseBak" class="accordion-collapse collapse"
-                            aria-labelledby="panelsListSelector-headingBak">
+                             aria-labelledby="panelsListSelector-headingBak">
                             <div class="accordion-body">
                                 <!-- List of applicants -->
                                 <div class="d-flex justify-content-evenly">
@@ -22,59 +22,41 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsListSelector-headingBak_applicants">
                                                 <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsListSelector-collapseBak_applicants"
-                                                    aria-expanded="false"
-                                                    aria-controls="panelsListSelector-collapseBak_applicants">
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#panelsListSelector-collapseBak_applicants"
+                                                        aria-expanded="false"
+                                                        aria-controls="panelsListSelector-collapseBak_applicants">
                                                     <p class="direction-info__name direction-info__body"
-                                                        style="display:block;">Списки
+                                                       style="display:block;">Списки
                                                         подавших заявление</p>
                                                 </button>
                                             </h2>
                                             <div id="panelsListSelector-collapseBak_applicants"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="panelsListSelector-headingBak_applicants">
+                                                 class="accordion-collapse collapse"
+                                                 aria-labelledby="panelsListSelector-headingBak_applicants">
                                                 <div class="accordion-body">
                                                     <!-- Free -->
-                                                    <div class="form-check">
+
+                                                    <!-- Test -->
+                                                    <CheckableAccordeon edu-level="Bak" list-type="Contest" budget-or-contract="Budget">
+                                                        <template v-slot:buttonContent>
+<!--                                                            <label class="direction-info__name direction-info__body flex-fill">Бюджет</label>-->
+                                                            <CheckableProgram :item-name="'testing'" class="flex-fill">Бакалавриат
+                                                            </CheckableProgram>
+                                                        </template>
+                                                        <template v-slot:bodyContent>
+                                                            <CheckableProgram :item-name="'testing1'" class="flex-fill">Программа 1
+                                                            </CheckableProgram>
+                                                            <CheckableProgram :item-name="'testing2'" class="flex-fill">Программа 2
+                                                            </CheckableProgram>
+                                                        </template>
+                                                    </CheckableAccordeon>
 
 
-                                                        <div class="accordion flex-fill"
-                                                            id="accordionPanelsListSelector_bak_budget">
-                                                            <div class="accordion-item">
-                                                                <h2 class="accordion-header"
-                                                                    id="panelsListSelector-headingBak_contest_budget">
-                                                                    <button class="accordion-button collapsed"
-                                                                        type="button" data-bs-toggle="collapse"
-                                                                        data-bs-target="#panelsListSelector-collapseBak_contest_budget"
-                                                                        aria-expanded="false"
-                                                                        aria-controls="panelsListSelector-collapseBak_contest_budget">
-                                                                        <input class="form-check-input m-1"
-                                                                            type="checkbox" v-model="bakBudget"
-                                                                            id="flexCheckBudget" @click.stop>
-                                                                        <label
-                                                                            class="form-check-label direction-info__name direction-info__body"
-                                                                            for="flexCheckBudget"
-                                                                            style="display:block;">&nbsp;Бюджет
-                                                                        </label>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="panelsListSelector-collapseBak_contest_budget"
-                                                                    class="accordion-collapse collapse"
-                                                                    aria-labelledby="panelsListSelector-headingBak_contest_budget">
-                                                                    <div class="accordion-body">
-                                                                        Мудоебство
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
                                                     <!-- Paid -->
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox"
-                                                            v-model="bakContract" id="flexCheckContract">
+                                                               v-model="bakContract" id="flexCheckContract">
                                                         <label
                                                             class="form-check-label direction-info__name direction-info__body"
                                                             for="flexCheckContract" style="display:block;">Контракт
@@ -87,18 +69,18 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsListSelector-headingBak_contest">
                                                 <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsListSelector-collapseBak_contest"
-                                                    aria-expanded="false"
-                                                    aria-controls="panelsListSelector-collapseBak_contest">
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#panelsListSelector-collapseBak_contest"
+                                                        aria-expanded="false"
+                                                        aria-controls="panelsListSelector-collapseBak_contest">
                                                     <p class="direction-info__name direction-info__body"
-                                                        style="display:block;">Конкурсные
+                                                       style="display:block;">Конкурсные
                                                         списки</p>
                                                 </button>
                                             </h2>
                                             <div id="panelsListSelector-collapseBak_contest"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="panelsListSelector-headingBak_contest">
+                                                 class="accordion-collapse collapse"
+                                                 aria-labelledby="panelsListSelector-headingBak_contest">
                                                 <div class="accordion-body">
                                                     Мудоебство
                                                 </div>
@@ -108,18 +90,18 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsListSelector-headingBak_enrolled">
                                                 <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsListSelector-collapseBak_enrolled"
-                                                    aria-expanded="false"
-                                                    aria-controls="panelsListSelector-collapseBak_enrolled">
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#panelsListSelector-collapseBak_enrolled"
+                                                        aria-expanded="false"
+                                                        aria-controls="panelsListSelector-collapseBak_enrolled">
                                                     <p class="direction-info__name direction-info__body"
-                                                        style="display:block;">Списки
+                                                       style="display:block;">Списки
                                                         зачисленных</p>
                                                 </button>
                                             </h2>
                                             <div id="panelsListSelector-collapseBak_enrolled"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="panelsListSelector-headingBak_enrolled">
+                                                 class="accordion-collapse collapse"
+                                                 aria-labelledby="panelsListSelector-headingBak_enrolled">
                                                 <div class="accordion-body">
                                                     Автоматом проебал
                                                 </div>
@@ -135,14 +117,14 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsListSelector-headingMag">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#panelsListSelector-collapseMag" aria-expanded="false"
-                                aria-controls="panelsListSelector-collapseMag">
+                                    data-bs-target="#panelsListSelector-collapseMag" aria-expanded="false"
+                                    aria-controls="panelsListSelector-collapseMag">
                                 <p class="direction-info__name" style="display:block;"><b><span
-                                            style="color: #fd4239;">М</span></b>агистратура</p>
+                                    style="color: #fd4239;">М</span></b>агистратура</p>
                             </button>
                         </h2>
                         <div id="panelsListSelector-collapseMag" class="accordion-collapse collapse"
-                            aria-labelledby="panelsListSelector-headingMag">
+                             aria-labelledby="panelsListSelector-headingMag">
                             <div class="accordion-body">
                                 <!-- List of applicants -->
                                 <div class="d-flex justify-content-evenly">
@@ -150,18 +132,18 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsListSelector-headingMag_applicants">
                                                 <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsListSelector-collapseMag_applicants"
-                                                    aria-expanded="false"
-                                                    aria-controls="panelsListSelector-collapseMag_applicants">
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#panelsListSelector-collapseMag_applicants"
+                                                        aria-expanded="false"
+                                                        aria-controls="panelsListSelector-collapseMag_applicants">
                                                     <p class="direction-info__name direction-info__body"
-                                                        style="display:block;">Списки
+                                                       style="display:block;">Списки
                                                         подавших заявление</p>
                                                 </button>
                                             </h2>
                                             <div id="panelsListSelector-collapseMag_applicants"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="panelsListSelector-headingMag_applicants">
+                                                 class="accordion-collapse collapse"
+                                                 aria-labelledby="panelsListSelector-headingMag_applicants">
                                                 <div class="accordion-body">
                                                     Абоба 4
                                                 </div>
@@ -171,18 +153,18 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsListSelector-headingMag_contest">
                                                 <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsListSelector-collapseMag_contest"
-                                                    aria-expanded="false"
-                                                    aria-controls="panelsListSelector-collapseMag_contest">
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#panelsListSelector-collapseMag_contest"
+                                                        aria-expanded="false"
+                                                        aria-controls="panelsListSelector-collapseMag_contest">
                                                     <p class="direction-info__name direction-info__body"
-                                                        style="display:block;">Конкурсные
+                                                       style="display:block;">Конкурсные
                                                         списки</p>
                                                 </button>
                                             </h2>
                                             <div id="panelsListSelector-collapseMag_contest"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="panelsListSelector-headingMag_contest">
+                                                 class="accordion-collapse collapse"
+                                                 aria-labelledby="panelsListSelector-headingMag_contest">
                                                 <div class="accordion-body">
                                                     Абоба 5
                                                 </div>
@@ -192,18 +174,18 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsListSelector-headingMag_enrolled">
                                                 <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsListSelector-collapseMag_enrolled"
-                                                    aria-expanded="false"
-                                                    aria-controls="panelsListSelector-collapseMag_enrolled">
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#panelsListSelector-collapseMag_enrolled"
+                                                        aria-expanded="false"
+                                                        aria-controls="panelsListSelector-collapseMag_enrolled">
                                                     <p class="direction-info__name direction-info__body"
-                                                        style="display:block;">Списки
+                                                       style="display:block;">Списки
                                                         зачисленных</p>
                                                 </button>
                                             </h2>
                                             <div id="panelsListSelector-collapseMag_enrolled"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="panelsListSelector-headingMag_enrolled">
+                                                 class="accordion-collapse collapse"
+                                                 aria-labelledby="panelsListSelector-headingMag_enrolled">
                                                 <div class="accordion-body">
                                                     Абоба 6
                                                 </div>
@@ -219,14 +201,14 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsListSelector-headingAsp">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#panelsListSelector-collapseAsp" aria-expanded="false"
-                                aria-controls="panelsListSelector-collapseAsp">
+                                    data-bs-target="#panelsListSelector-collapseAsp" aria-expanded="false"
+                                    aria-controls="panelsListSelector-collapseAsp">
                                 <p class="direction-info__name" style="display:block;"><b><span
-                                            style="color: #FF992C;">А</span></b>спирантура</p>
+                                    style="color: #FF992C;">А</span></b>спирантура</p>
                             </button>
                         </h2>
                         <div id="panelsListSelector-collapseAsp" class="accordion-collapse collapse"
-                            aria-labelledby="panelsListSelector-headingAsp">
+                             aria-labelledby="panelsListSelector-headingAsp">
                             <div class="accordion-body">
                                 <!-- List of applicants -->
                                 <div class="d-flex justify-content-evenly">
@@ -235,18 +217,18 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsListSelector-headingAsp_contest">
                                                 <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsListSelector-collapseAsp_contest"
-                                                    aria-expanded="false"
-                                                    aria-controls="panelsListSelector-collapseAsp_contest">
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#panelsListSelector-collapseAsp_contest"
+                                                        aria-expanded="false"
+                                                        aria-controls="panelsListSelector-collapseAsp_contest">
                                                     <p class="direction-info__name direction-info__body"
-                                                        style="display:block;">Конкурсные
+                                                       style="display:block;">Конкурсные
                                                         списки</p>
                                                 </button>
                                             </h2>
                                             <div id="panelsListSelector-collapseAsp_contest"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="panelsListSelector-headingAsp_contest">
+                                                 class="accordion-collapse collapse"
+                                                 aria-labelledby="panelsListSelector-headingAsp_contest">
                                                 <div class="accordion-body">
                                                     Абоба 7
                                                 </div>
@@ -256,18 +238,18 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="panelsListSelector-headingAsp_enrolled">
                                                 <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsListSelector-collapseAsp_enrolled"
-                                                    aria-expanded="false"
-                                                    aria-controls="panelsListSelector-collapseAsp_enrolled">
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#panelsListSelector-collapseAsp_enrolled"
+                                                        aria-expanded="false"
+                                                        aria-controls="panelsListSelector-collapseAsp_enrolled">
                                                     <p class="direction-info__name direction-info__body"
-                                                        style="display:block;">Списки
+                                                       style="display:block;">Списки
                                                         зачисленных</p>
                                                 </button>
                                             </h2>
                                             <div id="panelsListSelector-collapseAsp_enrolled"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="panelsListSelector-headingAsp_enrolled">
+                                                 class="accordion-collapse collapse"
+                                                 aria-labelledby="panelsListSelector-headingAsp_enrolled">
                                                 <div class="accordion-body">
                                                     Абоба 8
                                                 </div>
@@ -285,7 +267,11 @@
 </template>
 
 <script>
+import CheckableProgram from "@/components/UI/CheckableProgram.vue";
+import CheckableAccordeon from "@/components/UI/CheckableAccordeon.vue";
+
 export default {
+    components: {CheckableAccordeon, CheckableProgram},
     data() {
         return {
             bakBudget: false,

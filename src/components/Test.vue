@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-xl-2 col-lg-3 col-md-4 justify-content-center">
                         <a href="" class="btn-b" role="button"><i
-                                class="bi bi-pencil-square"></i> Редактировать</a>
+                                class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>
                     </div>
                 </div>
                 <hr>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-xl-2 col-lg-3 col-md-4 justify-content-center">
                         <a href="" class="btn-b" role="button"><i
-                                class="bi bi-pencil-square"></i> Редактировать</a>
+                                class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>
                     </div>
                 </div>
 
