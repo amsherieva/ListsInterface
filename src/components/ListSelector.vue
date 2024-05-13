@@ -38,11 +38,11 @@
                                                     <!-- Free -->
 
                                                     <!-- Test -->
-                                                    <CheckableAccordeon edu-level="Bak" list-type="Contest" budget-or-contract="Budget">
+                                                    <CheckableAccordeon edu-level="Bak" list-type="Contest" budget-or-contract="Budget" checkbox-name="133156">
                                                         <template v-slot:buttonContent>
-<!--                                                            <label class="direction-info__name direction-info__body flex-fill">Бюджет</label>-->
-                                                            <CheckableProgram :item-name="'testing'" class="flex-fill">Бакалавриат
-                                                            </CheckableProgram>
+                                                            <label class="direction-info__name direction-info__body flex-fill">Бюджет</label>
+<!--                                                            <CheckableProgram :item-name="'testing'" class="flex-fill">Бакалавриат-->
+<!--                                                            </CheckableProgram>-->
                                                         </template>
                                                         <template v-slot:bodyContent>
                                                             <CheckableProgram :item-name="'testing1'" class="flex-fill">Программа 1
