@@ -38,11 +38,9 @@
                                                     <!-- Free -->
 
                                                     <!-- Test -->
-                                                    <CheckableAccordeon edu-level="Bak" list-type="Contest" budget-or-contract="Budget" checkbox-name="133156">
+                                                    <CheckableAccordion edu-level="Bak" list-type="Contest" budget-or-contract="Budget" checkbox-name="133156">
                                                         <template v-slot:buttonContent>
                                                             <label class="direction-info__name direction-info__body flex-fill">Бюджет</label>
-<!--                                                            <CheckableProgram :item-name="'testing'" class="flex-fill">Бакалавриат-->
-<!--                                                            </CheckableProgram>-->
                                                         </template>
                                                         <template v-slot:bodyContent>
                                                             <CheckableProgram :item-name="'testing1'" class="flex-fill">Программа 1
@@ -50,7 +48,7 @@
                                                             <CheckableProgram :item-name="'testing2'" class="flex-fill">Программа 2
                                                             </CheckableProgram>
                                                         </template>
-                                                    </CheckableAccordeon>
+                                                    </CheckableAccordion>
 
 
                                                     <!-- Paid -->
@@ -268,10 +266,10 @@
 
 <script>
 import CheckableProgram from "@/components/UI/CheckableProgram.vue";
-import CheckableAccordeon from "@/components/UI/CheckableAccordeon.vue";
+import CheckableAccordion from "@/components/UI/CheckableAccordion.vue";
 
 export default {
-    components: {CheckableAccordeon, CheckableProgram},
+    components: {CheckableAccordion, CheckableProgram},
     data() {
         return {
             bakBudget: false,

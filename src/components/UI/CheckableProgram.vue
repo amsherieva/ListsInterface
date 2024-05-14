@@ -12,6 +12,8 @@
     </div>
 </template>
 
+<!--TODO: make default font smaller (same as here: https://abit.etu.ru/ru/postupayushhim/old/test-akkordeona)-->
+
 <script>
 export default {
     name: 'CheckableProgram',
