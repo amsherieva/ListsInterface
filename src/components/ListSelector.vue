@@ -1,305 +1,240 @@
 <template>
-    <div class="row container-fluid mx-auto mt-4 mb-4">
-        <div class="col-lg-7 col p-0 mx-auto">
-            <div class="d-flex justify-content-evenly">
-                <div class="accordion flex-fill" id="accordionPanelsListSelector">
-                    <!-- Bak -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsListSelector-headingBak">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsListSelector-collapseBak" aria-expanded="false"
-                                    aria-controls="panelsListSelector-collapseBak">
-                                <p class="direction-info__name" style="display:block;"><b><span
-                                    style="color: #0152a3;">Б</span></b>акалавриат</p>
-                            </button>
-                        </h2>
-                        <div id="panelsListSelector-collapseBak" class="accordion-collapse collapse"
-                             aria-labelledby="panelsListSelector-headingBak">
-                            <div class="accordion-body">
-                                <!-- List of applicants -->
-                                <div class="d-flex justify-content-evenly">
-                                    <div class="accordion flex-fill" id="accordionPanelsListSelector_bak">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsListSelector-headingBak_applicants">
-                                                <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#panelsListSelector-collapseBak_applicants"
-                                                        aria-expanded="false"
-                                                        aria-controls="panelsListSelector-collapseBak_applicants">
-                                                    <p class="direction-info__name direction-info__body"
+    <div class="temp-list-selector">
+        <div class="row container-fluid mx-auto mt-4 mb-4">
+            <div class="col-lg-7 col p-0 mx-auto">
+                <div class="d-flex justify-content-evenly">
+                    <!-- Bak, Mag & Asp accordion -->
+                    <CheckableAccordion edu-level="BakMagAsp">
+                        <template v-slot:accordeonBody>
+
+                            <!--Bak-->
+                            <MyAccordionItem edu-level="Bak">
+                                <template v-slot:buttonContent>
+                                    <p class="direction-info__name ps-3" style="display:block;"><b><span
+                                        style="color: #0152a3;">Б</span></b>акалавриат</p>
+                                </template>
+                                <template v-slot:bodyContent>
+                                    <CheckableAccordion edu-level="Bak" list-type="Applicants">
+                                        <template v-slot:accordeonBody>
+                                            <!--List of Applicants-->
+                                            <MyAccordionItem edu-level="Bak" list-type="Applicants">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
                                                        style="display:block;">Списки
                                                         подавших заявление</p>
-                                                </button>
-                                            </h2>
-                                            <div id="panelsListSelector-collapseBak_applicants"
-                                                 class="accordion-collapse collapse"
-                                                 aria-labelledby="panelsListSelector-headingBak_applicants">
-                                                <div class="accordion-body">
-                                                    <!-- Free -->
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    <CheckableAccordion edu-level="Bak" list-type="Applicants"
+                                                                        budget-or-contract="BudgetAndContract">
+                                                        <template v-slot:accordeonBody>
 
-                                                    <!-- Test -->
-                                                    <CheckableAccordion edu-level="Bak" list-type="Contest" budget-or-contract="Budget" checkbox-name="133156">
-                                                        <template v-slot:buttonContent>
-                                                            <label class="direction-info__name direction-info__body flex-fill">Бюджет</label>
-                                                        </template>
-                                                        <template v-slot:bodyContent>
-                                                            <CheckableProgram :item-name="'testing1'" class="flex-fill">Программа 1
-                                                            </CheckableProgram>
-                                                            <CheckableProgram :item-name="'testing2'" class="flex-fill">Программа 2
-                                                            </CheckableProgram>
+                                                            <!-- Budget -->
+                                                            <MyAccordionItem edu-level="Bak" list-type="Applicants"
+                                                                             budget-or-contract="Budget"
+                                                                             checkbox-name="123123132132">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Бюджет</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <CheckableProgram :item-name="'testing1'"
+                                                                                      class="flex-fill">Программа 1
+                                                                    </CheckableProgram>
+                                                                    <CheckableProgram :item-name="'testing2'"
+                                                                                      class="flex-fill">Программа 2
+                                                                    </CheckableProgram>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                            <!-- Contract -->
+                                                            <MyAccordionItem edu-level="Bak" list-type="Applicants"
+                                                                             budget-or-contract="Contract"
+                                                                             checkbox-name="23123132132">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Контракт</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <CheckableProgram :item-name="'testing3'"
+                                                                                      class="flex-fill">Программа 1
+                                                                    </CheckableProgram>
+                                                                    <CheckableProgram :item-name="'testing4'"
+                                                                                      class="flex-fill">Программа 2
+                                                                    </CheckableProgram>
+                                                                </template>
+                                                            </MyAccordionItem>
+
                                                         </template>
                                                     </CheckableAccordion>
-
-
-                                                    <!-- Paid -->
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox"
-                                                               v-model="bakContract" id="flexCheckContract">
-                                                        <label
-                                                            class="form-check-label direction-info__name direction-info__body"
-                                                            for="flexCheckContract" style="display:block;">Контракт
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Contest list -->
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsListSelector-headingBak_contest">
-                                                <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#panelsListSelector-collapseBak_contest"
-                                                        aria-expanded="false"
-                                                        aria-controls="panelsListSelector-collapseBak_contest">
-                                                    <p class="direction-info__name direction-info__body"
+                                                </template>
+                                            </MyAccordionItem>
+                                            <!--Contest list-->
+                                            <MyAccordionItem edu-level="Bak" list-type="Contest">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
                                                        style="display:block;">Конкурсные
                                                         списки</p>
-                                                </button>
-                                            </h2>
-                                            <div id="panelsListSelector-collapseBak_contest"
-                                                 class="accordion-collapse collapse"
-                                                 aria-labelledby="panelsListSelector-headingBak_contest">
-                                                <div class="accordion-body">
-                                                    Мудоебство
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Enrolled list -->
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsListSelector-headingBak_enrolled">
-                                                <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#panelsListSelector-collapseBak_enrolled"
-                                                        aria-expanded="false"
-                                                        aria-controls="panelsListSelector-collapseBak_enrolled">
-                                                    <p class="direction-info__name direction-info__body"
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    Bak2 Body
+                                                </template>
+                                            </MyAccordionItem>
+                                            <!--Enrolled list-->
+                                            <MyAccordionItem edu-level="Bak" list-type="Enrolled">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
                                                        style="display:block;">Списки
                                                         зачисленных</p>
-                                                </button>
-                                            </h2>
-                                            <div id="panelsListSelector-collapseBak_enrolled"
-                                                 class="accordion-collapse collapse"
-                                                 aria-labelledby="panelsListSelector-headingBak_enrolled">
-                                                <div class="accordion-body">
-                                                    Автоматом проебал
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    Bak3 Body
+                                                </template>
+                                            </MyAccordionItem>
+                                        </template>
+                                    </CheckableAccordion>
+                                </template>
+                            </MyAccordionItem>
 
-                    <!-- Mag -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsListSelector-headingMag">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsListSelector-collapseMag" aria-expanded="false"
-                                    aria-controls="panelsListSelector-collapseMag">
-                                <p class="direction-info__name" style="display:block;"><b><span
-                                    style="color: #fd4239;">М</span></b>агистратура</p>
-                            </button>
-                        </h2>
-                        <div id="panelsListSelector-collapseMag" class="accordion-collapse collapse"
-                             aria-labelledby="panelsListSelector-headingMag">
-                            <div class="accordion-body">
-                                <!-- List of applicants -->
-                                <div class="d-flex justify-content-evenly">
-                                    <div class="accordion flex-fill" id="accordionPanelsListSelector_mag">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsListSelector-headingMag_applicants">
-                                                <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#panelsListSelector-collapseMag_applicants"
-                                                        aria-expanded="false"
-                                                        aria-controls="panelsListSelector-collapseMag_applicants">
-                                                    <p class="direction-info__name direction-info__body"
+                            <!--Mag-->
+                            <MyAccordionItem edu-level="Mag">
+                                <template v-slot:buttonContent>
+                                    <p class="direction-info__name ps-3" style="display:block;"><b><span
+                                        style="color: #fd4239;">М</span></b>агистратура</p>
+                                </template>
+                                <template v-slot:bodyContent>
+                                    <CheckableAccordion edu-level="Mag" list-type="Applicants">
+                                        <template v-slot:accordeonBody>
+                                            <!--List of Applicants-->
+                                            <MyAccordionItem edu-level="Mag" list-type="Applicants">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
                                                        style="display:block;">Списки
                                                         подавших заявление</p>
-                                                </button>
-                                            </h2>
-                                            <div id="panelsListSelector-collapseMag_applicants"
-                                                 class="accordion-collapse collapse"
-                                                 aria-labelledby="panelsListSelector-headingMag_applicants">
-                                                <div class="accordion-body">
-                                                    Абоба 4
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Contest list -->
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsListSelector-headingMag_contest">
-                                                <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#panelsListSelector-collapseMag_contest"
-                                                        aria-expanded="false"
-                                                        aria-controls="panelsListSelector-collapseMag_contest">
-                                                    <p class="direction-info__name direction-info__body"
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    Mag1 Body
+                                                </template>
+                                            </MyAccordionItem>
+                                            <!--Contest list-->
+                                            <MyAccordionItem edu-level="Mag" list-type="Contest">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
                                                        style="display:block;">Конкурсные
                                                         списки</p>
-                                                </button>
-                                            </h2>
-                                            <div id="panelsListSelector-collapseMag_contest"
-                                                 class="accordion-collapse collapse"
-                                                 aria-labelledby="panelsListSelector-headingMag_contest">
-                                                <div class="accordion-body">
-                                                    Абоба 5
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Enrolled list -->
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsListSelector-headingMag_enrolled">
-                                                <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#panelsListSelector-collapseMag_enrolled"
-                                                        aria-expanded="false"
-                                                        aria-controls="panelsListSelector-collapseMag_enrolled">
-                                                    <p class="direction-info__name direction-info__body"
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    Mag2 Body
+                                                </template>
+                                            </MyAccordionItem>
+                                            <!--Enrolled list-->
+                                            <MyAccordionItem edu-level="Mag" list-type="Enrolled">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
                                                        style="display:block;">Списки
                                                         зачисленных</p>
-                                                </button>
-                                            </h2>
-                                            <div id="panelsListSelector-collapseMag_enrolled"
-                                                 class="accordion-collapse collapse"
-                                                 aria-labelledby="panelsListSelector-headingMag_enrolled">
-                                                <div class="accordion-body">
-                                                    Абоба 6
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    Mag3 Body
+                                                </template>
+                                            </MyAccordionItem>
+                                        </template>
+                                    </CheckableAccordion>
+                                </template>
+                            </MyAccordionItem>
 
-                    <!-- Asp -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsListSelector-headingAsp">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsListSelector-collapseAsp" aria-expanded="false"
-                                    aria-controls="panelsListSelector-collapseAsp">
-                                <p class="direction-info__name" style="display:block;"><b><span
-                                    style="color: #FF992C;">А</span></b>спирантура</p>
-                            </button>
-                        </h2>
-                        <div id="panelsListSelector-collapseAsp" class="accordion-collapse collapse"
-                             aria-labelledby="panelsListSelector-headingAsp">
-                            <div class="accordion-body">
-                                <!-- List of applicants -->
-                                <div class="d-flex justify-content-evenly">
-                                    <div class="accordion flex-fill" id="accordionPanelsListSelector_asp">
-                                        <!-- Contest list -->
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsListSelector-headingAsp_contest">
-                                                <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#panelsListSelector-collapseAsp_contest"
-                                                        aria-expanded="false"
-                                                        aria-controls="panelsListSelector-collapseAsp_contest">
-                                                    <p class="direction-info__name direction-info__body"
+                            <!--Asp-->
+                            <MyAccordionItem edu-level="Asp">
+                                <template v-slot:buttonContent>
+                                    <p class="direction-info__name ps-3" style="display:block;"><b><span
+                                        style="color: #FF992C;">А</span></b>спирантура</p>
+                                </template>
+                                <template v-slot:bodyContent>
+                                    <CheckableAccordion edu-level="Asp" list-type="Applicants">
+                                        <template v-slot:accordeonBody>
+                                            <!--Contest list-->
+                                            <MyAccordionItem edu-level="Asp" list-type="Contest">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
                                                        style="display:block;">Конкурсные
                                                         списки</p>
-                                                </button>
-                                            </h2>
-                                            <div id="panelsListSelector-collapseAsp_contest"
-                                                 class="accordion-collapse collapse"
-                                                 aria-labelledby="panelsListSelector-headingAsp_contest">
-                                                <div class="accordion-body">
-                                                    Абоба 7
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Enrolled list -->
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="panelsListSelector-headingAsp_enrolled">
-                                                <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#panelsListSelector-collapseAsp_enrolled"
-                                                        aria-expanded="false"
-                                                        aria-controls="panelsListSelector-collapseAsp_enrolled">
-                                                    <p class="direction-info__name direction-info__body"
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    Asp2 Body
+                                                </template>
+                                            </MyAccordionItem>
+                                            <!--Enrolled list-->
+                                            <MyAccordionItem edu-level="Asp" list-type="Enrolled">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
                                                        style="display:block;">Списки
                                                         зачисленных</p>
-                                                </button>
-                                            </h2>
-                                            <div id="panelsListSelector-collapseAsp_enrolled"
-                                                 class="accordion-collapse collapse"
-                                                 aria-labelledby="panelsListSelector-headingAsp_enrolled">
-                                                <div class="accordion-body">
-                                                    Абоба 8
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    Asp3 Body
+                                                </template>
+                                            </MyAccordionItem>
+                                        </template>
+                                    </CheckableAccordion>
+                                </template>
+                            </MyAccordionItem>
+
+                        </template>
+                    </CheckableAccordion>
+
                 </div>
             </div>
         </div>
+
+        <!-- Test area for competition list getter (from link) -->
+<!--        <div>-->
+<!--            <h2>Сохраненные соревнования:</h2>-->
+<!--            <ul>-->
+<!--                <li v-for="competition in competitions" :key="competition.id">-->
+<!--                    {{ competition.name }}-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+
     </div>
 </template>
 
 <script>
-import CheckableProgram from "@/components/UI/CheckableProgram.vue";
 import CheckableAccordion from "@/components/UI/CheckableAccordion.vue";
+import CheckableProgram from "@/components/UI/CheckableProgram.vue";
+import MyAccordionItem from "@/components/UI/MyAccordionItem.vue";
+import {getListCompetitions} from "@/components/ListLoader";
 
 export default {
-    components: {CheckableAccordion, CheckableProgram},
+    name: 'ListSelector',
+    components: {MyAccordionItem, CheckableProgram, CheckableAccordion},
+
     data() {
         return {
-            bakBudget: false,
-            bakContract: false,
-        }
-    }
-};
+            competitions: null,
+        };
+    },
+
+    mounted() {
+        this.getCompetitions();
+    },
+
+    methods: {
+        async getCompetitions() {
+            const campaign = '1';
+            const typeList = '1';
+            const competitions = await getListCompetitions(campaign, typeList);
+            console.log(competitions);
+            this.competitions = competitions;
+        },
+    },
+}
 </script>
 
 <style scoped>
-.accordion {
-    --bs-accordion-btn-bg: white;
-    --bs-accordion-active-bg: white;
-}
-
-.accordion-button button:active,
-.accordion-button button:focus,
-.accordion-button button:hover,
-.accordion-button:active,
-.accordion-button:focus,
-.accordion-button:hover {
-    background-color: #e8eff7;
-    box-shadow: 0 0 0 4px #c2d6e8;
-    color: #0152a3;
-}
-
 .direction-info__name {
     font-family: Roboto-Medium;
     color: #404040;
-    margin: 0px;
+    margin: 0;
     font-size: calc(1rem + 0.3vw);
 }
 

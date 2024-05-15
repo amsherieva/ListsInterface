@@ -2,18 +2,17 @@
     <Header/>
     <ListSelector/>
     <Test/>
-    <TempListSelector/>
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
-import ListSelector from "@/components/ListSelector.vue"
+import ListSelectorOld from "@/components/ListSelectorOld.vue"
 import Test from "@/components/Test.vue";
-import TempListSelector from "@/components/TempListSelector.vue";
+import ListSelector from "@/components/ListSelector.vue";
 
 export default {
     components: {
-        Header, ListSelector, Test, TempListSelector
+        Header, ListSelector, Test, ListSelectorOld
     },
 };
 </script>
