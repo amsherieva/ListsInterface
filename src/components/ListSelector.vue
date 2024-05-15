@@ -31,7 +31,9 @@
                                                             <!-- Budget -->
                                                             <MyAccordionItem edu-level="Bak" list-type="Applicants"
                                                                              budget-or-contract="Budget"
-                                                                             checkbox-name="BakApplicantsBudget">
+                                                                             checkbox-name="BakApplicantsBudget"
+                                                                             v-model="checkableGroups['BakApplicantsBudget']"
+                                                                             @change="OnCheckboxClick">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Бюджет</label>
@@ -235,6 +237,7 @@ export default {
             listsReceived: false,
             dataArrays: {},
             dataArraysSize: 0,
+            checkableGroups: {},
         };
     },
 
@@ -255,6 +258,8 @@ export default {
                 this.dataArraysSize++;
                 //console.log(this.dataArrays['BakApplicantsBudget' + i]);
             }
+            // Check all of the BakApplicantsBudget accordion as the unchecked
+            this.checkableGroups['BakApplicantsBudget'] = false;
 
             // Get Mag competitions, add them to dataArrays
 
@@ -271,8 +276,7 @@ export default {
             for (const element in this.dataArrays) {
                 if (this.dataArrays[element].Selected && !anySelected) {
                     anySelected = true;
-                }
-                else if (!this.dataArrays[element].Selected) {
+                } else if (!this.dataArrays[element].Selected) {
                     break;
                 }
                 counter++;
@@ -289,16 +293,14 @@ export default {
 
             if (allSelected) {
                 return 2;
-            }
-            else if (anySelected) {
+            } else if (anySelected) {
                 return 1;
-            }
-            else return 0;
+            } else return 0;
         },
 
         checkableProgramClicked(isSelected, checkableProgramName) {
             let checkbox;
-// Parent checkbox name
+
             let parentCheckboxName = checkableProgramName.replace(/[0-9]/g, '');
 
             this.dataArrays[checkableProgramName].Selected = isSelected
@@ -308,14 +310,26 @@ export default {
             console.log(selectedStatus)
             if (selectedStatus === 0) {
                 checkbox.checked = false;
-            }
-            else if (selectedStatus === 1) {
+            } else if (selectedStatus === 1) {
                 checkbox.intermediate = true;
-            }
-            else if (selectedStatus === 2) {
+            } else if (selectedStatus === 2) {
                 checkbox.checked = true;
             }
-        }
+        },
+
+        OnCheckboxClick(event) {
+            let checkboxName = event.target.getAttribute('id');
+            this.checkableGroups[checkboxName] = !this.checkableGroups[checkboxName];
+            console.log(this.checkableGroups);
+
+
+            for (const element in this.dataArrays) {
+                if (element.includes(checkboxName)) {
+                    this.dataArrays[element].Selected = !this.dataArrays[element].Selected;
+                }
+            }
+
+        },
     },
 }
 </script>

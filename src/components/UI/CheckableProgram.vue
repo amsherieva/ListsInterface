@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import {ref, watch} from "vue";
+
 export default {
     name: 'CheckableProgram',
     props: {
@@ -31,6 +33,20 @@ export default {
             required: true
         }
     },
+    setup(props) {
+        const isProgramSelected = ref(props.isSelected);
+
+        watch(props, (newValue) => {
+            if (props.itemName && newValue.isSelected !== undefined) {
+                console.log('Props updated:', newValue.isSelected);
+                isProgramSelected.value = newValue.isSelected
+            }
+        });
+
+        return {
+            isProgramSelected,
+        }
+    },
 
     data() {
         return {
@@ -40,9 +56,10 @@ export default {
 
     methods: {
         OnCheckboxClick() {
+            this.isProgramSelected = !this.isProgramSelected;
             this.$emit('onCheckboxClick', this.isProgramSelected, this.itemName)
         }
-    }
+    },
 }
 </script>
 
