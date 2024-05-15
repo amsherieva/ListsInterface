@@ -3,16 +3,20 @@
         <input class="form-check-input m-1"
                type="checkbox"
                :id="'checkable-' + itemName"
-               @click.stop="temp">
+               v-model="isProgramSelected"
+               @change="OnCheckboxClick">
         <label
-            class="form-check-label direction-info__name direction-info__body"
+            class="form-check-label flex-wrap direction-info direction-info__name"
             :for="'checkable-' + itemName"
-            style="display:block;">&nbsp;<slot></slot>
+            style="display:block;">&nbsp;<span class="direction-info direction-info__code">
+            <slot name="Code"></slot>
+        </span>&nbsp;
+            <span class="direction-info">
+                <slot name="Name"></slot>
+            </span>
         </label>
     </div>
 </template>
-
-<!--TODO: make default font smaller (same as here: https://abit.etu.ru/ru/postupayushhim/old/test-akkordeona)-->
 
 <script>
 export default {
@@ -21,12 +25,22 @@ export default {
         itemName: {
             type: String,
             required: true
+        },
+        isSelected: {
+            type: Boolean,
+            required: true
+        }
+    },
+
+    data() {
+        return {
+            isProgramSelected: this.isSelected,
         }
     },
 
     methods: {
-        temp(event) {
-            console.log(event);
+        OnCheckboxClick() {
+            this.$emit('onCheckboxClick', this.isProgramSelected, this.itemName)
         }
     }
 }
@@ -38,9 +52,17 @@ export default {
     padding-left: 0px;
 }
 
-.direction-info__name {
+.direction-info {
     font-family: Roboto-Medium;
-    color: #404040;
+    font-size: 16px;
+    margin: 0;
+}
+
+.direction-info__code {
+    color: #0152a3;
+}
+
+.direction-info__name2 {
     margin: 0px;
     font-size: calc(1rem + 0.3vw);
 }

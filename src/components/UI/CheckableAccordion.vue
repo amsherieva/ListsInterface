@@ -26,7 +26,7 @@ export default {
         budgetOrContract: {
             type: String
         }
-    }
+    },
 }
 </script>
 
