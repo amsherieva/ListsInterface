@@ -186,14 +186,17 @@
         </div>
 
         <!-- Test area for competition list getter (from link) -->
-<!--        <div>-->
-<!--            <h2>Сохраненные соревнования:</h2>-->
-<!--            <ul>-->
-<!--                <li v-for="competition in competitions" :key="competition.id">-->
-<!--                    {{ competition.name }}-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
+        <div>
+            <template v-if="listsReceived">
+                <h2>Сохраненные соревнования:</h2>
+                <ul>
+                    <li v-for="(competition, index) in competitions.competition_groups" :key="competition.id">
+                        {{ competition.code }} {{ competition.name }}; faculty_id: {{ competition.faculty_id }}
+                    </li>
+                </ul>
+            </template>
+            <p v-else>Загрузка списков...</p>
+        </div>
 
     </div>
 </template>
@@ -211,11 +214,13 @@ export default {
     data() {
         return {
             competitions: null,
+            listsReceived: false,
         };
     },
 
-    mounted() {
-        this.getCompetitions();
+    async mounted() {
+        await this.getCompetitions();
+        console.log(this.competitions);
     },
 
     methods: {
@@ -223,8 +228,8 @@ export default {
             const campaign = '1';
             const typeList = '1';
             const competitions = await getListCompetitions(campaign, typeList);
-            console.log(competitions);
             this.competitions = competitions;
+            this.listsReceived = true;
         },
     },
 }
