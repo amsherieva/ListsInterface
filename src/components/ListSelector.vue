@@ -200,7 +200,7 @@
         </div>
 
         <!-- Test area for competition list getter (from link) -->
-        <div>
+<!--        <div>
             <template v-if="listsReceived">
                 <h2>Сохраненные соревнования:</h2>
                 <ul>
@@ -211,7 +211,7 @@
                 </ul>
             </template>
             <p v-else>Загрузка списков...</p>
-        </div>
+        </div>-->
 
     </div>
 </template>
@@ -238,6 +238,7 @@ export default {
             dataArrays: {},
             dataArraysSize: 0,
             checkableGroups: {},
+            checkInProgress: false,
         };
     },
 
@@ -288,8 +289,8 @@ export default {
                 allSelected = true;
             }
 
-            console.log("AllSelected ", allSelected);
-            console.log("AnySelected ", anySelected);
+            //console.log("AllSelected ", allSelected);
+            //console.log("AnySelected ", anySelected);
 
             if (allSelected) {
                 return 2;
@@ -299,33 +300,53 @@ export default {
         },
 
         checkableProgramClicked(isSelected, checkableProgramName) {
+            console.log("checkableProgramClicked initiated by: ", checkableProgramName);
             let checkbox;
 
             let parentCheckboxName = checkableProgramName.replace(/[0-9]/g, '');
 
-            this.dataArrays[checkableProgramName].Selected = isSelected
+            this.dataArrays[checkableProgramName].Selected = isSelected;
 
             let selectedStatus = this.checkCompetitionsSelectStatus(this.dataArrays);
             checkbox = document.getElementById(parentCheckboxName);
-            console.log(selectedStatus)
-            if (selectedStatus === 0) {
-                checkbox.checked = false;
-            } else if (selectedStatus === 1) {
-                checkbox.intermediate = true;
-            } else if (selectedStatus === 2) {
-                checkbox.checked = true;
+            console.log(selectedStatus, checkbox);
+
+            if (!this.checkInProgress) {
+                if (selectedStatus === 0) {
+                    this.checkableGroups[parentCheckboxName] = false;
+                    checkbox.checked = false;
+                } else if (selectedStatus === 1) {
+                    this.checkableGroups[parentCheckboxName] = false;
+                    checkbox.checked = false;
+                    checkbox.intermediate = true;
+                } else if (selectedStatus === 2) {
+                    this.checkableGroups[parentCheckboxName] = true;
+                    checkbox.checked = true;
+                }
             }
         },
 
         OnCheckboxClick(event) {
             let checkboxName = event.target.getAttribute('id');
-            this.checkableGroups[checkboxName] = !this.checkableGroups[checkboxName];
-            console.log(this.checkableGroups);
+            if (!checkboxName.includes('checkable-')) {
+                console.log("checkableGroups1:",checkboxName);
+                this.checkableGroups[checkboxName] = !this.checkableGroups[checkboxName];
+                console.log("checkableGroups2:",this.checkableGroups[checkboxName]);
 
-
-            for (const element in this.dataArrays) {
-                if (element.includes(checkboxName)) {
-                    this.dataArrays[element].Selected = !this.dataArrays[element].Selected;
+                let count = 0;
+                this.checkInProgress = true;
+                for (const element in this.dataArrays) {
+                    count++;
+                    console.log("Element: ", this.dataArrays[element].Selected);
+                    console.log("this.checkableGroups[checkboxName]: ", this.checkableGroups[checkboxName]);
+                    if (element.includes(checkboxName) && this.checkableGroups[checkboxName] !== this.dataArrays[element].Selected) {
+                        //this.dataArrays[element].Selected = !this.dataArrays[element].Selected;
+                        if (count === this.dataArraysSize) {
+                            this.checkInProgress = false;
+                        }
+                        let checkbox = document.getElementById('checkable-' + element);
+                        checkbox.click();
+                    }
                 }
             }
 

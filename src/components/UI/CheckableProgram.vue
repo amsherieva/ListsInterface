@@ -38,8 +38,8 @@ export default {
 
         watch(props, (newValue) => {
             if (props.itemName && newValue.isSelected !== undefined) {
-                console.log('Props updated:', newValue.isSelected);
-                isProgramSelected.value = newValue.isSelected
+                //console.log('Props updated:', newValue.isSelected);
+                isProgramSelected.value = newValue.isSelected;
             }
         });
 
