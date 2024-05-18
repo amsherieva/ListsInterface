@@ -39,14 +39,13 @@
                                                                         class="direction-info__name direction-info__body flex-fill">Бюджет</label>
                                                                 </template>
                                                                 <template v-slot:bodyContent>
-                                                                    <!--Test programs-->
                                                                     <div>
                                                                         <template v-if="listsReceived">
                                                                             <div class="programs"
-                                                                                 v-for="(competition, index) in dataArrays"
+                                                                                 v-for="competition in BakBudget"
                                                                                  :key="competition.id">
                                                                                 <CheckableProgram
-                                                                                    :item-name="index.toString()"
+                                                                                    :item-name="competition.id"
                                                                                     :is-selected="competition.Selected"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClick="checkableProgramClicked">
@@ -61,20 +60,41 @@
                                                                         </template>
                                                                         <p v-else>Загрузка списков...</p>
                                                                     </div>
-
                                                                 </template>
                                                             </MyAccordionItem>
 
                                                             <!-- Contract -->
                                                             <MyAccordionItem edu-level="Bak" list-type="Applicants"
                                                                              budget-or-contract="Contract"
-                                                                             checkbox-name="BakApplicantsContract">
+                                                                             checkbox-name="BakApplicantsContract"
+                                                                             v-model="checkableGroups['BakApplicantsContract']"
+                                                                             @change="OnCheckboxClick">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Контракт</label>
                                                                 </template>
                                                                 <template v-slot:bodyContent>
-                                                                    abiba
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in BakContract"
+                                                                                 :key="competition.id">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.id"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClick="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.name }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
                                                                 </template>
                                                             </MyAccordionItem>
 
@@ -228,6 +248,14 @@ export default {
     computed: {
         checkableProgram() {
             return checkableProgram
+        },
+
+        BakBudget() {
+            return this.getCurrentCompetitions('BakApplicantsBudget')
+        },
+
+        BakContract() {
+            return this.getCurrentCompetitions('BakApplicantsContract')
         }
     },
     components: {MyAccordionItem, CheckableProgram, CheckableAccordion},
@@ -250,17 +278,14 @@ export default {
     methods: {
         async getCompetitions() {
             // Get Bak competitions
-            const campaign = '1';
-            const typeList = '1';
-            const competitions = await getListCompetitions(campaign, typeList);
-            for (let i = 0; i < competitions.competition_groups.length; i++) {
-                competitions.competition_groups[i].Selected = false;
-                this.dataArrays['BakApplicantsBudget' + i] = competitions.competition_groups[i];
-                this.dataArraysSize++;
-                //console.log(this.dataArrays['BakApplicantsBudget' + i]);
-            }
-            // Check all of the BakApplicantsBudget accordion as the unchecked
-            this.checkableGroups['BakApplicantsBudget'] = false;
+            // Budget
+            let campaign = '1';
+            let typeList = '1';
+            let competitions = await this.formDataArray(campaign, typeList, 'BakApplicantsBudget')
+
+            // Contract
+            typeList = '5';
+            competitions = await this.formDataArray(campaign, typeList, 'BakApplicantsContract');
 
             // Get Mag competitions, add them to dataArrays
 
@@ -269,28 +294,47 @@ export default {
             this.listsReceived = true;
         },
 
-        checkCompetitionsSelectStatus() {
+        async formDataArray(campaign, typeList, groupCommonName) {
+            let competitions = await getListCompetitions(campaign, typeList);
+
+            let tempArray = [];
+
+            for (let i = 0; i < competitions.competition_groups.length; i++) {
+                competitions.competition_groups[i].Selected = false;
+                competitions.competition_groups[i].id = groupCommonName + i;
+                tempArray[i] = competitions.competition_groups[i];
+            }
+            this.dataArrays[groupCommonName] = tempArray;
+            console.log(this.dataArrays);
+            // Check all the groupCommonName accordion as the unchecked
+            this.checkableGroups[groupCommonName] = false;
+
+            console.log("Filled data array with ", groupCommonName);
+
+            return competitions;
+        },
+
+        getCurrentCompetitions(groupCommonName) {
+            return this.dataArrays[groupCommonName];
+        },
+
+        checkCompetitionsSelectStatus(competitionBlock) {
             let allSelected = false;
             let anySelected = false;
             let counter = 0;
 
-            for (const element in this.dataArrays) {
-                if (this.dataArrays[element].Selected && !anySelected) {
+            for (const element in competitionBlock) {
+                if (competitionBlock[element].Selected && !anySelected) {
                     anySelected = true;
-                } else if (!this.dataArrays[element].Selected) {
-                    break;
+                } else if (!competitionBlock[element].Selected) {
+                    continue;
                 }
                 counter++;
             }
 
-            //console.log("Counter: " + counter);
-            //console.log("competitionsArray length: " + this.dataArraysSize);
-            if (counter === this.dataArraysSize) {
+            if (counter === competitionBlock.length) {
                 allSelected = true;
             }
-
-            //console.log("AllSelected ", allSelected);
-            //console.log("AnySelected ", anySelected);
 
             if (allSelected) {
                 return 2;
@@ -304,12 +348,12 @@ export default {
             let checkbox;
 
             let parentCheckboxName = checkableProgramName.replace(/[0-9]/g, '');
+            let programIndex = checkableProgramName.replace(/\D/g, '');
 
-            this.dataArrays[checkableProgramName].Selected = isSelected;
+            this.dataArrays[parentCheckboxName][programIndex].Selected = isSelected;
 
-            let selectedStatus = this.checkCompetitionsSelectStatus(this.dataArrays);
+            let selectedStatus = this.checkCompetitionsSelectStatus(this.dataArrays[parentCheckboxName]);
             checkbox = document.getElementById(parentCheckboxName);
-            console.log(selectedStatus, checkbox);
 
             if (!this.checkInProgress) {
                 if (selectedStatus === 0) {
@@ -329,22 +373,19 @@ export default {
         OnCheckboxClick(event) {
             let checkboxName = event.target.getAttribute('id');
             if (!checkboxName.includes('checkable-')) {
-                console.log("checkableGroups1:",checkboxName);
+                console.log("Big checkbox clicked: ",checkboxName)
                 this.checkableGroups[checkboxName] = !this.checkableGroups[checkboxName];
-                console.log("checkableGroups2:",this.checkableGroups[checkboxName]);
 
                 let count = 0;
                 this.checkInProgress = true;
-                for (const element in this.dataArrays) {
+                for (const element in this.dataArrays[checkboxName]) {
                     count++;
-                    console.log("Element: ", this.dataArrays[element].Selected);
-                    console.log("this.checkableGroups[checkboxName]: ", this.checkableGroups[checkboxName]);
-                    if (element.includes(checkboxName) && this.checkableGroups[checkboxName] !== this.dataArrays[element].Selected) {
+                    if (this.dataArrays[checkboxName][element].id.includes(checkboxName) && this.checkableGroups[checkboxName] !== this.dataArrays[checkboxName][element].Selected) {
                         //this.dataArrays[element].Selected = !this.dataArrays[element].Selected;
-                        if (count === this.dataArraysSize) {
+                        if (count === this.dataArrays[checkboxName].length) {
                             this.checkInProgress = false;
                         }
-                        let checkbox = document.getElementById('checkable-' + element);
+                        let checkbox = document.getElementById('checkable-' + this.dataArrays[checkboxName][element].id);
                         checkbox.click();
                     }
                 }
