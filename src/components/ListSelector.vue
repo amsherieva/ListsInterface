@@ -220,18 +220,18 @@
         </div>
 
         <!-- Test area for competition list getter (from link) -->
-<!--        <div>
-            <template v-if="listsReceived">
-                <h2>Сохраненные соревнования:</h2>
-                <ul>
-                    <li v-for="(competition, index) in dataArrays" :key="competition.id">
-                        {{ competition.code }} {{ competition.name }}; faculty_id: {{ competition.faculty_id }};
-                        SELECTED: {{ competition.Selected }}
-                    </li>
-                </ul>
-            </template>
-            <p v-else>Загрузка списков...</p>
-        </div>-->
+        <!--        <div>
+                    <template v-if="listsReceived">
+                        <h2>Сохраненные соревнования:</h2>
+                        <ul>
+                            <li v-for="(competition, index) in dataArrays" :key="competition.id">
+                                {{ competition.code }} {{ competition.name }}; faculty_id: {{ competition.faculty_id }};
+                                SELECTED: {{ competition.Selected }}
+                            </li>
+                        </ul>
+                    </template>
+                    <p v-else>Загрузка списков...</p>
+                </div>-->
 
     </div>
 </template>
@@ -264,15 +264,14 @@ export default {
         return {
             listsReceived: false,
             dataArrays: {},
-            dataArraysSize: 0,
             checkableGroups: {},
             checkInProgress: false,
+            competitionsSelectedStatus: {},
         };
     },
 
     async mounted() {
         await this.getCompetitions();
-        //console.log(this.dataArrays);
     },
 
     methods: {
@@ -281,11 +280,11 @@ export default {
             // Budget
             let campaign = '1';
             let typeList = '1';
-            let competitions = await this.formDataArray(campaign, typeList, 'BakApplicantsBudget')
+            await this.formDataArray(campaign, typeList, 'BakApplicantsBudget')
 
             // Contract
             typeList = '5';
-            competitions = await this.formDataArray(campaign, typeList, 'BakApplicantsContract');
+            await this.formDataArray(campaign, typeList, 'BakApplicantsContract');
 
             // Get Mag competitions, add them to dataArrays
 
@@ -305,13 +304,11 @@ export default {
                 tempArray[i] = competitions.competition_groups[i];
             }
             this.dataArrays[groupCommonName] = tempArray;
-            console.log(this.dataArrays);
+            //console.log(this.dataArrays);
             // Check all the groupCommonName accordion as the unchecked
             this.checkableGroups[groupCommonName] = false;
 
-            console.log("Filled data array with ", groupCommonName);
-
-            return competitions;
+            //console.log("Filled data array with ", groupCommonName);
         },
 
         getCurrentCompetitions(groupCommonName) {
@@ -321,10 +318,13 @@ export default {
         checkCompetitionsSelectStatus(competitionBlock) {
             let allSelected = false;
             let anySelected = false;
+            let oneSelected = false;
             let counter = 0;
 
             for (const element in competitionBlock) {
-                if (competitionBlock[element].Selected && !anySelected) {
+                if (competitionBlock[element].Selected && !oneSelected) {
+                    oneSelected = true;
+                } else if (competitionBlock[element].Selected && !anySelected && oneSelected) {
                     anySelected = true;
                 } else if (!competitionBlock[element].Selected) {
                     continue;
@@ -337,8 +337,10 @@ export default {
             }
 
             if (allSelected) {
-                return 2;
+                return 3;
             } else if (anySelected) {
+                return 2;
+            } else if (oneSelected) {
                 return 1;
             } else return 0;
         },
@@ -355,15 +357,16 @@ export default {
             let selectedStatus = this.checkCompetitionsSelectStatus(this.dataArrays[parentCheckboxName]);
             checkbox = document.getElementById(parentCheckboxName);
 
+            this.competitionsSelectedStatus[parentCheckboxName] = selectedStatus;
             if (!this.checkInProgress) {
                 if (selectedStatus === 0) {
                     this.checkableGroups[parentCheckboxName] = false;
                     checkbox.checked = false;
-                } else if (selectedStatus === 1) {
+                } else if (selectedStatus === 2 || selectedStatus === 1) {
                     this.checkableGroups[parentCheckboxName] = false;
                     checkbox.checked = false;
                     checkbox.intermediate = true;
-                } else if (selectedStatus === 2) {
+                } else if (selectedStatus === 3) {
                     this.checkableGroups[parentCheckboxName] = true;
                     checkbox.checked = true;
                 }
@@ -373,7 +376,7 @@ export default {
         OnCheckboxClick(event) {
             let checkboxName = event.target.getAttribute('id');
             if (!checkboxName.includes('checkable-')) {
-                console.log("Big checkbox clicked: ",checkboxName)
+                console.log("Big checkbox clicked: ", checkboxName)
                 this.checkableGroups[checkboxName] = !this.checkableGroups[checkboxName];
 
                 let count = 0;

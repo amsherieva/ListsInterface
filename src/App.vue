@@ -1,19 +1,22 @@
 <template>
     <Header/>
     <ListSelector/>
-    <Test/>
+<!--    <Test/>-->
+    <ListSelectorNotification/>
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
-import ListSelectorOld from "@/components/ListSelectorOld.vue"
 import Test from "@/components/Test.vue";
 import ListSelector from "@/components/ListSelector.vue";
+import ListSelectorNotification from "@/components/ListSelectorNotification.vue";
 
 export default {
     components: {
-        Header, ListSelector, Test, ListSelectorOld
+        Header, ListSelector, ListSelectorNotification ,Test,
     },
+
+    // TODO: make ListSelector return list selection status (none, one competition selected, multiple selected)
 };
 </script>
 
