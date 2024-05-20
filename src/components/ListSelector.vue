@@ -371,6 +371,8 @@ export default {
                     checkbox.checked = true;
                 }
             }
+
+            this.$emit('onCompetitionListsStateUpdate', selectedStatus);
         },
 
         OnCheckboxClick(event) {
