@@ -6,7 +6,7 @@
     <!--    <Test/>-->
 
     <template v-if="competitionListsState === 0">
-        <ListSelectorNotification/>
+        <ListSelectorNotification class="pb-3"/>
     </template>
     <template v-if="competitionListsState === 1">
         Выбрана одна программа
@@ -18,7 +18,6 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import Test from "@/components/Test.vue";
 import ListSelector from "@/components/ListSelector.vue";
 import ListSelectorNotification from "@/components/ListSelectorNotification.vue";
 import CheckableProgram from "@/components/UI/CheckableProgram.vue";
@@ -27,7 +26,7 @@ import MultipleCompetitionsControls from "@/components/MultipleCompetitionsContr
 export default {
     components: {
         CheckableProgram,
-        Header, ListSelector, ListSelectorNotification, MultipleCompetitionsControls, Test,
+        Header, ListSelector, ListSelectorNotification, MultipleCompetitionsControls,
     },
 
     data() {
@@ -37,7 +36,6 @@ export default {
         };
     },
 
-    // TODO: make ListSelector return list selection status (none, one competition selected, multiple selected)
     methods: {
         competitionListsStateUpdated(selectedStatus, selectedCompetitions, parentGroupName) {
             this.competitionListsState = selectedStatus;

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="list-selector-notification">
         <div class="row container-fluid mx-auto">
             <div class="col-lg-7 col p-0 mx-auto">
                 <!-- <div class="p-2 px-md-3 d-flex justify-content-center align-items-center"> -->

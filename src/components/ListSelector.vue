@@ -1,5 +1,5 @@
 <template>
-    <div class="temp-list-selector">
+    <div class="list-selector">
         <div class="row container-fluid mx-auto mt-4 mb-4">
             <div class="col-lg-7 col p-0 mx-auto">
                 <div class="d-flex justify-content-evenly">
@@ -360,11 +360,7 @@ export default {
 
             // Form array of selected competitions
             let tempSelectedCompetitions = []
-            for (const element in this.dataArrays[parentCheckboxName]) {
-                if (this.dataArrays[parentCheckboxName][element].Selected) {
-                    tempSelectedCompetitions.push(this.dataArrays[parentCheckboxName][element]);
-                }
-            }
+            tempSelectedCompetitions = this.dataArrays[parentCheckboxName].filter(competition => competition.Selected);
 
             this.competitionsSelectedStatus[parentCheckboxName] = selectedStatus;
             if (!this.checkInProgress) {

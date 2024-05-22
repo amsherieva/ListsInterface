@@ -1,28 +1,67 @@
 <template>
     <div class="multiple-competitions-controls">
-
         <div class="row container-fluid mx-auto">
             <div class="col-lg-7 col p-0 mx-auto">
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b">Опубликовать списки</button>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#publishListsModal">Опубликовать списки</button>
+                        <ConfirmationPopup :id="'publishListsModal'">
+                            <template v-slot:title>
+                                Внимание!
+                            </template>
+                            <template v-slot:body>
+                                Вы уверены, что хотите опубликовать все выбранные Вами списки?
+                            </template>
+                        </ConfirmationPopup>
                     </div>
                     <div class="col-lg-4 col-md-5 col-6">
-                        <a href="" class="btn-b" role="button">Снять с публикации</a>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#removeListsFromPublishModal">Снять с публикации</button>
+                        <ConfirmationPopup :id="'removeListsFromPublishModal'">
+                            <template v-slot:title>
+                                Внимание!
+                            </template>
+                            <template v-slot:body>
+                                Вы уверены, что хотите снять с публикации все выбранные Вами списки?
+                            </template>
+                        </ConfirmationPopup>
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b">Разморозить списки</button>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#unfreezeListsModal">Разморозить списки</button>
+                        <ConfirmationPopup :id="'unfreezeListsModal'">
+                            <template v-slot:title>
+                                Внимание!
+                            </template>
+                            <template v-slot:body>
+                                Вы уверены, что хотите разморозить все выбранные Вами списки?
+                            </template>
+                        </ConfirmationPopup>
                     </div>
                     <div class="col-lg-4 col-md-5 col-6">
-                        <a href="" class="btn-b" role="button">Заморозить списки</a>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#freezeListsModal">Заморозить списки</button>
+                        <ConfirmationPopup :id="'freezeListsModal'">
+                            <template v-slot:title>
+                                Внимание!
+                            </template>
+                            <template v-slot:body>
+                                Вы уверены, что хотите заморозить все выбранные Вами списки?
+                            </template>
+                        </ConfirmationPopup>
                     </div>
                 </div>
 
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-10">
-                        <a href="" class="btn-b btn-block" role="button">Обновить сейчас</a>
+                        <button class="btn-b btn-block" data-bs-toggle="modal" data-bs-target="#updateListsModal">Обновить сейчас</button>
+                        <ConfirmationPopup :id="'updateListsModal'">
+                            <template v-slot:title>
+                                Внимание!
+                            </template>
+                            <template v-slot:body>
+                                Вы уверены, что хотите обновить все выбранные Вами списки?
+                            </template>
+                        </ConfirmationPopup>
                     </div>
                 </div>
                 <hr style="color: #0152A3; border-width:2px;">
@@ -61,8 +100,12 @@
 </template>
 
 <script>
+
+import ConfirmationPopup from "@/components/UI/ConfirmationPopup.vue";
+
 export default {
     name: "MultipleCompetitionsControls",
+    components: {ConfirmationPopup},
 }
 </script>
 
