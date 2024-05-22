@@ -354,8 +354,17 @@ export default {
 
             this.dataArrays[parentCheckboxName][programIndex].Selected = isSelected;
 
+
             let selectedStatus = this.checkCompetitionsSelectStatus(this.dataArrays[parentCheckboxName]);
             checkbox = document.getElementById(parentCheckboxName);
+
+            // Form array of selected competitions
+            let tempSelectedCompetitions = []
+            for (const element in this.dataArrays[parentCheckboxName]) {
+                if (this.dataArrays[parentCheckboxName][element].Selected) {
+                    tempSelectedCompetitions.push(this.dataArrays[parentCheckboxName][element]);
+                }
+            }
 
             this.competitionsSelectedStatus[parentCheckboxName] = selectedStatus;
             if (!this.checkInProgress) {
@@ -372,7 +381,7 @@ export default {
                 }
             }
 
-            this.$emit('onCompetitionListsStateUpdate', selectedStatus);
+            this.$emit('onCompetitionListsStateUpdate', selectedStatus, tempSelectedCompetitions, parentCheckboxName);
         },
 
         OnCheckboxClick(event) {
