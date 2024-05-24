@@ -1,5 +1,5 @@
 <template>
-    <Header/>
+    <Header :token="apiToken" @getToken="receiveToken" @deleteToken="deleteToken"/>
     <ListSelector
         :selected-competitions="selectedCompetitions"
         @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
@@ -29,10 +29,15 @@ export default {
         Header, ListSelector, ListSelectorNotification, MultipleCompetitionsControls,
     },
 
+    mounted() {
+        this.apiToken = sessionStorage.getItem("token");
+    },
+
     data() {
         return {
             competitionListsState: 0,
             selectedCompetitions: {},
+            apiToken: "",
         };
     },
 
@@ -41,6 +46,16 @@ export default {
             this.competitionListsState = selectedStatus;
             this.selectedCompetitions[parentGroupName] = selectedCompetitions;
             console.log("selectedCompetitions: ", this.selectedCompetitions);
+        },
+
+        receiveToken(receivedToken) {
+            this.apiToken = receivedToken;
+            sessionStorage.setItem("token", this.apiToken);
+        },
+
+        deleteToken() {
+            this.apiToken = "";
+            sessionStorage.removeItem("token")
         }
     }
 };

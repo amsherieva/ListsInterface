@@ -4,7 +4,9 @@
             <div class="col-lg-7 col p-0 mx-auto">
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#publishListsModal">Опубликовать списки</button>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#publishListsModal">Опубликовать
+                            списки
+                        </button>
                         <ConfirmationPopup :id="'publishListsModal'">
                             <template v-slot:title>
                                 Внимание!
@@ -15,7 +17,9 @@
                         </ConfirmationPopup>
                     </div>
                     <div class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#removeListsFromPublishModal">Снять с публикации</button>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#removeListsFromPublishModal">Снять
+                            с публикации
+                        </button>
                         <ConfirmationPopup :id="'removeListsFromPublishModal'">
                             <template v-slot:title>
                                 Внимание!
@@ -28,7 +32,9 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#unfreezeListsModal">Разморозить списки</button>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#unfreezeListsModal">Разморозить
+                            списки
+                        </button>
                         <ConfirmationPopup :id="'unfreezeListsModal'">
                             <template v-slot:title>
                                 Внимание!
@@ -39,7 +45,9 @@
                         </ConfirmationPopup>
                     </div>
                     <div class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#freezeListsModal">Заморозить списки</button>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#freezeListsModal">Заморозить
+                            списки
+                        </button>
                         <ConfirmationPopup :id="'freezeListsModal'">
                             <template v-slot:title>
                                 Внимание!
@@ -53,7 +61,9 @@
 
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-10">
-                        <button class="btn-b btn-block" data-bs-toggle="modal" data-bs-target="#updateListsModal">Обновить сейчас</button>
+                        <button class="btn-b btn-block" data-bs-toggle="modal" data-bs-target="#updateListsModal">
+                            Обновить сейчас
+                        </button>
                         <ConfirmationPopup :id="'updateListsModal'">
                             <template v-slot:title>
                                 Внимание!
@@ -70,9 +80,9 @@
                     <div class="col-xl-6 col-lg-9 col-md-8 mt-1">
                         <p>Последнее время обновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>
                     </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 justify-content-center">
-                        <a href="" class="btn-b" role="button"><i
-                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>
+                    <div class="col-xl-3 col-lg-3 col-md-4 justify-content-center">
+                        <button class="btn-b"><i
+                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</button>
                     </div>
                 </div>
                 <hr>
@@ -81,16 +91,25 @@
                     <div class="col-xl-6 col-lg-9 col-md-8 mt-1">
                         <p>Период автообновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>
                     </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 justify-content-center">
-                        <a href="" class="btn-b" role="button"><i
-                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>
+                    <div class="col-xl-3 col-lg-3 col-md-4 justify-content-center">
+                        <button class="btn-b"><i
+                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</button>
                     </div>
                 </div>
+                <p class="mt-4"><button class="btn-b btn-block">Сохранить внесенные изменения</button></p>
 
 
-                <p class="mt-4"><a href="" class="btn-b btn-block"
-                                   role="button">Сохранить внесенные изменения</a></p>
-
+<!--                <h2 class="py-2">Datepicker in Bootstrap 5</h2>
+                <form class="row">
+                    <label for="date" class="col-1 col-form-label">Date</label>
+                    <div class="col-5">
+                        <div class="input-group date" id="datepicker">
+                            <input type="text" class="form-control" id="date"/>
+                            <span class="input-group-append"><span class="input-group-text bg-light d-block"><i
+                                class="fa fa-calendar"></i></span></span>
+                        </div>
+                    </div>
+                </form>-->
 
                 <!-- </div> -->
             </div>
