@@ -82,12 +82,12 @@ export default {
     },
 
     methods: {
-        getToken(event) {
+        getToken() {
             this.$emit("getToken", this.enteredToken);
             this.enteredToken = "";
         },
 
-        deleteToken(event) {
+        deleteToken() {
             this.$emit("deleteToken");
             this.enteredToken = "";
         }
@@ -115,11 +115,5 @@ h1 {
 h2 {
     text-align: right;
     font-size: calc(0.6rem + 0.8vw);
-}
-
-.container {
-    margin-left: 5px;
-    margin-right: 5px;
-    width: 100%;
 }
 </style>
