@@ -74,8 +74,6 @@ export default {
         },
 
         async getToken() {
-            // TODO: check token validity before sending it to the main app
-
             sessionStorage.setItem("token", this.enteredToken);
             const testRequestResponse = await this.testGetRequest();
             if (testRequestResponse === 500) {
