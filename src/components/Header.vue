@@ -24,40 +24,40 @@
                                     <button class="dropdown-item" type="button"><i class="bi bi-box-arrow-right"></i>&nbsp;Выйти
                                     </button>
                                 </li>
-                                <li>
-                                    <button class="btn-b dropdown-item" type="button" data-bs-toggle="modal"
-                                            data-bs-target="#enterTokenModal">Ввести токен
-                                    </button>
-                                </li>
+<!--                                <li>-->
+<!--                                    <button class="btn-b dropdown-item" type="button" data-bs-toggle="modal"-->
+<!--                                            data-bs-target="#enterTokenModal">Ввести токен-->
+<!--                                    </button>-->
+<!--                                </li>-->
                             </ul>
                         </div>
                     </div>
-                    <template v-if="token && token.length > 0">
-                        <ConfirmationPopup :id="'enterTokenModal'" :usePositiveResponseButton="false"
-                                           :useNegativeResponseButton="true"
-                                           @negativeButtonClicked="deleteToken">
-                            <template v-slot:title>
-                                Добро пожаловать!
-                            </template>
-                            <template v-slot:body>
-                                Обнаружен существующий токен: {{ token }}.
-                            </template>
-                            <template v-slot:negativeButtonText>
-                                Удалить токен
-                            </template>
-                        </ConfirmationPopup>
-                    </template>
-                    <template v-else>
-                        <ConfirmationPopup :id="'enterTokenModal'" @positiveButtonClicked="getToken">
-                            <template v-slot:title>
-                                Добро пожаловать!
-                            </template>
-                            <template v-slot:body>
-                                <p>Пожалуйста, введите токен:</p>
-                                <input type="text" class="form-control" placeholder="Token" v-model="enteredToken">
-                            </template>
-                        </ConfirmationPopup>
-                    </template>
+<!--                    <template v-if="token && token.length > 0">-->
+<!--                        <ConfirmationPopup :id="'enterTokenModal'" :usePositiveResponseButton="false"-->
+<!--                                           :useNegativeResponseButton="true"-->
+<!--                                           @negativeButtonClicked="deleteToken">-->
+<!--                            <template v-slot:title>-->
+<!--                                Добро пожаловать!-->
+<!--                            </template>-->
+<!--                            <template v-slot:body>-->
+<!--                                Обнаружен существующий токен: {{ token }}.-->
+<!--                            </template>-->
+<!--                            <template v-slot:negativeButtonText>-->
+<!--                                Удалить токен-->
+<!--                            </template>-->
+<!--                        </ConfirmationPopup>-->
+<!--                    </template>-->
+<!--                    <template v-else>-->
+<!--                        <ConfirmationPopup :id="'enterTokenModal'" @positiveButtonClicked="getToken">-->
+<!--                            <template v-slot:title>-->
+<!--                                Добро пожаловать!-->
+<!--                            </template>-->
+<!--                            <template v-slot:body>-->
+<!--                                <p>Пожалуйста, введите токен:</p>-->
+<!--                                <input type="text" class="form-control" placeholder="Token" v-model="enteredToken">-->
+<!--                            </template>-->
+<!--                        </ConfirmationPopup>-->
+<!--                    </template>-->
                 </div>
             </div>
         </div>

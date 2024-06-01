@@ -1,22 +1,26 @@
 <template>
-    <Header :token="apiToken" @getToken="receiveToken" @deleteToken="deleteToken"/>
-    <ListSelector
-        :selected-competitions="selectedCompetitions"
-        @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
-    <!--    <Test/>-->
+    <Header :token="apiToken" @deleteToken="deleteToken"/>
+    <template v-if="isTokenValid">
+        <ListSelector
+            :selected-competitions="selectedCompetitions"
+            @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
 
-    <!--  Test button  -->
-    <button class="btn-b" @click="testPostRequest">Тест POST запросов</button>
-    <button class="btn-b" @click="testGetRequest">Тест GET запросов</button>
+        <!--  Test button  -->
+        <button class="btn-b" @click="testPostRequest">Тест POST запросов</button>
+        <button class="btn-b" @click="testGetRequest">Тест GET запросов</button>
 
-    <template v-if="competitionListsState === 0">
-        <ListSelectorNotification class="pb-3"/>
+        <template v-if="competitionListsState === 0">
+            <ListSelectorNotification class="pb-3"/>
+        </template>
+        <template v-if="competitionListsState === 1">
+            Выбрана одна программа
+        </template>
+        <template v-if="competitionListsState >= 2">
+            <MultipleCompetitionsControls/>
+        </template>
     </template>
-    <template v-if="competitionListsState === 1">
-        Выбрана одна программа
-    </template>
-    <template v-if="competitionListsState >= 2">
-        <MultipleCompetitionsControls/>
+    <template v-else>
+        <AuthWindowModal :token="apiToken" @getToken="receiveToken"/>
     </template>
 </template>
 
@@ -26,17 +30,22 @@ import ListSelector from "@/components/ListSelector.vue";
 import ListSelectorNotification from "@/components/ListSelectorNotification.vue";
 import CheckableProgram from "@/components/UI/CheckableProgram.vue";
 import MultipleCompetitionsControls from "@/components/MultipleCompetitionsControls.vue";
+import AuthWindow from "@/components/AuthWindow.vue";
+import AuthWindowModal from "@/components/AuthWindowModal.vue";
 // axios
 import axiosInstance from "@/axiosConfig";
 
 export default {
     components: {
+        AuthWindowModal,
+        AuthWindow,
         CheckableProgram,
         Header, ListSelector, ListSelectorNotification, MultipleCompetitionsControls,
     },
 
     mounted() {
         this.apiToken = sessionStorage.getItem("token");
+        this.isTokenValid = sessionStorage.getItem("isTokenValid");
     },
 
     data() {
@@ -44,9 +53,16 @@ export default {
             competitionListsState: 0,
             selectedCompetitions: {},
             apiToken: "",
+            isTokenValid: false,
 
             testItems: {},
         };
+    },
+
+    computed: {
+        validateToken() {
+            return this.isTokenValid;
+        }
     },
 
     methods: {
@@ -58,7 +74,9 @@ export default {
 
         receiveToken(receivedToken) {
             this.apiToken = receivedToken;
+            this.isTokenValid = true;
             sessionStorage.setItem("token", this.apiToken);
+            sessionStorage.setItem("isTokenValid", this.isTokenValid);
         },
 
         deleteToken() {
@@ -69,7 +87,6 @@ export default {
         async testPostRequest() {
             try {
                 const response = await axiosInstance.post('/api/dictionaries');
-                this.testItems = response.data;
                 console.log('Ответ сервера:', response.data);
             } catch (error) {
                 console.error('Ошибка при отправке данных:', error);
