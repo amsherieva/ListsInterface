@@ -5,6 +5,10 @@
         @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
     <!--    <Test/>-->
 
+    <!--  Test button  -->
+    <button class="btn-b" @click="testPostRequest">Тест POST запросов</button>
+    <button class="btn-b" @click="testGetRequest">Тест GET запросов</button>
+
     <template v-if="competitionListsState === 0">
         <ListSelectorNotification class="pb-3"/>
     </template>
@@ -22,6 +26,8 @@ import ListSelector from "@/components/ListSelector.vue";
 import ListSelectorNotification from "@/components/ListSelectorNotification.vue";
 import CheckableProgram from "@/components/UI/CheckableProgram.vue";
 import MultipleCompetitionsControls from "@/components/MultipleCompetitionsControls.vue";
+// axios
+import axiosInstance from "@/axiosConfig";
 
 export default {
     components: {
@@ -38,6 +44,8 @@ export default {
             competitionListsState: 0,
             selectedCompetitions: {},
             apiToken: "",
+
+            testItems: {},
         };
     },
 
@@ -56,7 +64,27 @@ export default {
         deleteToken() {
             this.apiToken = "";
             sessionStorage.removeItem("token")
-        }
+        },
+
+        async testPostRequest() {
+            try {
+                const response = await axiosInstance.post('/api/dictionaries');
+                this.testItems = response.data;
+                console.log('Ответ сервера:', response.data);
+            } catch (error) {
+                console.error('Ошибка при отправке данных:', error);
+            }
+        },
+
+        async testGetRequest() {
+            try {
+                const response = await axiosInstance.get("/api/dictionaries/dict_edu_forms");
+                this.testItems = response.data;
+                console.log("Список чего-то: ", this.testItems);
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+        },
     }
 };
 </script>
