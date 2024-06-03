@@ -43,17 +43,17 @@
                                                                         <template v-if="listsReceived">
                                                                             <div class="programs"
                                                                                  v-for="competition in BakBudget"
-                                                                                 :key="competition.id">
+                                                                                 :key="competition.displayId">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.id"
+                                                                                    :item-name="competition.displayId"
                                                                                     :is-selected="competition.Selected"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClick="checkableProgramClicked">
                                                                                     <template v-slot:Code>
-                                                                                        {{ competition.code }}
+                                                                                        {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.name }}
+                                                                                        {{ competition.fdv }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -78,17 +78,17 @@
                                                                         <template v-if="listsReceived">
                                                                             <div class="programs"
                                                                                  v-for="competition in BakContract"
-                                                                                 :key="competition.id">
+                                                                                 :key="competition.displayId">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.id"
+                                                                                    :item-name="competition.displayId"
                                                                                     :is-selected="competition.Selected"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClick="checkableProgramClicked">
                                                                                     <template v-slot:Code>
-                                                                                        {{ competition.code }}
+                                                                                        {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.name }}
+                                                                                        {{ competition.fdv }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -242,6 +242,9 @@ import CheckableProgram from "@/components/UI/CheckableProgram.vue";
 import MyAccordionItem from "@/components/UI/MyAccordionItem.vue";
 import {getListCompetitions} from "@/components/ListLoader";
 import checkableProgram from "@/components/UI/CheckableProgram.vue";
+import bootstrap from "bootstrap/dist/js/bootstrap.bundle.js";
+
+import axiosInstance from "@/axiosConfig";
 
 export default {
     name: 'ListSelector',
@@ -267,6 +270,10 @@ export default {
             checkableGroups: {},
             checkInProgress: false,
             competitionsSelectedStatus: {},
+
+            // API data
+            dictionaries: {},   // Really need it??
+            competitionsMap: {},
         };
     },
 
@@ -280,17 +287,23 @@ export default {
             // Budget
             let campaign = '1';
             let typeList = '1';
-            await this.formDataArray(campaign, typeList, 'BakApplicantsBudget')
+            await this.readCompetitionGroupsDictionary();
+            //await this.formDataArray(campaign, typeList, 'BakApplicantsBudget');
+            // const tempStorage = await this.getListOfLists(campaign, typeList);
+            // console.log("tempStorage: ", tempStorage);
+            // this.buildFullCompetitionsMap(tempStorage);
+            await this.formDataArray_New(campaign, typeList, 'BakApplicants');
 
             // Contract
-            typeList = '5';
-            await this.formDataArray(campaign, typeList, 'BakApplicantsContract');
+            //typeList = '5';
+            //await this.formDataArray(campaign, typeList, 'BakApplicantsContract');
 
             // Get Mag competitions, add them to dataArrays
 
             // Get Asp competitions, add them to dataArrays
 
             this.listsReceived = true;
+            console.log("CheckableGroups: ", this.checkableGroups);
         },
 
         async formDataArray(campaign, typeList, groupCommonName) {
@@ -308,7 +321,87 @@ export default {
             // Check all the groupCommonName accordion as the unchecked
             this.checkableGroups[groupCommonName] = false;
 
-            //console.log("Filled data array with ", groupCommonName);
+            console.log("Filled data array with ", this.dataArrays);
+        },
+
+        async formDataArray_New(campaignType, commonListType, groupCommonName) {
+            const competitions = await this.getListOfLists(campaignType, commonListType);
+            console.log("tempStorage: ", competitions);
+            const fullCompetitionsMap = this.buildFullCompetitionsMap(competitions);
+
+
+            let tempArrayBudget = [];
+            let tempArrayContract = [];
+            fullCompetitionsMap.forEach((value, key) => {
+                value.Selected = false;
+                value.displayId = groupCommonName;
+                if (value.common_fin_source_id === 1) {
+                    // Budget
+                    value.displayId += "Budget" + tempArrayBudget.length;
+                    tempArrayBudget[tempArrayBudget.length++] = value;
+                } else {
+                    // Contract
+                    value.displayId += "Contract" + tempArrayContract.length;
+                    tempArrayContract[tempArrayContract.length++] = value;
+                }
+            });
+            //console.log("Test tempArrayBudget: ", tempArrayBudget);
+            //console.log("Test tempArrayContract: ", tempArrayContract);
+
+            this.dataArrays[groupCommonName + "Budget"] = tempArrayBudget;
+            this.dataArrays[groupCommonName + "Contract"] = tempArrayContract;
+            // Check all the groupCommonName accordion as the unchecked
+            this.checkableGroups[groupCommonName + "Budget"] = false;
+            this.checkableGroups[groupCommonName + "Contract"] = false;
+        },
+
+        async getDictionaries() {
+            try {
+                const response = await axiosInstance.get("/api/dictionaries");
+                this.dictionaries = new Map(Object.entries(response.data));
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+        },
+
+        async readCompetitionGroupsDictionary() {
+            try {
+                const response = await axiosInstance.get("/api/dictionaries/dict_competition_groups");
+                this.competitionsMap = new Map(response.data.items.map(item => [item.id, item]));
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+        },
+
+        async getListOfLists(campaignType, commonListType) {
+            console.log("Giga massiv: ", this.dataArrays);
+            let saveSource = new Map();
+
+            try {
+                const response = await axiosInstance.get("/api/lists/" + campaignType + "/" + commonListType);
+                console.log("List of lists response: ", response.data);
+                saveSource = new Map(response.data.data.map(item => [item.uuid, item]));
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+
+            return saveSource;
+        },
+
+        buildFullCompetitionsMap(listOfLists) {
+            const combinedMap = new Map();
+
+            listOfLists.forEach((valueFirst, key) => {
+                const valueSecond = this.competitionsMap.get(valueFirst.competition_group_id);
+                if (valueSecond) {
+                    const {id, ...rest} = valueSecond;
+                    const combinedValue = {...rest, ...valueFirst};
+                    combinedMap.set(key, combinedValue);
+                }
+            });
+
+            console.log("Combined map: ", combinedMap);
+            return combinedMap;
         },
 
         getCurrentCompetitions(groupCommonName) {
@@ -356,6 +449,7 @@ export default {
 
 
             let selectedStatus = this.checkCompetitionsSelectStatus(this.dataArrays[parentCheckboxName]);
+            console.log("selectedStatus", selectedStatus)
             checkbox = document.getElementById(parentCheckboxName);
 
             // Form array of selected competitions
@@ -363,39 +457,38 @@ export default {
             tempSelectedCompetitions = this.dataArrays[parentCheckboxName].filter(competition => competition.Selected);
 
             this.competitionsSelectedStatus[parentCheckboxName] = selectedStatus;
-            if (!this.checkInProgress) {
-                if (selectedStatus === 0) {
-                    this.checkableGroups[parentCheckboxName] = false;
-                    checkbox.checked = false;
-                } else if (selectedStatus === 2 || selectedStatus === 1) {
-                    this.checkableGroups[parentCheckboxName] = false;
-                    checkbox.checked = false;
-                    checkbox.intermediate = true;
-                } else if (selectedStatus === 3) {
-                    this.checkableGroups[parentCheckboxName] = true;
-                    checkbox.checked = true;
-                }
+            if (selectedStatus === 0) {
+                //this.checkableGroups[parentCheckboxName] = false;
+                checkbox.checked = false;
+                checkbox.intermediate = false;
+            } else if (selectedStatus === 2 || selectedStatus === 1) {
+                //this.checkableGroups[parentCheckboxName] = false;
+                checkbox.checked = false;
+                checkbox.intermediate = true;
+            } else if (selectedStatus === 3) {
+                //this.checkableGroups[parentCheckboxName] = true;
+                checkbox.checked = true;
+                checkbox.intermediate = false;
             }
 
             this.$emit('onCompetitionListsStateUpdate', selectedStatus, tempSelectedCompetitions, parentCheckboxName);
         },
 
         OnCheckboxClick(event) {
-            let checkboxName = event.target.getAttribute('id');
+            const checkboxName = String(event.target.getAttribute('id'));
             if (!checkboxName.includes('checkable-')) {
                 console.log("Big checkbox clicked: ", checkboxName)
-                this.checkableGroups[checkboxName] = !this.checkableGroups[checkboxName];
+                //const previousCheckboxState = this.checkableGroups[checkboxName];
+                const bigCheckbox = document.getElementById(checkboxName);
+                //if (!bigCheckbox.intermediate) {
+                    this.checkableGroups[checkboxName] = !this.checkableGroups[checkboxName];
+                //}
 
                 let count = 0;
-                this.checkInProgress = true;
                 for (const element in this.dataArrays[checkboxName]) {
                     count++;
-                    if (this.dataArrays[checkboxName][element].id.includes(checkboxName) && this.checkableGroups[checkboxName] !== this.dataArrays[checkboxName][element].Selected) {
-                        //this.dataArrays[element].Selected = !this.dataArrays[element].Selected;
-                        if (count === this.dataArrays[checkboxName].length) {
-                            this.checkInProgress = false;
-                        }
-                        let checkbox = document.getElementById('checkable-' + this.dataArrays[checkboxName][element].id);
+                    if (this.checkableGroups[checkboxName] !== this.dataArrays[checkboxName][element].Selected) {
+                        let checkbox = document.getElementById('checkable-' + this.dataArrays[checkboxName][element].displayId);
                         checkbox.click();
                     }
                 }

@@ -3,11 +3,11 @@
         <h2 class="accordion-header" style="display: flex; align-items: center;"
             :id="'panelsListSelector-heading' + eduLevel + listType + budgetOrContract">
 
-            <div v-if="checkboxName">
+            <template v-if="checkboxName">
                 <input class="form-check-input m-2"
                        type="checkbox"
                        :id="checkboxName">
-            </div>
+            </template>
 
             <button class="accordion-button collapsed ps-1"
                     type="button" data-bs-toggle="collapse"

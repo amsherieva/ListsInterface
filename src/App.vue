@@ -6,7 +6,16 @@
             @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
 
         <!--  Test button  -->
-        <button class="btn-b" @click="testPostRequest">Тест POST запросов</button>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                GET
+            </button>
+            <ul class="dropdown-menu">
+                <li v-for="dictionaryName in dictionaries.entries">
+                    <button class="dropdown-item" type="button" @click="getRequest('/api/dictionaries/' + dictionaryName[0])">{{ dictionaryName[1] }}</button>
+                </li>
+            </ul>
+        </div>
         <button class="btn-b" @click="testGetRequest">Тест GET запросов</button>
 
         <template v-if="competitionListsState === 0">
@@ -22,6 +31,7 @@
     <template v-else>
         <AuthWindowModal :token="apiToken" @getToken="receiveToken"/>
     </template>
+    {{ testItems }}
 </template>
 
 <script>
@@ -30,7 +40,6 @@ import ListSelector from "@/components/ListSelector.vue";
 import ListSelectorNotification from "@/components/ListSelectorNotification.vue";
 import CheckableProgram from "@/components/UI/CheckableProgram.vue";
 import MultipleCompetitionsControls from "@/components/MultipleCompetitionsControls.vue";
-import AuthWindow from "@/components/AuthWindow.vue";
 import AuthWindowModal from "@/components/AuthWindowModal.vue";
 // axios
 import axiosInstance from "@/axiosConfig";
@@ -38,14 +47,18 @@ import axiosInstance from "@/axiosConfig";
 export default {
     components: {
         AuthWindowModal,
-        AuthWindow,
         CheckableProgram,
         Header, ListSelector, ListSelectorNotification, MultipleCompetitionsControls,
     },
 
-    mounted() {
+    async mounted() {
         this.apiToken = sessionStorage.getItem("token");
         this.isTokenValid = sessionStorage.getItem("isTokenValid");
+        //const temp = await this.getRequest("/api/dictionaries")
+        //this.dictionaries = new Map(Object.entries(temp));
+        //console.log([...this.dictionaries.keys()]); // Получить все ключи
+        //console.log([...this.dictionaries.values()]); // Получить все значения
+        //console.log([...this.dictionaries.entries()]); // Получить все записи (ключ, значение)
     },
 
     data() {
@@ -55,14 +68,12 @@ export default {
             apiToken: "",
             isTokenValid: false,
 
+            // Obtained via API
+            dictionaries: {
+                type: Map
+            },
             testItems: {},
         };
-    },
-
-    computed: {
-        validateToken() {
-            return this.isTokenValid;
-        }
     },
 
     methods: {
@@ -93,9 +104,21 @@ export default {
             }
         },
 
+        async getRequest(url) {
+            console.log(url)
+            try {
+                const response = await axiosInstance.get(url);
+                console.log('Ответ сервера:', response.data);
+                this.testItems = response.data;
+                return response.data;
+            } catch (error) {
+                console.error('Ошибка при отправке данных:', error);
+            }
+        },
+
         async testGetRequest() {
             try {
-                const response = await axiosInstance.get("/api/dictionaries/dict_edu_forms");
+                const response = await axiosInstance.get("/api/lists/1/1");
                 this.testItems = response.data;
                 console.log("Список чего-то: ", this.testItems);
             } catch (error) {

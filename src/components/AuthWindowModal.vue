@@ -64,19 +64,19 @@ export default {
             let errorCode = 0;
             try {
                 const response = await axiosInstance.get("/api/dictionaries");
-                this.testItems = response.data;
-                console.log("Список чего-то: ", this.testItems);
+                this.dictionaries = response.data;
             } catch (error) {
                 console.error('Ошибка при получении данных:', error);
-                errorCode = error.response.status;
+                //errorCode = error.response.status;
+                errorCode = error.code;
             }
             return errorCode;
         },
 
-        async getToken() {
+        getToken: async function () {
             sessionStorage.setItem("token", this.enteredToken);
             const testRequestResponse = await this.testGetRequest();
-            if (testRequestResponse === 500) {
+            if (testRequestResponse === 500 || testRequestResponse === "ERR_NETWORK") {
                 this.isTokenCheckFailed = true;
                 sessionStorage.removeItem("token");
                 const failedModal = new bootstrap.Modal(document.getElementById(this.idFailed));
