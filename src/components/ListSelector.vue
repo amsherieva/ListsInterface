@@ -33,7 +33,7 @@
                                                                              budget-or-contract="Budget"
                                                                              checkbox-name="BakApplicantsBudget"
                                                                              v-model="checkableGroups['BakApplicantsBudget']"
-                                                                             @change="OnCheckboxClick">
+                                                                             @change="OnBigCheckboxClick">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Бюджет</label>
@@ -42,13 +42,13 @@
                                                                     <div>
                                                                         <template v-if="listsReceived">
                                                                             <div class="programs"
-                                                                                 v-for="competition in BakBudget"
+                                                                                 v-for="competition in BakApplicantsBudget"
                                                                                  :key="competition.displayId">
                                                                                 <CheckableProgram
                                                                                     :item-name="competition.displayId"
                                                                                     :is-selected="competition.Selected"
                                                                                     class="flex-fill"
-                                                                                    @onCheckboxClick="checkableProgramClicked">
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
@@ -68,7 +68,7 @@
                                                                              budget-or-contract="Contract"
                                                                              checkbox-name="BakApplicantsContract"
                                                                              v-model="checkableGroups['BakApplicantsContract']"
-                                                                             @change="OnCheckboxClick">
+                                                                             @change="OnBigCheckboxClick">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Контракт</label>
@@ -77,13 +77,13 @@
                                                                     <div>
                                                                         <template v-if="listsReceived">
                                                                             <div class="programs"
-                                                                                 v-for="competition in BakContract"
+                                                                                 v-for="competition in BakApplicantsContract"
                                                                                  :key="competition.displayId">
                                                                                 <CheckableProgram
                                                                                     :item-name="competition.displayId"
                                                                                     :is-selected="competition.Selected"
                                                                                     class="flex-fill"
-                                                                                    @onCheckboxClick="checkableProgramClicked">
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
@@ -110,7 +110,84 @@
                                                         списки</p>
                                                 </template>
                                                 <template v-slot:bodyContent>
-                                                    Bak2 Body
+
+                                                    <CheckableAccordion edu-level="Bak" list-type="Contest"
+                                                                        budget-or-contract="BudgetAndContract">
+                                                        <template v-slot:accordeonBody>
+
+                                                            <!-- Budget -->
+                                                            <MyAccordionItem edu-level="Bak" list-type="Contest"
+                                                                             budget-or-contract="Budget"
+                                                                             checkbox-name="BakContestBudget"
+                                                                             v-model="checkableGroups['BakContestBudget']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Бюджет</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in BakContestBudget"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                            <!-- Contract -->
+                                                            <MyAccordionItem edu-level="Bak" list-type="Contest"
+                                                                             budget-or-contract="Contract"
+                                                                             checkbox-name="BakContestContract"
+                                                                             v-model="checkableGroups['BakContestContract']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Контракт</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in BakContestContract"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
                                                 </template>
                                             </MyAccordionItem>
                                             <!--Enrolled list-->
@@ -121,7 +198,84 @@
                                                         зачисленных</p>
                                                 </template>
                                                 <template v-slot:bodyContent>
-                                                    Bak3 Body
+
+                                                    <CheckableAccordion edu-level="Bak" list-type="Enrolled"
+                                                                        budget-or-contract="BudgetAndContract">
+                                                        <template v-slot:accordeonBody>
+
+                                                            <!-- Budget -->
+                                                            <MyAccordionItem edu-level="Bak" list-type="Enrolled"
+                                                                             budget-or-contract="Budget"
+                                                                             checkbox-name="BakEnrolledBudget"
+                                                                             v-model="checkableGroups['BakEnrolledBudget']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Бюджет</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in BakEnrolledBudget"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                            <!-- Contract -->
+                                                            <MyAccordionItem edu-level="Bak" list-type="Enrolled"
+                                                                             budget-or-contract="Contract"
+                                                                             checkbox-name="BakEnrolledContract"
+                                                                             v-model="checkableGroups['BakEnrolledContract']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Контракт</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in BakEnrolledContract"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
                                                 </template>
                                             </MyAccordionItem>
                                         </template>
@@ -146,7 +300,82 @@
                                                         подавших заявление</p>
                                                 </template>
                                                 <template v-slot:bodyContent>
-                                                    Mag1 Body
+                                                    <CheckableAccordion edu-level="Mag" list-type="Applicants"
+                                                                        budget-or-contract="BudgetAndContract">
+                                                        <template v-slot:accordeonBody>
+
+                                                            <!-- Budget -->
+                                                            <MyAccordionItem edu-level="Mag" list-type="Applicants"
+                                                                             budget-or-contract="Budget"
+                                                                             checkbox-name="MagApplicantsBudget"
+                                                                             v-model="checkableGroups['MagApplicantsBudget']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Бюджет</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in MagApplicantsBudget"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                            <!-- Contract -->
+                                                            <MyAccordionItem edu-level="Mag" list-type="Applicants"
+                                                                             budget-or-contract="Contract"
+                                                                             checkbox-name="MagApplicantsContract"
+                                                                             v-model="checkableGroups['MagApplicantsContract']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Контракт</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in MagApplicantsContract"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                        </template>
+                                                    </CheckableAccordion>
                                                 </template>
                                             </MyAccordionItem>
                                             <!--Contest list-->
@@ -157,7 +386,84 @@
                                                         списки</p>
                                                 </template>
                                                 <template v-slot:bodyContent>
-                                                    Mag2 Body
+
+                                                    <CheckableAccordion edu-level="Mag" list-type="Contest"
+                                                                        budget-or-contract="BudgetAndContract">
+                                                        <template v-slot:accordeonBody>
+
+                                                            <!-- Budget -->
+                                                            <MyAccordionItem edu-level="Mag" list-type="Contest"
+                                                                             budget-or-contract="Budget"
+                                                                             checkbox-name="MagContestBudget"
+                                                                             v-model="checkableGroups['MagContestBudget']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Бюджет</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in MagContestBudget"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                            <!-- Contract -->
+                                                            <MyAccordionItem edu-level="Mag" list-type="Contest"
+                                                                             budget-or-contract="Contract"
+                                                                             checkbox-name="MagContestContract"
+                                                                             v-model="checkableGroups['MagContestContract']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Контракт</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in MagContestContract"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
                                                 </template>
                                             </MyAccordionItem>
                                             <!--Enrolled list-->
@@ -168,7 +474,84 @@
                                                         зачисленных</p>
                                                 </template>
                                                 <template v-slot:bodyContent>
-                                                    Mag3 Body
+
+                                                    <CheckableAccordion edu-level="Mag" list-type="Enrolled"
+                                                                        budget-or-contract="BudgetAndContract">
+                                                        <template v-slot:accordeonBody>
+
+                                                            <!-- Budget -->
+                                                            <MyAccordionItem edu-level="Mag" list-type="Enrolled"
+                                                                             budget-or-contract="Budget"
+                                                                             checkbox-name="MagEnrolledBudget"
+                                                                             v-model="checkableGroups['MagEnrolledBudget']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Бюджет</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in MagEnrolledBudget"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                            <!-- Contract -->
+                                                            <MyAccordionItem edu-level="Mag" list-type="Enrolled"
+                                                                             budget-or-contract="Contract"
+                                                                             checkbox-name="MagEnrolledContract"
+                                                                             v-model="checkableGroups['MagEnrolledContract']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Контракт</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in MagEnrolledContract"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
                                                 </template>
                                             </MyAccordionItem>
                                         </template>
@@ -193,7 +576,84 @@
                                                         списки</p>
                                                 </template>
                                                 <template v-slot:bodyContent>
-                                                    Asp2 Body
+
+                                                    <CheckableAccordion edu-level="Asp" list-type="Contest"
+                                                                        budget-or-contract="BudgetAndContract">
+                                                        <template v-slot:accordeonBody>
+
+                                                            <!-- Budget -->
+                                                            <MyAccordionItem edu-level="Asp" list-type="Contest"
+                                                                             budget-or-contract="Budget"
+                                                                             checkbox-name="AspContestBudget"
+                                                                             v-model="checkableGroups['AspContestBudget']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Бюджет</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in AspContestBudget"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                            <!-- Contract -->
+                                                            <MyAccordionItem edu-level="Asp" list-type="Contest"
+                                                                             budget-or-contract="Contract"
+                                                                             checkbox-name="AspContestContract"
+                                                                             v-model="checkableGroups['AspContestContract']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Контракт</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in AspContestContract"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
                                                 </template>
                                             </MyAccordionItem>
                                             <!--Enrolled list-->
@@ -204,7 +664,84 @@
                                                         зачисленных</p>
                                                 </template>
                                                 <template v-slot:bodyContent>
-                                                    Asp3 Body
+
+                                                    <CheckableAccordion edu-level="Asp" list-type="Enrolled"
+                                                                        budget-or-contract="BudgetAndContract">
+                                                        <template v-slot:accordeonBody>
+
+                                                            <!-- Budget -->
+                                                            <MyAccordionItem edu-level="Asp" list-type="Enrolled"
+                                                                             budget-or-contract="Budget"
+                                                                             checkbox-name="AspEnrolledBudget"
+                                                                             v-model="checkableGroups['AspEnrolledBudget']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Бюджет</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in AspEnrolledBudget"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                            <!-- Contract -->
+                                                            <MyAccordionItem edu-level="Asp" list-type="Enrolled"
+                                                                             budget-or-contract="Contract"
+                                                                             checkbox-name="AspEnrolledContract"
+                                                                             v-model="checkableGroups['AspEnrolledContract']"
+                                                                             @change="OnBigCheckboxClick">
+                                                                <template v-slot:buttonContent>
+                                                                    <label
+                                                                        class="direction-info__name direction-info__body flex-fill">Контракт</label>
+                                                                </template>
+                                                                <template v-slot:bodyContent>
+                                                                    <div>
+                                                                        <template v-if="listsReceived">
+                                                                            <div class="programs"
+                                                                                 v-for="competition in AspEnrolledContract"
+                                                                                 :key="competition.displayId">
+                                                                                <CheckableProgram
+                                                                                    :item-name="competition.displayId"
+                                                                                    :is-selected="competition.Selected"
+                                                                                    class="flex-fill"
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    <template v-slot:Code>
+                                                                                        {{ competition.direction_code }}
+                                                                                    </template>
+                                                                                    <template v-slot:Name>
+                                                                                        {{ competition.fdv }}
+                                                                                    </template>
+                                                                                </CheckableProgram>
+                                                                            </div>
+                                                                        </template>
+                                                                        <p v-else>Загрузка списков...</p>
+                                                                    </div>
+                                                                </template>
+                                                            </MyAccordionItem>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
                                                 </template>
                                             </MyAccordionItem>
                                         </template>
@@ -218,20 +755,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Test area for competition list getter (from link) -->
-        <!--        <div>
-                    <template v-if="listsReceived">
-                        <h2>Сохраненные соревнования:</h2>
-                        <ul>
-                            <li v-for="(competition, index) in dataArrays" :key="competition.id">
-                                {{ competition.code }} {{ competition.name }}; faculty_id: {{ competition.faculty_id }};
-                                SELECTED: {{ competition.Selected }}
-                            </li>
-                        </ul>
-                    </template>
-                    <p v-else>Загрузка списков...</p>
-                </div>-->
 
     </div>
 </template>
@@ -253,13 +776,74 @@ export default {
             return checkableProgram
         },
 
-        BakBudget() {
+        // Bak
+        BakApplicantsBudget() {
             return this.getCurrentCompetitions('BakApplicantsBudget')
         },
 
-        BakContract() {
+        BakApplicantsContract() {
             return this.getCurrentCompetitions('BakApplicantsContract')
-        }
+        },
+
+        BakContestBudget() {
+            return this.getCurrentCompetitions('BakContestBudget')
+        },
+
+        BakContestContract() {
+            return this.getCurrentCompetitions('BakContestContract')
+        },
+
+        BakEnrolledBudget() {
+            return this.getCurrentCompetitions('BakEnrolledBudget')
+        },
+
+        BakEnrolledContract() {
+            return this.getCurrentCompetitions('BakEnrolledContract')
+        },
+
+
+        // Mag
+        MagApplicantsBudget() {
+            return this.getCurrentCompetitions('MagApplicantsBudget')
+        },
+
+        MagApplicantsContract() {
+            return this.getCurrentCompetitions('MagApplicantsContract')
+        },
+
+        MagContestBudget() {
+            return this.getCurrentCompetitions('MagContestBudget')
+        },
+
+        MagContestContract() {
+            return this.getCurrentCompetitions('MagContestContract')
+        },
+
+        MagEnrolledBudget() {
+            return this.getCurrentCompetitions('MagEnrolledBudget')
+        },
+
+        MagEnrolledContract() {
+            return this.getCurrentCompetitions('MagEnrolledContract')
+        },
+
+
+        // Asp
+        AspContestBudget() {
+            return this.getCurrentCompetitions('AspContestBudget')
+        },
+
+        AspContestContract() {
+            return this.getCurrentCompetitions('AspContestContract')
+        },
+
+        AspEnrolledBudget() {
+            return this.getCurrentCompetitions('AspEnrolledBudget')
+        },
+
+        AspEnrolledContract() {
+            return this.getCurrentCompetitions('AspEnrolledContract')
+        },
     },
     components: {MyAccordionItem, CheckableProgram, CheckableAccordion},
 
@@ -285,28 +869,29 @@ export default {
         async getCompetitions() {
             // Get Bak competitions
             // Budget
+
             let campaign = '1';
-            let typeList = '1';
             await this.readCompetitionGroupsDictionary();
-            //await this.formDataArray(campaign, typeList, 'BakApplicantsBudget');
-            // const tempStorage = await this.getListOfLists(campaign, typeList);
-            // console.log("tempStorage: ", tempStorage);
-            // this.buildFullCompetitionsMap(tempStorage);
-            await this.formDataArray_New(campaign, typeList, 'BakApplicants');
 
-            // Contract
-            //typeList = '5';
-            //await this.formDataArray(campaign, typeList, 'BakApplicantsContract');
+            // Bak
+            await this.formDataArray(campaign, 1, 'BakApplicants');
+            await this.formDataArray(campaign, 2, 'BakContest');
+            await this.formDataArray(campaign, 5, 'BakEnrolled');
 
-            // Get Mag competitions, add them to dataArrays
+            // Mag
+            await this.formDataArray(2, 1, 'MagApplicants');
+            await this.formDataArray(2, 2, 'MagContest');
+            await this.formDataArray(2, 5, 'MagEnrolled');
 
-            // Get Asp competitions, add them to dataArrays
+            // Asp
+            await this.formDataArray(3, 2, 'AspContest');
+            await this.formDataArray(3, 5, 'AspEnrolled');
 
             this.listsReceived = true;
-            console.log("CheckableGroups: ", this.checkableGroups);
+            //console.log("CheckableGroups: ", this.checkableGroups);
         },
 
-        async formDataArray(campaign, typeList, groupCommonName) {
+        async formDataArray_Old(campaign, typeList, groupCommonName) {
             let competitions = await getListCompetitions(campaign, typeList);
 
             let tempArray = [];
@@ -317,17 +902,27 @@ export default {
                 tempArray[i] = competitions.competition_groups[i];
             }
             this.dataArrays[groupCommonName] = tempArray;
-            //console.log(this.dataArrays);
             // Check all the groupCommonName accordion as the unchecked
             this.checkableGroups[groupCommonName] = false;
-
-            console.log("Filled data array with ", this.dataArrays);
         },
 
-        async formDataArray_New(campaignType, commonListType, groupCommonName) {
+        async formDataArray(campaignType, commonListType, groupCommonName) {
+            function dataArraysCompareFn(a, b) {
+                const stringNumberFirst = a[1].direction_code.replace(/\./g, "");
+                const numberFirst = Number(stringNumberFirst);
+                const stringNumberSecond = b[1].direction_code.replace(/\./g, "");
+                const numberSecond = Number(stringNumberSecond);
+
+                return numberFirst - numberSecond;
+            }
+
             const competitions = await this.getListOfLists(campaignType, commonListType);
-            console.log("tempStorage: ", competitions);
-            const fullCompetitionsMap = this.buildFullCompetitionsMap(competitions);
+            let fullCompetitionsMap = this.buildFullCompetitionsMap(competitions);
+
+            // Sort the map
+            const entries = Array.from(fullCompetitionsMap.entries());
+            const sortedEntries = entries.sort(dataArraysCompareFn);
+            fullCompetitionsMap = new Map(sortedEntries);
 
 
             let tempArrayBudget = [];
@@ -345,8 +940,6 @@ export default {
                     tempArrayContract[tempArrayContract.length++] = value;
                 }
             });
-            //console.log("Test tempArrayBudget: ", tempArrayBudget);
-            //console.log("Test tempArrayContract: ", tempArrayContract);
 
             this.dataArrays[groupCommonName + "Budget"] = tempArrayBudget;
             this.dataArrays[groupCommonName + "Contract"] = tempArrayContract;
@@ -374,12 +967,12 @@ export default {
         },
 
         async getListOfLists(campaignType, commonListType) {
-            console.log("Giga massiv: ", this.dataArrays);
+            //console.log("Giga massiv: ", this.dataArrays);
             let saveSource = new Map();
 
             try {
                 const response = await axiosInstance.get("/api/lists/" + campaignType + "/" + commonListType);
-                console.log("List of lists response: ", response.data);
+                //console.log("List of lists response: ", response.data);
                 saveSource = new Map(response.data.data.map(item => [item.uuid, item]));
             } catch (error) {
                 console.error('Ошибка при получении данных:', error);
@@ -400,7 +993,7 @@ export default {
                 }
             });
 
-            console.log("Combined map: ", combinedMap);
+            //console.log("Combined map: ", combinedMap);
             return combinedMap;
         },
 
@@ -420,7 +1013,7 @@ export default {
                 } else if (competitionBlock[element].Selected && !anySelected && oneSelected) {
                     anySelected = true;
                 } else if (!competitionBlock[element].Selected) {
-                    continue;
+                    break;
                 }
                 counter++;
             }
@@ -438,57 +1031,71 @@ export default {
             } else return 0;
         },
 
-        checkableProgramClicked(isSelected, checkableProgramName) {
-            console.log("checkableProgramClicked initiated by: ", checkableProgramName);
-            let checkbox;
+        checkableProgramClicked(checkableProgramName) {
+            //console.log("checkableProgramClicked initiated by: ", checkableProgramName);
 
             let parentCheckboxName = checkableProgramName.replace(/[0-9]/g, '');
             let programIndex = checkableProgramName.replace(/\D/g, '');
 
-            this.dataArrays[parentCheckboxName][programIndex].Selected = isSelected;
-
+            this.dataArrays[parentCheckboxName][programIndex].Selected = !this.dataArrays[parentCheckboxName][programIndex].Selected;
 
             let selectedStatus = this.checkCompetitionsSelectStatus(this.dataArrays[parentCheckboxName]);
-            console.log("selectedStatus", selectedStatus)
-            checkbox = document.getElementById(parentCheckboxName);
 
-            // Form array of selected competitions
-            let tempSelectedCompetitions = []
-            tempSelectedCompetitions = this.dataArrays[parentCheckboxName].filter(competition => competition.Selected);
-
-            this.competitionsSelectedStatus[parentCheckboxName] = selectedStatus;
-            if (selectedStatus === 0) {
-                //this.checkableGroups[parentCheckboxName] = false;
+            if (!this.dataArrays[parentCheckboxName][programIndex].Selected && this.checkableGroups[parentCheckboxName]) {
+                this.checkableGroups[parentCheckboxName] = false;
+                const checkbox = document.getElementById(parentCheckboxName);
                 checkbox.checked = false;
-                checkbox.intermediate = false;
-            } else if (selectedStatus === 2 || selectedStatus === 1) {
-                //this.checkableGroups[parentCheckboxName] = false;
-                checkbox.checked = false;
-                checkbox.intermediate = true;
-            } else if (selectedStatus === 3) {
-                //this.checkableGroups[parentCheckboxName] = true;
-                checkbox.checked = true;
-                checkbox.intermediate = false;
+            } else if (this.dataArrays[parentCheckboxName][programIndex].Selected) {
+                if (selectedStatus === 3) {
+                    // All selected
+                    this.checkableGroups[parentCheckboxName] = true;
+                    const checkbox = document.getElementById(parentCheckboxName);
+                    checkbox.checked = true;
+                }
             }
+            let tempSelectedCompetitions = this.dataArrays[parentCheckboxName].filter(competition => competition.Selected);
+
+            //
+            //
+            // let selectedStatus = this.checkCompetitionsSelectStatus(this.dataArrays[parentCheckboxName]);
+            // console.log("selectedStatus", selectedStatus)
+            // checkbox = document.getElementById(parentCheckboxName);
+            //
+            // // Form array of selected competitions
+            // let tempSelectedCompetitions = []
+            // tempSelectedCompetitions = this.dataArrays[parentCheckboxName].filter(competition => competition.Selected);
+            //
+            // this.competitionsSelectedStatus[parentCheckboxName] = selectedStatus;
+            // if (selectedStatus === 0) {
+            //     //this.checkableGroups[parentCheckboxName] = false;
+            //     checkbox.checked = false;
+            //     checkbox.intermediate = false;
+            // } else if (selectedStatus === 2 || selectedStatus === 1) {
+            //     //this.checkableGroups[parentCheckboxName] = false;
+            //     checkbox.checked = false;
+            //     checkbox.intermediate = true;
+            // } else if (selectedStatus === 3) {
+            //     //this.checkableGroups[parentCheckboxName] = true;
+            //     checkbox.checked = true;
+            //     checkbox.intermediate = false;
+            // }
 
             this.$emit('onCompetitionListsStateUpdate', selectedStatus, tempSelectedCompetitions, parentCheckboxName);
         },
 
-        OnCheckboxClick(event) {
-            const checkboxName = String(event.target.getAttribute('id'));
-            if (!checkboxName.includes('checkable-')) {
-                console.log("Big checkbox clicked: ", checkboxName)
-                //const previousCheckboxState = this.checkableGroups[checkboxName];
-                const bigCheckbox = document.getElementById(checkboxName);
-                //if (!bigCheckbox.intermediate) {
-                    this.checkableGroups[checkboxName] = !this.checkableGroups[checkboxName];
-                //}
+        OnBigCheckboxClick(event) {
+            const bigCheckboxName = String(event.target.getAttribute('id'));
+            if (!bigCheckboxName.includes('checkable-')) {
+                //console.log("Big checkbox clicked: ", bigCheckboxName)
+                this.checkableGroups[bigCheckboxName] = !this.checkableGroups[bigCheckboxName];
+                const checkbox = document.getElementById(bigCheckboxName);
+                checkbox.checked = this.checkableGroups[bigCheckboxName];
 
                 let count = 0;
-                for (const element in this.dataArrays[checkboxName]) {
+                for (const element in this.dataArrays[bigCheckboxName]) {
                     count++;
-                    if (this.checkableGroups[checkboxName] !== this.dataArrays[checkboxName][element].Selected) {
-                        let checkbox = document.getElementById('checkable-' + this.dataArrays[checkboxName][element].displayId);
+                    if (this.dataArrays[bigCheckboxName][element].Selected !== this.checkableGroups[bigCheckboxName]) {
+                        let checkbox = document.getElementById('checkable-' + this.dataArrays[bigCheckboxName][element].displayId);
                         checkbox.click();
                     }
                 }

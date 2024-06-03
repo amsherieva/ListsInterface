@@ -57,7 +57,7 @@ export default {
     methods: {
         OnCheckboxClick() {
             this.isProgramSelected = !this.isProgramSelected;
-            this.$emit('onCheckboxClick', this.isProgramSelected, this.itemName)
+            this.$emit('onCheckboxClicked', this.itemName)
         }
     },
 }

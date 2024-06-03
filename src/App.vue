@@ -5,19 +5,6 @@
             :selected-competitions="selectedCompetitions"
             @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
 
-        <!--  Test button  -->
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                GET
-            </button>
-            <ul class="dropdown-menu">
-                <li v-for="dictionaryName in dictionaries.entries">
-                    <button class="dropdown-item" type="button" @click="getRequest('/api/dictionaries/' + dictionaryName[0])">{{ dictionaryName[1] }}</button>
-                </li>
-            </ul>
-        </div>
-        <button class="btn-b" @click="testGetRequest">Тест GET запросов</button>
-
         <template v-if="competitionListsState === 0">
             <ListSelectorNotification class="pb-3"/>
         </template>
@@ -31,7 +18,6 @@
     <template v-else>
         <AuthWindowModal :token="apiToken" @getToken="receiveToken"/>
     </template>
-    {{ testItems }}
 </template>
 
 <script>
