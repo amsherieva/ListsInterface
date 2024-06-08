@@ -12,52 +12,13 @@
                         <h1 class="p-0 m-0">Интерфейс списков</h1>
                     </div>
                     <div class="ms-auto ">
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 border-0 text-nowrap" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                <h2 class="p-0 m-0">
-                                    <i class="bi bi-person-circle"></i>&nbsp;Тест Тестович Тестов
-                                </h2>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                                <li>
-                                    <button class="dropdown-item" type="button"><i class="bi bi-box-arrow-right"></i>&nbsp;Выйти
-                                    </button>
-                                </li>
-<!--                                <li>-->
-<!--                                    <button class="btn-b dropdown-item" type="button" data-bs-toggle="modal"-->
-<!--                                            data-bs-target="#enterTokenModal">Ввести токен-->
-<!--                                    </button>-->
-<!--                                </li>-->
-                            </ul>
-                        </div>
+                        <button type="button" class="btn p-0 border-0 text-nowrap" id="deleteTokenButton"
+                                @click="deleteToken">
+                            <h2 class="p-0 m-0">
+                                <i class="bi bi-box-arrow-right"></i>&nbsp;Завершить сеанс
+                            </h2>
+                        </button>
                     </div>
-<!--                    <template v-if="token && token.length > 0">-->
-<!--                        <ConfirmationPopup :id="'enterTokenModal'" :usePositiveResponseButton="false"-->
-<!--                                           :useNegativeResponseButton="true"-->
-<!--                                           @negativeButtonClicked="deleteToken">-->
-<!--                            <template v-slot:title>-->
-<!--                                Добро пожаловать!-->
-<!--                            </template>-->
-<!--                            <template v-slot:body>-->
-<!--                                Обнаружен существующий токен: {{ token }}.-->
-<!--                            </template>-->
-<!--                            <template v-slot:negativeButtonText>-->
-<!--                                Удалить токен-->
-<!--                            </template>-->
-<!--                        </ConfirmationPopup>-->
-<!--                    </template>-->
-<!--                    <template v-else>-->
-<!--                        <ConfirmationPopup :id="'enterTokenModal'" @positiveButtonClicked="getToken">-->
-<!--                            <template v-slot:title>-->
-<!--                                Добро пожаловать!-->
-<!--                            </template>-->
-<!--                            <template v-slot:body>-->
-<!--                                <p>Пожалуйста, введите токен:</p>-->
-<!--                                <input type="text" class="form-control" placeholder="Token" v-model="enteredToken">-->
-<!--                            </template>-->
-<!--                        </ConfirmationPopup>-->
-<!--                    </template>-->
                 </div>
             </div>
         </div>

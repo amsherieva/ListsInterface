@@ -1,7 +1,7 @@
 <template>
     <div class="confirmation-popup">
         <div class="modal fade" :id tabindex="-1" aria-hidden="true" :aria-labelledby="id + 'Label'"
-             v-bind="isNecessary ? necessaryAttributes : {}">
+             v-bind="isNecessary ? necessaryAttributes : {}" ref="modal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -20,7 +20,7 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                         </template>
                         <template v-if="usePositiveResponseButton">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                            <button type="button" class="btn btn-primary" v-bind="isNecessary ? {} : dismissableButton"
                                     @click="positiveButtonClicked">Продолжить
                             </button>
                         </template>
@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import {Modal} from "bootstrap";
+
 export default {
     name: "ConfirmationPopup",
 
@@ -66,10 +68,26 @@ export default {
                 'data-bs-backdrop': 'static',
                 'data-bs-keyboard': 'false',
             };
+        },
+
+        dismissableButton(){
+            return {
+                'data-bs-dismiss':"modal"
+            }
         }
     },
 
     methods: {
+        showModal() {
+            const modal = new Modal(this.$refs.modal);
+            modal.show();
+        },
+
+        hideModal() {
+            const modal = new Modal(this.$refs.modal);
+            modal.hide();
+        },
+
         positiveButtonClicked(event) {
             this.$emit('positiveButtonClicked', event);
         },

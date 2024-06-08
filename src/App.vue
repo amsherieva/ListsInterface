@@ -16,7 +16,7 @@
         </template>
     </template>
     <template v-else>
-        <AuthWindowModal :token="apiToken" @getToken="receiveToken"/>
+        <AuthWindowModal :token="apiToken" @getToken="receiveToken" :id="'enterTokenModalTest'"/>
     </template>
 </template>
 
@@ -78,7 +78,9 @@ export default {
 
         deleteToken() {
             this.apiToken = "";
-            sessionStorage.removeItem("token")
+            sessionStorage.removeItem("token");
+            this.isTokenValid = false;
+            sessionStorage.setItem("isTokenValid", this.isTokenValid);
         },
 
         async testPostRequest() {

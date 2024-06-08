@@ -11,9 +11,11 @@
 
             <button class="accordion-button collapsed ps-1"
                     type="button" data-bs-toggle="collapse"
+                    :id="'panelsListSelector-button' + eduLevel + listType + budgetOrContract"
                     :data-bs-target="'#panelsListSelector-collapse' + eduLevel + listType + budgetOrContract"
                     aria-expanded="false"
-                    :aria-controls="'panelsListSelector-collapse' + eduLevel + listType + budgetOrContract">
+                    :aria-controls="'panelsListSelector-collapse' + eduLevel + listType + budgetOrContract"
+                    @click="OnButtonClicked">
                 <slot name="buttonContent"></slot>
             </button>
         </h2>
@@ -44,6 +46,12 @@ export default {
         },
         budgetOrContract: {
             type: String
+        }
+    },
+
+    methods: {
+        OnButtonClicked(event) {
+            this.$emit("onAccordionButtonClicked", event, this.eduLevel, this.listType, this.budgetOrContract);
         }
     }
 }

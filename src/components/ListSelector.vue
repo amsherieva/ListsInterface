@@ -33,7 +33,8 @@
                                                                              budget-or-contract="Budget"
                                                                              checkbox-name="BakApplicantsBudget"
                                                                              v-model="checkableGroups['BakApplicantsBudget']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Бюджет</label>
@@ -68,7 +69,8 @@
                                                                              budget-or-contract="Contract"
                                                                              checkbox-name="BakApplicantsContract"
                                                                              v-model="checkableGroups['BakApplicantsContract']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Контракт</label>
@@ -120,7 +122,8 @@
                                                                              budget-or-contract="Budget"
                                                                              checkbox-name="BakContestBudget"
                                                                              v-model="checkableGroups['BakContestBudget']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Бюджет</label>
@@ -155,7 +158,8 @@
                                                                              budget-or-contract="Contract"
                                                                              checkbox-name="BakContestContract"
                                                                              v-model="checkableGroups['BakContestContract']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Контракт</label>
@@ -170,7 +174,8 @@
                                                                                     :item-name="competition.displayId"
                                                                                     :is-selected="competition.Selected"
                                                                                     class="flex-fill"
-                                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                                    @onCheckboxClicked="checkableProgramClicked"
+                                                                                    @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
@@ -208,7 +213,8 @@
                                                                              budget-or-contract="Budget"
                                                                              checkbox-name="BakEnrolledBudget"
                                                                              v-model="checkableGroups['BakEnrolledBudget']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Бюджет</label>
@@ -243,7 +249,8 @@
                                                                              budget-or-contract="Contract"
                                                                              checkbox-name="BakEnrolledContract"
                                                                              v-model="checkableGroups['BakEnrolledContract']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Контракт</label>
@@ -309,7 +316,8 @@
                                                                              budget-or-contract="Budget"
                                                                              checkbox-name="MagApplicantsBudget"
                                                                              v-model="checkableGroups['MagApplicantsBudget']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Бюджет</label>
@@ -344,7 +352,8 @@
                                                                              budget-or-contract="Contract"
                                                                              checkbox-name="MagApplicantsContract"
                                                                              v-model="checkableGroups['MagApplicantsContract']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Контракт</label>
@@ -396,7 +405,8 @@
                                                                              budget-or-contract="Budget"
                                                                              checkbox-name="MagContestBudget"
                                                                              v-model="checkableGroups['MagContestBudget']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Бюджет</label>
@@ -431,7 +441,8 @@
                                                                              budget-or-contract="Contract"
                                                                              checkbox-name="MagContestContract"
                                                                              v-model="checkableGroups['MagContestContract']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Контракт</label>
@@ -484,7 +495,8 @@
                                                                              budget-or-contract="Budget"
                                                                              checkbox-name="MagEnrolledBudget"
                                                                              v-model="checkableGroups['MagEnrolledBudget']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Бюджет</label>
@@ -519,7 +531,8 @@
                                                                              budget-or-contract="Contract"
                                                                              checkbox-name="MagEnrolledContract"
                                                                              v-model="checkableGroups['MagEnrolledContract']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Контракт</label>
@@ -586,7 +599,8 @@
                                                                              budget-or-contract="Budget"
                                                                              checkbox-name="AspContestBudget"
                                                                              v-model="checkableGroups['AspContestBudget']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Бюджет</label>
@@ -621,7 +635,8 @@
                                                                              budget-or-contract="Contract"
                                                                              checkbox-name="AspContestContract"
                                                                              v-model="checkableGroups['AspContestContract']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Контракт</label>
@@ -674,7 +689,8 @@
                                                                              budget-or-contract="Budget"
                                                                              checkbox-name="AspEnrolledBudget"
                                                                              v-model="checkableGroups['AspEnrolledBudget']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Бюджет</label>
@@ -709,7 +725,8 @@
                                                                              budget-or-contract="Contract"
                                                                              checkbox-name="AspEnrolledContract"
                                                                              v-model="checkableGroups['AspEnrolledContract']"
-                                                                             @change="OnBigCheckboxClick">
+                                                                             @change="OnBigCheckboxClick"
+                                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                                 <template v-slot:buttonContent>
                                                                     <label
                                                                         class="direction-info__name direction-info__body flex-fill">Контракт</label>
@@ -854,6 +871,7 @@ export default {
             checkableGroups: {},
             checkInProgress: false,
             competitionsSelectedStatus: {},
+            callEnum: {},
 
             // API data
             dictionaries: {},   // Really need it??
@@ -863,6 +881,19 @@ export default {
 
     async mounted() {
         await this.getCompetitions();
+        let tempMap = new Map();
+        tempMap.set("Bak", 1);
+        tempMap.set("Mag", 2);
+        tempMap.set("Asp", 3);
+
+        tempMap.set("Applicants", 1);
+        tempMap.set("Contest", 2);
+        tempMap.set("Enrolled", 5);
+
+        tempMap.set("Budget", 1);
+        tempMap.set("Contract", 2);
+
+        this.callEnum = tempMap;
     },
 
     methods: {
@@ -871,21 +902,21 @@ export default {
             // Budget
 
             let campaign = '1';
-            await this.readCompetitionGroupsDictionary();
+            //await this.readCompetitionGroupsDictionary();
 
             // Bak
-            await this.formDataArray(campaign, 1, 'BakApplicants');
-            await this.formDataArray(campaign, 2, 'BakContest');
-            await this.formDataArray(campaign, 5, 'BakEnrolled');
+            //await this.formDataArray(1, 1, 'BakApplicants');
+            //await this.formDataArray(1, 2, 'BakContest');
+            //await this.formDataArray(1, 5, 'BakEnrolled');
 
             // Mag
-            await this.formDataArray(2, 1, 'MagApplicants');
-            await this.formDataArray(2, 2, 'MagContest');
-            await this.formDataArray(2, 5, 'MagEnrolled');
+            //await this.formDataArray(2, 1, 'MagApplicants');
+            //await this.formDataArray(2, 2, 'MagContest');
+            //await this.formDataArray(2, 5, 'MagEnrolled');
 
             // Asp
-            await this.formDataArray(3, 2, 'AspContest');
-            await this.formDataArray(3, 5, 'AspEnrolled');
+            //await this.formDataArray(3, 2, 'AspContest');
+            //await this.formDataArray(3, 5, 'AspEnrolled');
 
             this.listsReceived = true;
             //console.log("CheckableGroups: ", this.checkableGroups);
@@ -967,12 +998,10 @@ export default {
         },
 
         async getListOfLists(campaignType, commonListType) {
-            //console.log("Giga massiv: ", this.dataArrays);
             let saveSource = new Map();
 
             try {
                 const response = await axiosInstance.get("/api/lists/" + campaignType + "/" + commonListType);
-                //console.log("List of lists response: ", response.data);
                 saveSource = new Map(response.data.data.map(item => [item.uuid, item]));
             } catch (error) {
                 console.error('Ошибка при получении данных:', error);
@@ -993,7 +1022,6 @@ export default {
                 }
             });
 
-            //console.log("Combined map: ", combinedMap);
             return combinedMap;
         },
 
@@ -1055,38 +1083,13 @@ export default {
             }
             let tempSelectedCompetitions = this.dataArrays[parentCheckboxName].filter(competition => competition.Selected);
 
-            //
-            //
-            // let selectedStatus = this.checkCompetitionsSelectStatus(this.dataArrays[parentCheckboxName]);
-            // console.log("selectedStatus", selectedStatus)
-            // checkbox = document.getElementById(parentCheckboxName);
-            //
-            // // Form array of selected competitions
-            // let tempSelectedCompetitions = []
-            // tempSelectedCompetitions = this.dataArrays[parentCheckboxName].filter(competition => competition.Selected);
-            //
-            // this.competitionsSelectedStatus[parentCheckboxName] = selectedStatus;
-            // if (selectedStatus === 0) {
-            //     //this.checkableGroups[parentCheckboxName] = false;
-            //     checkbox.checked = false;
-            //     checkbox.intermediate = false;
-            // } else if (selectedStatus === 2 || selectedStatus === 1) {
-            //     //this.checkableGroups[parentCheckboxName] = false;
-            //     checkbox.checked = false;
-            //     checkbox.intermediate = true;
-            // } else if (selectedStatus === 3) {
-            //     //this.checkableGroups[parentCheckboxName] = true;
-            //     checkbox.checked = true;
-            //     checkbox.intermediate = false;
-            // }
-
             this.$emit('onCompetitionListsStateUpdate', selectedStatus, tempSelectedCompetitions, parentCheckboxName);
         },
 
         OnBigCheckboxClick(event) {
             const bigCheckboxName = String(event.target.getAttribute('id'));
             if (!bigCheckboxName.includes('checkable-')) {
-                //console.log("Big checkbox clicked: ", bigCheckboxName)
+                //console.log("Big checkbox clicked: ", event)
                 this.checkableGroups[bigCheckboxName] = !this.checkableGroups[bigCheckboxName];
                 const checkbox = document.getElementById(bigCheckboxName);
                 checkbox.checked = this.checkableGroups[bigCheckboxName];
@@ -1102,6 +1105,14 @@ export default {
             }
 
         },
+
+        OnAccordionButtonClicked(event, eduLevel, listType, budgetOrContract) {
+            console.log("OnAccordionButtonClicked: ", eduLevel, listType, budgetOrContract);
+            //console.log("Map at: ", eduLevel + listType + budgetOrContract);
+            if (!this.callEnum.get(eduLevel + listType + budgetOrContract)) {
+                //console.log(eduLevel + listType + budgetOrContract);
+            }
+        }
     },
 }
 </script>
