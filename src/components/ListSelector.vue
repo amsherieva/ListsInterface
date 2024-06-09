@@ -174,8 +174,7 @@
                                                                                     :item-name="competition.displayId"
                                                                                     :is-selected="competition.Selected"
                                                                                     class="flex-fill"
-                                                                                    @onCheckboxClicked="checkableProgramClicked"
-                                                                                    @onAccordionButtonClicked="OnAccordionButtonClicked">
+                                                                                    @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
@@ -786,7 +785,7 @@ import bootstrap from "bootstrap/dist/js/bootstrap.bundle.js";
 
 import axiosInstance from "@/axiosConfig";
 
-export default {
+export default{
     name: 'ListSelector',
     computed: {
         checkableProgram() {
