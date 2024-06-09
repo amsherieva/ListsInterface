@@ -1,6 +1,5 @@
 <template>
     <Header :token="apiToken" @deleteToken="deleteToken"/>
-    <template v-if="isTokenValid">
         <ListSelector
             :selected-competitions="selectedCompetitions"
             @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
@@ -16,10 +15,7 @@
         </template>
         <h2 class="text-center">Тестовая зона</h2>
         <TestButtons></TestButtons>
-    </template>
-    <template v-else>
-        <AuthWindowModal :token="apiToken" @getToken="receiveToken" :id="'enterTokenModalTest'"/>
-    </template>
+        <AuthWindowModal :isTokenValid @getToken="receiveToken" :id="'enterTokenModalTest'"/>
 </template>
 
 <script>
@@ -41,9 +37,10 @@ export default {
         Header, ListSelector, ListSelectorNotification, MultipleCompetitionsControls,
     },
 
-    async mounted() {
+    async created() {
         this.apiToken = sessionStorage.getItem("token");
-        this.isTokenValid = sessionStorage.getItem("isTokenValid");
+        this.isTokenValid = (sessionStorage.getItem("isTokenValid") === 'true');
+
         //const temp = await this.getRequest("/api/dictionaries")
         //this.dictionaries = new Map(Object.entries(temp));
         //console.log([...this.dictionaries.keys()]); // Получить все ключи

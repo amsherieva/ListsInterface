@@ -1,12 +1,12 @@
 <template>
     <div class="auth-window">
 
-        <ConfirmationPopup :id="id" @positiveButtonClicked="getToken" :isNecessary='true' :ref=id>
+        <ConfirmationPopup id="authWindowModal" @positiveButtonClicked="getToken" :isNecessary='true'>
             <template v-slot:title>
                 Добро пожаловать!
             </template>
             <template v-slot:body>
-                <template v-if="isTokenCheckFailed">
+                <template v-if="!isTokenValid && !isFirstTime">
                     <div class="alert alert-danger d-flex align-items-center" role="alert">
 <!--                        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>-->
                         <div>
@@ -19,88 +19,92 @@
                           @input="autoResize" ref="textarea" style="resize: none; overflow: hidden;"/>
             </template>
         </ConfirmationPopup>
-<!--        <ConfirmationPopup :id="idFailed" @negativeButtonClicked="tokenCheckFailed" :isNecessary='true'-->
-<!--                           :use-positive-response-button="false" :use-negative-response-button="true">-->
-<!--            <template v-slot:title>-->
-<!--                Ошибка-->
-<!--            </template>-->
-<!--            <template v-slot:body>-->
-<!--                <p>Введен невалидный токен!</p>-->
-<!--            </template>-->
-<!--            <template v-slot:negativeButtonText>-->
-<!--                Повтор-->
-<!--            </template>-->
-<!--        </ConfirmationPopup>-->
 
     </div>
 </template>
 
 <script>
 import ConfirmationPopup from "@/components/UI/ConfirmationPopup.vue";
-import { Modal } from "bootstrap";
+import bootstrap from "bootstrap/dist/js/bootstrap.bundle.js";
 import axiosInstance from "@/axiosConfig";
 
 export default {
     name: 'AuthWindowModal',
     components: {ConfirmationPopup},
-
     props: {
-        token: String,
+        isTokenValid: Boolean,
         //id: String
     },
 
     data() {
         return {
             enteredToken: "",
-            id: "enterTokenModalTest",
-            idFailed: "enterTokenModalTest_failed",
-            isTokenCheckFailed: false,
+            isFirstTime: true,
+            authModal: {},
         }
     },
 
-    updated() {
-        this.showDefaultModal();
+    mounted() {
+        console.log("isTokenValid: ", this.isTokenValid);
+        this.authModal = new bootstrap.Modal('#authWindowModal', {});
+        if (!this.isTokenValid) {
+            console.log("Modal mounted");
+            this.OpenModal();
+            this.autoResize();
+        }
+    },
+
+    watch: {
+        isTokenValid(newVal) {
+            console.log("isTokenValid new value: ", this.isTokenValid);
+            if (newVal) {
+                console.log("CloseModal called");
+                this.CloseModal();
+            }
+            if (!newVal) {
+                console.log("OpenModal called");
+                this.OpenModal();
+            }
+        }
     },
 
     methods: {
-        showDefaultModal() {
-            // const modalElement = this.$refs[this.id];
-            // const modal = new Modal(modalElement);
-            // modal.show();
-            this.$refs.enterTokenModalTest.showModal();
-            this.autoResize();
+        OpenModal() {
+            this.authModal.show();
+        },
+
+        CloseModal() {
+            this.authModal.hide();
         },
 
         async testGetRequest() {
+            console.log("Token test");
             let errorCode = 0;
             try {
-                const response = await axiosInstance.get("/api/dictionaries");
+                const response = await axiosInstance.get("/api/junk/lists/1/1/1");
                 this.dictionaries = response.data;
             } catch (error) {
                 console.error('Ошибка при получении данных:', error);
                 //errorCode = error.response.status;
                 errorCode = error.response.status;
             }
+            this.isFirstTime = false;
             return errorCode;
         },
 
-        getToken: async function () {
+        async getToken() {
             sessionStorage.setItem("token", this.enteredToken);
             const testRequestResponse = await this.testGetRequest();
             console.log("testRequestResponse: ",testRequestResponse);
             if (testRequestResponse === 500 || testRequestResponse === "ERR_NETWORK") {
-                this.isTokenCheckFailed = true;
                 sessionStorage.removeItem("token");
                 //const failedModal = new bootstrap.Modal(document.getElementById(this.idFailed));
                 //failedModal.show();
             } else {
+                console.log("Token is valid");
                 this.$emit("getToken", this.enteredToken);
             }
             this.enteredToken = "";
-        },
-
-        tokenCheckFailed() {
-            this.showDefaultModal();
         },
 
         autoResize() {

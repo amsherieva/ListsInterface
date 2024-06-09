@@ -947,7 +947,7 @@ export default {
                 return numberFirst - numberSecond;
             }
 
-            const competitions = await this.getListOfLists(campaignType, commonListType);
+            const competitions = await this.getListOfLists_old(campaignType, commonListType);
             let fullCompetitionsMap = this.buildFullCompetitionsMap(competitions);
 
             // Sort the map
@@ -997,11 +997,24 @@ export default {
             }
         },
 
-        async getListOfLists(campaignType, commonListType) {
+        async getListOfLists_old(campaignType, commonListType) {
             let saveSource = new Map();
 
             try {
                 const response = await axiosInstance.get("/api/lists/" + campaignType + "/" + commonListType);
+                saveSource = new Map(response.data.data.map(item => [item.uuid, item]));
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+
+            return saveSource;
+        },
+
+        async getListOfLists(campaignType, commonListType, commonFinSourceType) {
+            let saveSource = new Map();
+
+            try {
+                const response = await axiosInstance.get("/api/junk/lists/" + campaignType + "/" + commonListType + "/" + commonFinSourceType);
                 saveSource = new Map(response.data.data.map(item => [item.uuid, item]));
             } catch (error) {
                 console.error('Ошибка при получении данных:', error);
@@ -1108,9 +1121,20 @@ export default {
 
         OnAccordionButtonClicked(event, eduLevel, listType, budgetOrContract) {
             console.log("OnAccordionButtonClicked: ", eduLevel, listType, budgetOrContract);
+            const accordionCommonName = eduLevel + listType + budgetOrContract;
             //console.log("Map at: ", eduLevel + listType + budgetOrContract);
-            if (!this.callEnum.get(eduLevel + listType + budgetOrContract)) {
+            if (!this.callEnum.get(accordionCommonName)) {
                 //console.log(eduLevel + listType + budgetOrContract);
+                const ans = this.getListOfLists(this.callEnum.get(eduLevel), this.callEnum.get(listType), this.callEnum.get(budgetOrContract));
+                ans.forEach((value, key) => {
+                    value.Selected = false;
+                    value.displayId = accordionCommonName + '';
+                });
+
+                this.dataArrays[groupCommonName + "Budget"] = tempArrayBudget;
+                this.dataArrays[groupCommonName + "Contract"] = tempArrayContract;
+                // Check all the groupCommonName accordion as the unchecked
+                this.checkableGroups[groupCommonName + "Budget"] = false;
             }
         }
     },
