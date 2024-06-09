@@ -14,6 +14,8 @@
         <template v-if="competitionListsState >= 2">
             <MultipleCompetitionsControls/>
         </template>
+        <h2 class="text-center">Тестовая зона</h2>
+        <TestButtons></TestButtons>
     </template>
     <template v-else>
         <AuthWindowModal :token="apiToken" @getToken="receiveToken" :id="'enterTokenModalTest'"/>
@@ -29,9 +31,11 @@ import MultipleCompetitionsControls from "@/components/MultipleCompetitionsContr
 import AuthWindowModal from "@/components/AuthWindowModal.vue";
 // axios
 import axiosInstance from "@/axiosConfig";
+import TestButtons from "@/components/Test2.vue";
 
 export default {
     components: {
+        TestButtons,
         AuthWindowModal,
         CheckableProgram,
         Header, ListSelector, ListSelectorNotification, MultipleCompetitionsControls,
