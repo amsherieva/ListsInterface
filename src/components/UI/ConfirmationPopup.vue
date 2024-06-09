@@ -1,7 +1,7 @@
 <template>
     <div class="confirmation-popup">
         <div class="modal fade" :id tabindex="-1" aria-hidden="true" :aria-labelledby="id + 'Label'"
-             v-bind="isNecessary ? necessaryAttributes : {}" ref="modal">
+             v-bind="isNecessary ? necessaryAttributes : {}">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -38,8 +38,6 @@
 </template>
 
 <script>
-import {Modal} from "bootstrap";
-
 export default {
     name: "ConfirmationPopup",
 
@@ -78,15 +76,6 @@ export default {
     },
 
     methods: {
-        showModal() {
-            const modal = new Modal(this.$refs.modal);
-            modal.show();
-        },
-
-        hideModal() {
-            const modal = new Modal(this.$refs.modal);
-            modal.hide();
-        },
 
         positiveButtonClicked(event) {
             this.$emit('positiveButtonClicked', event);
