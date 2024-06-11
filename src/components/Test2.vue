@@ -9,7 +9,7 @@
                 <div class="row justify-content-center">
                     <!-- если список снят с публикации-->
                     <div class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b">Опубликовать списки</button>
+                        <button class="btn-b">Опубликовать список</button>
                     </div>
                     <!-- если список снят опубликован
                      <div class="col-lg-4 col-md-5 col-6">
@@ -66,63 +66,63 @@
                 </div>
             </div>
          </div>
-        <h2 class="markdown">Пример разметки на неодновременные блоки</h2>
-        <div class="row container-fluid mx-auto">
-            <div class="col-lg-7 col p-0 mx-auto">
-                <!-- <div class="p-2 px-md-3 d-flex justify-content-center align-items-center"> -->
-                <div class="alert alert-primary d-flex direction-info__name" role="alert"><i
-                        class="bi bi-exclamation-triangle-fill">&nbsp;</i>Выберите список</div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b">Опубликовать списки</button>
-                    </div>
-                    <div class="col-lg-4 col-md-5 col-6">
-                        <a href="" class="btn-b" role="button">Снять с публикации</a>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b">Разморозить списки</button>
-                    </div>
-                    <div class="col-lg-4 col-md-5 col-6">
-                        <a href="" class="btn-b" role="button">Заморозить списки</a>
-                    </div>
-                </div>
+<!--        <h2 class="markdown">Пример разметки на неодновременные блоки</h2>-->
+<!--        <div class="row container-fluid mx-auto">-->
+<!--            <div class="col-lg-7 col p-0 mx-auto">-->
+<!--                &lt;!&ndash; <div class="p-2 px-md-3 d-flex justify-content-center align-items-center"> &ndash;&gt;-->
+<!--                <div class="alert alert-primary d-flex direction-info__name" role="alert"><i-->
+<!--                        class="bi bi-exclamation-triangle-fill">&nbsp;</i>Выберите список</div>-->
+<!--                <div class="row justify-content-center">-->
+<!--                    <div class="col-lg-4 col-md-5 col-6">-->
+<!--                        <button class="btn-b">Опубликовать списки</button>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-5 col-6">-->
+<!--                        <a href="" class="btn-b" role="button">Снять с публикации</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row justify-content-center">-->
+<!--                    <div class="col-lg-4 col-md-5 col-6">-->
+<!--                        <button class="btn-b">Разморозить списки</button>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-5 col-6">-->
+<!--                        <a href="" class="btn-b" role="button">Заморозить списки</a>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <div class="row justify-content-center">
-                    <div class="col-lg-8 col-md-10">
-                        <a href="" class="btn-b btn-block" role="button">Обновить сейчас</a>
-                    </div>
-                </div>
-                <hr style="color: #0152A3; border-width:2px;">
+<!--                <div class="row justify-content-center">-->
+<!--                    <div class="col-lg-8 col-md-10">-->
+<!--                        <a href="" class="btn-b btn-block" role="button">Обновить сейчас</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <hr style="color: #0152A3; border-width:2px;">-->
 
-                <div class="row mt-4">
-                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">
-                        <p>Последнее время обновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">
-                        <a href="" class="btn-b" role="button"><i class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>
-                    </div>
-                </div>
-                <hr>
+<!--                <div class="row mt-4">-->
+<!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
+<!--                        <p>Последнее время обновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
+<!--                        <a href="" class="btn-b" role="button"><i class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <hr>-->
 
-                <div class="row mt-3">
-                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">
-                        <p>Период автообновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">
-                        <a href="" class="btn-b" role="button"><i class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>
-                    </div>
-                </div>
-
-
-                <!--<p class="mt-4"><a href="" class="btn-b btn-block"
-                        role="button">Сохранить внесенные изменения</a></p>-->
+<!--                <div class="row mt-3">-->
+<!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
+<!--                        <p>Период автообновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
+<!--                        <a href="" class="btn-b" role="button"><i class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>-->
+<!--                    </div>-->
+<!--                </div>-->
 
 
-                <!-- </div> -->
-            </div>
-        </div>
+<!--                &lt;!&ndash;<p class="mt-4"><a href="" class="btn-b btn-block"-->
+<!--                        role="button">Сохранить внесенные изменения</a></p>&ndash;&gt;-->
+
+
+<!--                &lt;!&ndash; </div> &ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
 
     </div>
 

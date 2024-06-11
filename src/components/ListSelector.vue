@@ -41,20 +41,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="BakApplicantsBudget">
                                                                             <div class="programs"
-                                                                                 v-for="competition in BakApplicantsBudget"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in BakApplicantsBudget.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'BakApplicantsBudget'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -77,20 +79,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="BakApplicantsContract">
                                                                             <div class="programs"
-                                                                                 v-for="competition in BakApplicantsContract"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in BakApplicantsContract.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'BakApplicantsContract'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -130,20 +134,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="BakContestBudget">
                                                                             <div class="programs"
-                                                                                 v-for="competition in BakContestBudget"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in BakContestBudget.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'BakContestBudget'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -166,20 +172,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="BakContestContract">
                                                                             <div class="programs"
-                                                                                 v-for="competition in BakContestContract"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in BakContestContract.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'BakContestContract'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -220,20 +228,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="BakEnrolledBudget">
                                                                             <div class="programs"
-                                                                                 v-for="competition in BakEnrolledBudget"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in BakEnrolledBudget.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'BakEnrolledBudget'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -256,20 +266,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="BakEnrolledContract">
                                                                             <div class="programs"
-                                                                                 v-for="competition in BakEnrolledContract"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in BakEnrolledContract.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'BakEnrolledContract'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -323,20 +335,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="MagApplicantsBudget">
                                                                             <div class="programs"
-                                                                                 v-for="competition in MagApplicantsBudget"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in MagApplicantsBudget.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'MagApplicantsBudget'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -359,20 +373,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="MagApplicantsContract">
                                                                             <div class="programs"
-                                                                                 v-for="competition in MagApplicantsContract"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in MagApplicantsContract.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'MagApplicantsContract'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -412,20 +428,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="MagContestBudget">
                                                                             <div class="programs"
-                                                                                 v-for="competition in MagContestBudget"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in MagContestBudget.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'MagContestBudget'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -448,20 +466,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="MagContestContract">
                                                                             <div class="programs"
-                                                                                 v-for="competition in MagContestContract"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in MagContestContract.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'MagContestContract'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -502,20 +522,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="MagEnrolledBudget">
                                                                             <div class="programs"
-                                                                                 v-for="competition in MagEnrolledBudget"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in MagEnrolledBudget.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'MagEnrolledBudget'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -538,20 +560,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="MagEnrolledContract">
                                                                             <div class="programs"
-                                                                                 v-for="competition in MagEnrolledContract"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in MagEnrolledContract.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'MagEnrolledContract'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -606,20 +630,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="AspContestBudget">
                                                                             <div class="programs"
-                                                                                 v-for="competition in AspContestBudget"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in AspContestBudget.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'AspContestBudget'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -642,20 +668,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="AspContestContract">
                                                                             <div class="programs"
-                                                                                 v-for="competition in AspContestContract"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in AspContestContract.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'AspContestContract'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -696,20 +724,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="AspEnrolledBudget">
                                                                             <div class="programs"
-                                                                                 v-for="competition in AspEnrolledBudget"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in AspEnrolledBudget.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'AspEnrolledBudget'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -732,20 +762,22 @@
                                                                 </template>
                                                                 <template v-slot:bodyContent>
                                                                     <div>
-                                                                        <template v-if="listsReceived">
+                                                                        <template v-if="AspEnrolledContract">
                                                                             <div class="programs"
-                                                                                 v-for="competition in AspEnrolledContract"
-                                                                                 :key="competition.displayId">
+                                                                                 v-for="competition in AspEnrolledContract.values()">
                                                                                 <CheckableProgram
-                                                                                    :item-name="competition.displayId"
+                                                                                    :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
+                                                                                    :belongs-to="'AspEnrolledContract'"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
                                                                                         {{ competition.direction_code }}
                                                                                     </template>
                                                                                     <template v-slot:Name>
-                                                                                        {{ competition.fdv }}
+                                                                                        {{
+                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                        }}
                                                                                     </template>
                                                                                 </CheckableProgram>
                                                                             </div>
@@ -785,7 +817,7 @@ import bootstrap from "bootstrap/dist/js/bootstrap.bundle.js";
 
 import axiosInstance from "@/axiosConfig";
 
-export default{
+export default {
     name: 'ListSelector',
     computed: {
         checkableProgram() {
@@ -794,7 +826,7 @@ export default{
 
         // Bak
         BakApplicantsBudget() {
-            return this.getCurrentCompetitions('BakApplicantsBudget')
+            return this.getCurrentCompetitions('BakApplicantsBudget');
         },
 
         BakApplicantsContract() {
@@ -1047,18 +1079,19 @@ export default{
             let oneSelected = false;
             let counter = 0;
 
-            for (const element in competitionBlock) {
-                if (competitionBlock[element].Selected && !oneSelected) {
+            for (const element of competitionBlock) {
+                if (element[1].Selected && !oneSelected) {
                     oneSelected = true;
-                } else if (competitionBlock[element].Selected && !anySelected && oneSelected) {
+                } else if (element[1].Selected && !anySelected && oneSelected) {
                     anySelected = true;
-                } else if (!competitionBlock[element].Selected) {
+                } else if (!element[1].Selected) {
                     break;
                 }
                 counter++;
             }
 
-            if (counter === competitionBlock.length) {
+            console.log("Length: ", competitionBlock.size);
+            if (counter === competitionBlock.size) {
                 allSelected = true;
             }
 
@@ -1071,69 +1104,98 @@ export default{
             } else return 0;
         },
 
-        checkableProgramClicked(checkableProgramName) {
+        checkableProgramClicked(checkableProgramName, parent) {
             //console.log("checkableProgramClicked initiated by: ", checkableProgramName);
 
-            let parentCheckboxName = checkableProgramName.replace(/[0-9]/g, '');
-            let programIndex = checkableProgramName.replace(/\D/g, '');
+            this.dataArrays[parent].get(checkableProgramName).Selected = !this.dataArrays[parent].get(checkableProgramName).Selected;
 
-            this.dataArrays[parentCheckboxName][programIndex].Selected = !this.dataArrays[parentCheckboxName][programIndex].Selected;
+            let selectedStatus = this.checkCompetitionsSelectStatus(this.dataArrays[parent]);
 
-            let selectedStatus = this.checkCompetitionsSelectStatus(this.dataArrays[parentCheckboxName]);
-
-            if (!this.dataArrays[parentCheckboxName][programIndex].Selected && this.checkableGroups[parentCheckboxName]) {
-                this.checkableGroups[parentCheckboxName] = false;
-                const checkbox = document.getElementById(parentCheckboxName);
+            if (!this.dataArrays[parent].get(checkableProgramName).Selected && this.checkableGroups[parent]) {
+                this.checkableGroups[parent] = false;
+                const checkbox = document.getElementById(parent);
                 checkbox.checked = false;
-            } else if (this.dataArrays[parentCheckboxName][programIndex].Selected) {
+            } else if (this.dataArrays[parent].get(checkableProgramName).Selected) {
                 if (selectedStatus === 3) {
                     // All selected
-                    this.checkableGroups[parentCheckboxName] = true;
-                    const checkbox = document.getElementById(parentCheckboxName);
+                    this.checkableGroups[parent] = true;
+                    const checkbox = document.getElementById(parent);
                     checkbox.checked = true;
                 }
             }
-            let tempSelectedCompetitions = this.dataArrays[parentCheckboxName].filter(competition => competition.Selected);
+            // let tempSelectedCompetitions = this.dataArrays[parentCheckboxName].filter(competition => competition.Selected);
+            let tempSelectedCompetitions = new Map(
+                [...this.dataArrays[parent]]
+                    .filter(([key, competition]) => competition.Selected)
+            );
 
-            this.$emit('onCompetitionListsStateUpdate', selectedStatus, tempSelectedCompetitions, parentCheckboxName);
+            console.log("Selected status in LIST_SELECTOR: ", selectedStatus)
+            this.$emit('onCompetitionListsStateUpdate', selectedStatus, tempSelectedCompetitions, parent);
         },
 
-        OnBigCheckboxClick(event) {
+        async OnBigCheckboxClick(event) {
             const bigCheckboxName = String(event.target.getAttribute('id'));
             if (!bigCheckboxName.includes('checkable-')) {
                 //console.log("Big checkbox clicked: ", event)
+                //console.log("Big checkbox name split: ", bigCheckboxName.split(/(?=[A-Z])/));
+                await this.getListsIfAbsent(bigCheckboxName);
                 this.checkableGroups[bigCheckboxName] = !this.checkableGroups[bigCheckboxName];
                 const checkbox = document.getElementById(bigCheckboxName);
                 checkbox.checked = this.checkableGroups[bigCheckboxName];
 
-                let count = 0;
-                for (const element in this.dataArrays[bigCheckboxName]) {
-                    count++;
-                    if (this.dataArrays[bigCheckboxName][element].Selected !== this.checkableGroups[bigCheckboxName]) {
-                        let checkbox = document.getElementById('checkable-' + this.dataArrays[bigCheckboxName][element].displayId);
+                console.log("this.dataArrays[bigCheckboxName]: ", this.dataArrays[bigCheckboxName]);
+
+                this.dataArrays[bigCheckboxName].forEach((value, key) => {
+                    if (value.Selected !== this.checkableGroups[bigCheckboxName]) {
+                        let checkbox = document.getElementById('checkable-' + value.uuid);
                         checkbox.click();
                     }
-                }
+                });
             }
 
         },
 
-        OnAccordionButtonClicked(event, eduLevel, listType, budgetOrContract) {
+        async getListsIfAbsent(bigCheckboxName) {
+            if (!this.callEnum.get(bigCheckboxName)) {
+                const tempArr = bigCheckboxName.split(/(?=[A-Z])/);
+                const eduLevel = tempArr[0];
+                const listType = tempArr[1];
+                const budgetOrContract = tempArr[2];
+
+                console.log("Get list at: ", eduLevel + listType + budgetOrContract);
+                const ans = await this.getListOfLists(this.callEnum.get(eduLevel), this.callEnum.get(listType), this.callEnum.get(budgetOrContract));
+                let index = 0;
+                ans.forEach((value, key) => {
+                    value.Selected = false;
+                    value.displayId = bigCheckboxName + index++;
+                });
+
+                this.dataArrays[bigCheckboxName] = ans;
+                // Check all the groupCommonName accordion as the unchecked
+                this.checkableGroups[bigCheckboxName] = false;
+
+                this.callEnum.set(bigCheckboxName, 1);
+            }
+        },
+
+        async OnAccordionButtonClicked(event, eduLevel, listType, budgetOrContract) {
             console.log("OnAccordionButtonClicked: ", eduLevel, listType, budgetOrContract);
             const accordionCommonName = eduLevel + listType + budgetOrContract;
             //console.log("Map at: ", eduLevel + listType + budgetOrContract);
             if (!this.callEnum.get(accordionCommonName)) {
-                //console.log(eduLevel + listType + budgetOrContract);
-                const ans = this.getListOfLists(this.callEnum.get(eduLevel), this.callEnum.get(listType), this.callEnum.get(budgetOrContract));
+                console.log("Get list at: ", eduLevel + listType + budgetOrContract);
+                const ans = await this.getListOfLists(this.callEnum.get(eduLevel), this.callEnum.get(listType), this.callEnum.get(budgetOrContract));
+                let index = 0;
                 ans.forEach((value, key) => {
                     value.Selected = false;
-                    value.displayId = accordionCommonName + '';
+                    value.displayId = accordionCommonName + index++;
                 });
 
-                this.dataArrays[groupCommonName + "Budget"] = tempArrayBudget;
-                this.dataArrays[groupCommonName + "Contract"] = tempArrayContract;
+                this.dataArrays[accordionCommonName] = ans;
                 // Check all the groupCommonName accordion as the unchecked
-                this.checkableGroups[groupCommonName + "Budget"] = false;
+                this.checkableGroups[accordionCommonName] = false;
+
+                this.callEnum.set(accordionCommonName, 1);
             }
         }
     },

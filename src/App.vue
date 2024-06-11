@@ -8,13 +8,13 @@
             <ListSelectorNotification class="pb-3"/>
         </template>
         <template v-if="competitionListsState === 1">
-            Выбрана одна программа
+            <SingleCompetitionControls :competition="selectedCompetitions"></SingleCompetitionControls>
         </template>
         <template v-if="competitionListsState >= 2">
             <MultipleCompetitionsControls/>
         </template>
-        <h2 class="text-center">Тестовая зона</h2>
-        <TestButtons></TestButtons>
+<!--        <h2 class="text-center">Тестовая зона</h2>-->
+<!--        <TestButtons></TestButtons>-->
         <AuthWindowModal :isTokenValid @getToken="receiveToken" :id="'enterTokenModalTest'"/>
 </template>
 
@@ -25,6 +25,7 @@ import ListSelectorNotification from "@/components/ListSelectorNotification.vue"
 import CheckableProgram from "@/components/UI/CheckableProgram.vue";
 import MultipleCompetitionsControls from "@/components/MultipleCompetitionsControls.vue";
 import AuthWindowModal from "@/components/AuthWindowModal.vue";
+import SingleCompetitionControls from "@/components/SingleCompetitionControls.vue";
 // axios
 import axiosInstance from "@/axiosConfig";
 import TestButtons from "@/components/Test2.vue";
@@ -34,7 +35,7 @@ export default {
         TestButtons,
         AuthWindowModal,
         CheckableProgram,
-        Header, ListSelector, ListSelectorNotification, MultipleCompetitionsControls,
+        Header, ListSelector, ListSelectorNotification, MultipleCompetitionsControls, SingleCompetitionControls
     },
 
     async created() {
@@ -63,10 +64,37 @@ export default {
         };
     },
 
+    computed: {
+        test() {
+            let returnName;
+            let returnKey;
+            for (const [key, value] of Object.values(this.selectedCompetitions)[0].entries()) {
+                returnKey = key;
+                returnName = value.competition_group;
+            }
+            return String(returnName + ", uuid: " + returnKey);
+        },
+
+        numberOfElementsTotal() {
+            //console.log("Number of elements total: ", this.selectedCompetitions);
+            for (const elem of Object.values(this.selectedCompetitions)) {
+                console.log("elem: ",elem);
+            }
+        }
+    },
+
     methods: {
         competitionListsStateUpdated(selectedStatus, selectedCompetitions, parentGroupName) {
-            this.competitionListsState = selectedStatus;
+            console.log("Selected status in APP: ", selectedStatus);
             this.selectedCompetitions[parentGroupName] = selectedCompetitions;
+
+            let tempSize = 0;
+            for (const elem of Object.values(this.selectedCompetitions)) {
+                tempSize += elem.size;
+            }
+            this.competitionListsState = tempSize;
+
+
             console.log("selectedCompetitions: ", this.selectedCompetitions);
         },
 

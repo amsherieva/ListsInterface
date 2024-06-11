@@ -31,6 +31,10 @@ export default {
         isSelected: {
             type: Boolean,
             required: true
+        },
+        belongsTo: {
+            type: String,
+            required: true
         }
     },
     setup(props) {
@@ -57,7 +61,7 @@ export default {
     methods: {
         OnCheckboxClick() {
             this.isProgramSelected = !this.isProgramSelected;
-            this.$emit('onCheckboxClicked', this.itemName)
+            this.$emit('onCheckboxClicked', this.itemName, this.belongsTo)
         }
     },
 }
