@@ -819,6 +819,22 @@ import axiosInstance from "@/axiosConfig";
 
 export default {
     name: 'ListSelector',
+
+    props: {
+        clearTrigger: {
+            type: Boolean,
+            required: true,
+        }
+    },
+
+    watch: {
+        clearTrigger: {
+            handler(newVal, oldVal) {
+                this.clearSelectedCompetitions();
+            }
+        }
+    },
+
     computed: {
         checkableProgram() {
             return checkableProgram
@@ -1194,6 +1210,19 @@ export default {
                 this.checkableGroups[accordionCommonName] = false;
 
                 this.callEnum.set(accordionCommonName, 1);
+            }
+        },
+
+        clearSelectedCompetitions() {
+            for (const [competitionName, elem] of Object.entries(this.dataArrays)) {
+                if (elem.size > 0) {
+                    elem.forEach((value, key) => {
+                        if (value.Selected) {
+                            let checkbox = document.getElementById('checkable-' + value.uuid);
+                            checkbox.click();
+                        }
+                    })
+                }
             }
         }
     },

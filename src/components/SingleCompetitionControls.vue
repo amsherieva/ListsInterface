@@ -2,6 +2,10 @@
     <div class="SingleCompetitionControls">
         <div class="row container-fluid mx-auto">
             <div v-if="selectedCompetition" class="col-lg-7 col p-0 mx-auto">
+                <SelectedCompetitionDisplay :campaign-type :list-type :fin-source
+                                            :list-code="selectedCompetition.direction_code"
+                                            :list-name='selectedCompetition.competition_group + (selectedCompetition.edu_form ? ( " (" + selectedCompetition.edu_form.toLowerCase() + ")") : "")'
+                                            @deleteListsFromSelected="deleteListsFromSelected"/>
                 <!-- publish status alert -->
                 <div v-if="selectedCompetition.hidden"
                      class="justify-content-center alert alert-danger d-flex direction-info__name" role="alert"><i
@@ -18,7 +22,8 @@
                         <button class="btn-b" data-bs-toggle="modal" data-bs-target="#publishListModal">Опубликовать
                             список
                         </button>
-                        <ConfirmationPopup :id="'publishListModal'" @positiveButtonClicked="publishCompetition(false)">
+                        <ConfirmationPopup :id="'publishListModal'"
+                                           @positiveButtonClicked="publishCompetition(false)">
                             <template v-slot:title>
                                 Внимание!
                             </template>
@@ -29,7 +34,8 @@
                     </div>
                     <!-- если список опубликован-->
                     <div v-if="!selectedCompetition.hidden" class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#hideListModal">Снять с публикации
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#hideListModal">Снять с
+                            публикации
                         </button>
                         <ConfirmationPopup :id="'hideListModal'" @positiveButtonClicked="publishCompetition(true)">
                             <template v-slot:title>
@@ -43,7 +49,8 @@
 
                     <!-- если список разморожен-->
                     <div v-if="!selectedCompetition.locked" class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#freezeListModal">Заморозить список
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#freezeListModal">Заморозить
+                            список
                         </button>
                         <ConfirmationPopup :id="'freezeListModal'" @positiveButtonClicked="freezeCompetition(true)">
                             <template v-slot:title>
@@ -59,7 +66,8 @@
                         <button class="btn-b" data-bs-toggle="modal" data-bs-target="#unfreezeListModal">Разморозить
                             список
                         </button>
-                        <ConfirmationPopup :id="'unfreezeListModal'" @positiveButtonClicked="freezeCompetition(false)">
+                        <ConfirmationPopup :id="'unfreezeListModal'"
+                                           @positiveButtonClicked="freezeCompetition(false)">
                             <template v-slot:title>
                                 Внимание!
                             </template>
@@ -76,45 +84,15 @@
                 </div>
                 <div v-if="!selectedCompetition.locked"
                      class="justify-content-center alert alert-success d-flex direction-info__name" role="alert"><i
-                    class="bi bi-check-circle-fill">&nbsp;</i>Следующее обновление
-                    списка:&nbsp;<u>{{ nextUpdateTime }}</u></div>
+                    class="bi bi-check-circle-fill">&nbsp;</i>Следующее обновление списка:&nbsp;<u>{{
+                        nextUpdateTime
+                    }}</u>
+                </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-10">
                         <button class="btn-b btn-block" @click="updateCompetition">Обновить сейчас</button>
                     </div>
                 </div>
-
-                <!--                <hr>-->
-                <!--                <div class="row mt-4">-->
-                <!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
-                <!--                        <p>Последнее время обновления списка:&nbsp;<u>14:54</u></p>-->
-                <!--                    </div>-->
-                <!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
-                <!--                        <a href="" class="btn-b" role="button"><i-->
-                <!--                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--                <hr>-->
-                <!--                <div class="row mt-3">-->
-                <!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
-                <!--                        <p>Период автообновления списка:&nbsp;<u>120 минут</u></p>-->
-                <!--                    </div>-->
-                <!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
-                <!--                        <a href="" class="btn-b" role="button"><i-->
-                <!--                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--                <hr>-->
-                <!--                <div class="row mt-3">-->
-                <!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
-                <!--                        <p>Текущая ревизия: <u>16:37 06.06.2024</u> (1654&nbsp;заявления)</p>-->
-                <!--                        &lt;!&ndash;здесь надо учитывать окончание у слова "заявления", 0 5 6 7 8 9 11-19 заявлений 1 заявление 2 3 4 заявления&ndash;&gt;-->
-                <!--                    </div>-->
-                <!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
-                <!--                        <a href="" class="btn-b" role="button"><i-->
-                <!--                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>-->
-                <!--                    </div>-->
-                <!--                </div>-->
             </div>
         </div>
     </div>
@@ -123,28 +101,37 @@
 <script>
 import axiosInstance from "@/axiosConfig";
 import ConfirmationPopup from "@/components/UI/ConfirmationPopup.vue";
+import SelectedCompetitionDisplay from "@/components/SelectedCompetitionDisplay.vue";
 
 export default {
     name: 'SingleCompetitionControls',
-    components: {ConfirmationPopup},
+    components: {ConfirmationPopup, SelectedCompetitionDisplay},
 
     props: {
         competition: {
             required: true,
+        },
+        namingMap: {
+            required: true
         }
     },
 
     data() {
         return {
-            selectedCompetition: null
+            selectedCompetition: null,
+            campaignType: {
+                type: String,
+            },
+            listType: {
+                type: String,
+            },
+            finSource: {
+                type: String,
+            }
         }
     },
 
     computed: {
-        getPath() {
-
-        },
-
         nextUpdateTime() {
             const dateStr = this.selectedCompetition.generated_at;
             //console.log(dateStr);
@@ -161,6 +148,18 @@ export default {
                     this.selectedCompetition = element
                 })
                 //console.log(this.selectedCompetition);
+            }
+        }
+    },
+
+    updated() {
+
+        for (const [key, elem] of Object.entries(this.competition)) {
+            if (elem.size > 0) {
+                let nameSplit = key.split(/(?=[A-Z])/);
+                this.campaignType = this.namingMap.get(nameSplit[0]);
+                this.listType = this.namingMap.get(nameSplit[1]);
+                this.finSource = this.namingMap.get(nameSplit[2]);
             }
         }
     },
@@ -196,6 +195,10 @@ export default {
             const newRevisionTime = new Date().toISOString();
             console.log("New time: ", newRevisionTime);
         },
+
+        deleteListsFromSelected() {
+            this.$emit("deleteListsFromSelected");
+        }
     },
 }
 </script>

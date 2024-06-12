@@ -1,14 +1,13 @@
 <template>
     <Header :token="apiToken" @deleteToken="deleteToken"/>
-    <ListSelector
-        :selected-competitions="selectedCompetitions"
-        @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
+    <ListSelector :clearTrigger @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
 
     <template v-if="competitionListsState === 0">
         <ListSelectorNotification class="pb-3"/>
     </template>
     <template v-if="competitionListsState === 1">
-        <SingleCompetitionControls :competition="selectedCompetitions"/>
+        <SingleCompetitionControls :competition="selectedCompetitions" :namingMap
+                                   @deleteListsFromSelected="deleteListsFromSelected"/>
     </template>
     <template v-if="competitionListsState >= 2">
         <MultipleCompetitionsControls :competitions="selectedCompetitions"
@@ -43,6 +42,18 @@ export default {
         this.apiToken = sessionStorage.getItem("token");
         this.isTokenValid = (sessionStorage.getItem("isTokenValid") === 'true');
 
+        this.namingMap = new Map();
+        this.namingMap.set("Bak", "Бакалавриат");
+        this.namingMap.set("Mag", "Магистратура");
+        this.namingMap.set("Asp", "Аспирантура");
+
+        this.namingMap.set("Applicants", "Списки подавших заявление");
+        this.namingMap.set("Contest", "Конкурсные списки");
+        this.namingMap.set("Enrolled", "Списки зачисленных");
+
+        this.namingMap.set("Budget", "Бюджет");
+        this.namingMap.set("Contract", "Контракт");
+
         //const temp = await this.getRequest("/api/dictionaries")
         //this.dictionaries = new Map(Object.entries(temp));
         //console.log([...this.dictionaries.keys()]); // Получить все ключи
@@ -54,8 +65,10 @@ export default {
         return {
             competitionListsState: 0,
             selectedCompetitions: {},
+            clearTrigger: false,
             apiToken: "",
             isTokenValid: false,
+            namingMap: [],
 
             // Obtained via API
             dictionaries: {
@@ -63,25 +76,6 @@ export default {
             },
             testItems: {},
         };
-    },
-
-    computed: {
-        test() {
-            let returnName;
-            let returnKey;
-            for (const [key, value] of Object.values(this.selectedCompetitions)[0].entries()) {
-                returnKey = key;
-                returnName = value.competition_group;
-            }
-            return String(returnName + ", uuid: " + returnKey);
-        },
-
-        // numberOfElementsTotal() {
-        //     //console.log("Number of elements total: ", this.selectedCompetitions);
-        //     for (const elem of Object.values(this.selectedCompetitions)) {
-        //         console.log("elem: ",elem);
-        //     }
-        // }
     },
 
     methods: {
@@ -144,6 +138,12 @@ export default {
                 console.error('Ошибка при получении данных:', error);
             }
         },
+
+        deleteListsFromSelected() {
+            this.clearTrigger = !this.clearTrigger;
+            this.selectedCompetitions = {};
+            this.competitionListsState = 0;
+        }
     }
 };
 </script>

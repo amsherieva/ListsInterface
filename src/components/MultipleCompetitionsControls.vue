@@ -3,6 +3,9 @@
         <div class="row container-fluid mx-auto">
             <div class="col-lg-7 col p-0 mx-auto">
                 <div class="row justify-content-center">
+                    <div v-if="selectedCompetitions">
+                        <MultipleSelectedCompetitionsDisplay/>
+                    </div>
                     <div class="col-lg-4 col-md-5 col-6">
                         <button class="btn-b" data-bs-toggle="modal" data-bs-target="#publishListsModal">Опубликовать
                             списки
@@ -108,11 +111,12 @@
 <script>
 
 import ConfirmationPopup from "@/components/UI/ConfirmationPopup.vue";
+import MultipleSelectedCompetitionsDisplay from "@/components/MultipleSelectedCompetitionsDisplay.vue";
 import axiosInstance from "@/axiosConfig";
 
 export default {
     name: "MultipleCompetitionsControls",
-    components: {ConfirmationPopup},
+    components: {ConfirmationPopup, MultipleSelectedCompetitionsDisplay},
 
     props: {
         competitions: {

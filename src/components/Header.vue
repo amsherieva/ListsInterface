@@ -70,7 +70,7 @@ h2 {
 }
 
 h1 {
-    font-size: calc(0.8rem + 1.25vw);
+    font-size: calc(0.8rem + 1.0vw);
 }
 
 h2 {
