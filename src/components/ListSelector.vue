@@ -1090,7 +1090,7 @@ export default {
                 counter++;
             }
 
-            console.log("Length: ", competitionBlock.size);
+            //console.log("Length: ", competitionBlock.size);
             if (counter === competitionBlock.size) {
                 allSelected = true;
             }
@@ -1128,8 +1128,6 @@ export default {
                 [...this.dataArrays[parent]]
                     .filter(([key, competition]) => competition.Selected)
             );
-
-            console.log("Selected status in LIST_SELECTOR: ", selectedStatus)
             this.$emit('onCompetitionListsStateUpdate', selectedStatus, tempSelectedCompetitions, parent);
         },
 

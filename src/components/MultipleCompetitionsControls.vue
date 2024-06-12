@@ -7,7 +7,7 @@
                         <button class="btn-b" data-bs-toggle="modal" data-bs-target="#publishListsModal">Опубликовать
                             списки
                         </button>
-                        <ConfirmationPopup :id="'publishListsModal'">
+                        <ConfirmationPopup :id="'publishListsModal'" @positiveButtonClicked="publishCompetitions(false)">
                             <template v-slot:title>
                                 Внимание!
                             </template>
@@ -20,7 +20,7 @@
                         <button class="btn-b" data-bs-toggle="modal" data-bs-target="#removeListsFromPublishModal">Снять
                             с публикации
                         </button>
-                        <ConfirmationPopup :id="'removeListsFromPublishModal'">
+                        <ConfirmationPopup :id="'removeListsFromPublishModal'" @positiveButtonClicked="publishCompetitions(true)">
                             <template v-slot:title>
                                 Внимание!
                             </template>
@@ -35,7 +35,7 @@
                         <button class="btn-b" data-bs-toggle="modal" data-bs-target="#unfreezeListsModal">Разморозить
                             списки
                         </button>
-                        <ConfirmationPopup :id="'unfreezeListsModal'">
+                        <ConfirmationPopup :id="'unfreezeListsModal'" @positiveButtonClicked="freezeCompetitions(false)">
                             <template v-slot:title>
                                 Внимание!
                             </template>
@@ -48,7 +48,7 @@
                         <button class="btn-b" data-bs-toggle="modal" data-bs-target="#freezeListsModal">Заморозить
                             списки
                         </button>
-                        <ConfirmationPopup :id="'freezeListsModal'">
+                        <ConfirmationPopup :id="'freezeListsModal'" @positiveButtonClicked="freezeCompetitions(true)">
                             <template v-slot:title>
                                 Внимание!
                             </template>
@@ -74,44 +74,31 @@
                         </ConfirmationPopup>
                     </div>
                 </div>
-                <hr style="color: #0152A3; border-width:2px;">
 
-                <div class="row mt-4">
-                    <div class="col-xl-6 col-lg-9 col-md-8 mt-1">
-                        <p>Последнее время обновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 justify-content-center">
-                        <button class="btn-b"><i
-                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</button>
-                    </div>
-                </div>
-                <hr>
+<!--                <hr style="color: #0152A3; border-width:2px;">-->
+<!--                <div class="row mt-4">-->
+<!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
+<!--                        <p>Последнее время обновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
+<!--                        <button class="btn-b"><i-->
+<!--                            class="bi bi-pencil-square">&nbsp;</i>Редактировать-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <hr>-->
 
-                <div class="row mt-3">
-                    <div class="col-xl-6 col-lg-9 col-md-8 mt-1">
-                        <p>Период автообновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 justify-content-center">
-                        <button class="btn-b"><i
-                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</button>
-                    </div>
-                </div>
-                <p class="mt-4"><button class="btn-b btn-block">Сохранить внесенные изменения</button></p>
-
-
-<!--                <h2 class="py-2">Datepicker in Bootstrap 5</h2>
-                <form class="row">
-                    <label for="date" class="col-1 col-form-label">Date</label>
-                    <div class="col-5">
-                        <div class="input-group date" id="datepicker">
-                            <input type="text" class="form-control" id="date"/>
-                            <span class="input-group-append"><span class="input-group-text bg-light d-block"><i
-                                class="fa fa-calendar"></i></span></span>
-                        </div>
-                    </div>
-                </form>-->
-
-                <!-- </div> -->
+<!--                <div class="row mt-3">-->
+<!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
+<!--                        <p>Период автообновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
+<!--                        <button class="btn-b"><i class="bi bi-pencil-square">&nbsp;</i>Редактировать</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <p class="mt-4">-->
+<!--                    <button class="btn-b btn-block">Сохранить внесенные изменения</button>-->
+<!--                </p>-->
             </div>
         </div>
 
@@ -121,10 +108,89 @@
 <script>
 
 import ConfirmationPopup from "@/components/UI/ConfirmationPopup.vue";
+import axiosInstance from "@/axiosConfig";
 
 export default {
     name: "MultipleCompetitionsControls",
     components: {ConfirmationPopup},
+
+    props: {
+        competitions: {
+            required: true,
+        }
+    },
+
+    data() {
+        return {
+            selectedCompetitions: null
+        }
+    },
+
+    mounted() {
+        this.selectedCompetitions = this.competitions;
+    },
+
+    methods: {
+        async publishCompetitions(status) {
+            try {
+                const arr = this.collectIDs();
+                const response = await axiosInstance.patch("/api/junk/lists", {
+                    lists: arr,
+                    hidden: status
+                });
+                console.log("publishCompetition response", response);
+                for (const competitionGroup of Object.values(this.selectedCompetitions)) {
+                    if (competitionGroup.size > 0) {
+                        competitionGroup.forEach((competition) => {
+                            competition.hidden = response.data.changes.hidden;
+                        })
+                    }
+                }
+                this.$emit('selectedCompetitionsUpdated', this.selectedCompetitions);
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+        },
+
+        collectIDs() {
+            let uuidArray = [];
+            for (const competitionGroup of Object.values(this.competitions)) {
+                if (competitionGroup.size > 0) {
+                    competitionGroup.forEach((competition) => {
+                        uuidArray.push(competition.uuid);
+                    })
+                }
+            }
+
+            return uuidArray;
+        },
+
+        async freezeCompetitions(status) {
+            try {
+                const arr = this.collectIDs();
+                const response = await axiosInstance.patch("/api/junk/lists", {
+                    lists: arr,
+                    locked: status
+                });
+                console.log("freezeCompetitions response", response);
+                for (const competitionGroup of Object.values(this.selectedCompetitions)) {
+                    if (competitionGroup.size > 0) {
+                        competitionGroup.forEach((competition) => {
+                            competition.locked = response.data.changes.locked;
+                        })
+                    }
+                }
+                this.$emit('selectedCompetitionsUpdated', this.selectedCompetitions);
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+        },
+
+        async updateCompetitions() {
+            const newRevisionTime = new Date().toISOString();
+            console.log("New time: ", newRevisionTime);
+        },
+    },
 }
 </script>
 

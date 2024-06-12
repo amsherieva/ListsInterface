@@ -15,20 +15,58 @@
                 <div class="row justify-content-center">
                     <!-- если список снят с публикации-->
                     <div v-if="selectedCompetition.hidden" class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b">Опубликовать список</button>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#publishListModal">Опубликовать
+                            список
+                        </button>
+                        <ConfirmationPopup :id="'publishListModal'" @positiveButtonClicked="publishCompetition(false)">
+                            <template v-slot:title>
+                                Внимание!
+                            </template>
+                            <template v-slot:body>
+                                Вы уверены, что хотите опубликовать выбранный Вами список?
+                            </template>
+                        </ConfirmationPopup>
                     </div>
                     <!-- если список опубликован-->
                     <div v-if="!selectedCompetition.hidden" class="col-lg-4 col-md-5 col-6">
-                        <button class="btn-b">Снять с публикации</button>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#hideListModal">Снять с публикации
+                        </button>
+                        <ConfirmationPopup :id="'hideListModal'" @positiveButtonClicked="publishCompetition(true)">
+                            <template v-slot:title>
+                                Внимание!
+                            </template>
+                            <template v-slot:body>
+                                Вы уверены, что хотите снять с публикации выбранный Вами список?
+                            </template>
+                        </ConfirmationPopup>
                     </div>
 
                     <!-- если список разморожен-->
                     <div v-if="!selectedCompetition.locked" class="col-lg-4 col-md-5 col-6">
-                        <a href="" class="btn-b" role="button">Заморозить список</a>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#freezeListModal">Заморозить список
+                        </button>
+                        <ConfirmationPopup :id="'freezeListModal'" @positiveButtonClicked="freezeCompetition(true)">
+                            <template v-slot:title>
+                                Внимание!
+                            </template>
+                            <template v-slot:body>
+                                Вы уверены, что хотите заморозить выбранный Вами список?
+                            </template>
+                        </ConfirmationPopup>
                     </div>
                     <!-- если список заморожен-->
                     <div v-if="selectedCompetition.locked" class="col-lg-4 col-md-5 col-6">
-                        <a href="" class="btn-b" role="button">Разморозить список</a>
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#unfreezeListModal">Разморозить
+                            список
+                        </button>
+                        <ConfirmationPopup :id="'unfreezeListModal'" @positiveButtonClicked="freezeCompetition(false)">
+                            <template v-slot:title>
+                                Внимание!
+                            </template>
+                            <template v-slot:body>
+                                Вы уверены, что хотите разморозить выбранный Вами список?
+                            </template>
+                        </ConfirmationPopup>
                     </div>
                 </div>
 
@@ -38,52 +76,57 @@
                 </div>
                 <div v-if="!selectedCompetition.locked"
                      class="justify-content-center alert alert-success d-flex direction-info__name" role="alert"><i
-                    class="bi bi-check-circle-fill">&nbsp;</i>Следующее обновление списка:&nbsp;<u>{{nextUpdateTime}}</u></div>
+                    class="bi bi-check-circle-fill">&nbsp;</i>Следующее обновление
+                    списка:&nbsp;<u>{{ nextUpdateTime }}</u></div>
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-10">
-                        <a href="" class="btn-b btn-block" role="button">Обновить сейчас</a>
+                        <button class="btn-b btn-block" @click="updateCompetition">Обновить сейчас</button>
                     </div>
                 </div>
 
-<!--                <hr>-->
-<!--                <div class="row mt-4">-->
-<!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
-<!--                        <p>Последнее время обновления списка:&nbsp;<u>14:54</u></p>-->
-<!--                    </div>-->
-<!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
-<!--                        <a href="" class="btn-b" role="button"><i-->
-<!--                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <hr>-->
-<!--                <div class="row mt-3">-->
-<!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
-<!--                        <p>Период автообновления списка:&nbsp;<u>120 минут</u></p>-->
-<!--                    </div>-->
-<!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
-<!--                        <a href="" class="btn-b" role="button"><i-->
-<!--                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <hr>-->
-<!--                <div class="row mt-3">-->
-<!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
-<!--                        <p>Текущая ревизия: <u>16:37 06.06.2024</u> (1654&nbsp;заявления)</p>-->
-<!--                        &lt;!&ndash;здесь надо учитывать окончание у слова "заявления", 0 5 6 7 8 9 11-19 заявлений 1 заявление 2 3 4 заявления&ndash;&gt;-->
-<!--                    </div>-->
-<!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
-<!--                        <a href="" class="btn-b" role="button"><i-->
-<!--                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <hr>-->
+                <!--                <div class="row mt-4">-->
+                <!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
+                <!--                        <p>Последнее время обновления списка:&nbsp;<u>14:54</u></p>-->
+                <!--                    </div>-->
+                <!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
+                <!--                        <a href="" class="btn-b" role="button"><i-->
+                <!--                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <hr>-->
+                <!--                <div class="row mt-3">-->
+                <!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
+                <!--                        <p>Период автообновления списка:&nbsp;<u>120 минут</u></p>-->
+                <!--                    </div>-->
+                <!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
+                <!--                        <a href="" class="btn-b" role="button"><i-->
+                <!--                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <hr>-->
+                <!--                <div class="row mt-3">-->
+                <!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
+                <!--                        <p>Текущая ревизия: <u>16:37 06.06.2024</u> (1654&nbsp;заявления)</p>-->
+                <!--                        &lt;!&ndash;здесь надо учитывать окончание у слова "заявления", 0 5 6 7 8 9 11-19 заявлений 1 заявление 2 3 4 заявления&ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
+                <!--                        <a href="" class="btn-b" role="button"><i-->
+                <!--                            class="bi bi-pencil-square">&nbsp;</i>Редактировать</a>-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import axiosInstance from "@/axiosConfig";
+import ConfirmationPopup from "@/components/UI/ConfirmationPopup.vue";
+
 export default {
     name: 'SingleCompetitionControls',
+    components: {ConfirmationPopup},
 
     props: {
         competition: {
@@ -97,18 +140,6 @@ export default {
         }
     },
 
-    mounted() {
-        for (const elem of Object.values(this.competition)) {
-            if (elem.size > 0) {
-                //this.selectedCompetition = Object.fromEntries(elem.entries());
-                elem.forEach((element) => {
-                    this.selectedCompetition = element
-                })
-                console.log(this.selectedCompetition);
-            }
-        }
-    },
-
     computed: {
         getPath() {
 
@@ -116,11 +147,56 @@ export default {
 
         nextUpdateTime() {
             const dateStr = this.selectedCompetition.generated_at;
-            console.log(dateStr);
+            //console.log(dateStr);
             const date = new Date(new Date(dateStr).getTime() + this.selectedCompetition.update_interval * 60000);
             return ("0" + date.getHours()).slice(-2) + ":" + date.getMinutes();
         }
-    }
+    },
+
+    mounted() {
+        for (const elem of Object.values(this.competition)) {
+            if (elem.size > 0) {
+                //this.selectedCompetition = Object.fromEntries(elem.entries());
+                elem.forEach((element) => {
+                    this.selectedCompetition = element
+                })
+                //console.log(this.selectedCompetition);
+            }
+        }
+    },
+
+    methods: {
+        async publishCompetition(status) {
+            try {
+                const response = await axiosInstance.patch("/api/junk/lists", {
+                    lists: [this.selectedCompetition.uuid],
+                    hidden: status
+                });
+                console.log("publishCompetition response", response);
+                this.selectedCompetition.hidden = response.data.changes.hidden;
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+        },
+
+        async freezeCompetition(status) {
+            try {
+                const response = await axiosInstance.patch("/api/junk/lists", {
+                    lists: [this.selectedCompetition.uuid],
+                    locked: status
+                });
+                console.log("freezeCompetition response", response);
+                this.selectedCompetition.locked = response.data.changes.locked;
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+        },
+
+        async updateCompetition() {
+            const newRevisionTime = new Date().toISOString();
+            console.log("New time: ", newRevisionTime);
+        },
+    },
 }
 </script>
 

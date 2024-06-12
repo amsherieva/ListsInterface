@@ -1,21 +1,22 @@
 <template>
     <Header :token="apiToken" @deleteToken="deleteToken"/>
-        <ListSelector
-            :selected-competitions="selectedCompetitions"
-            @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
+    <ListSelector
+        :selected-competitions="selectedCompetitions"
+        @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
 
-        <template v-if="competitionListsState === 0">
-            <ListSelectorNotification class="pb-3"/>
-        </template>
-        <template v-if="competitionListsState === 1">
-            <SingleCompetitionControls :competition="selectedCompetitions"></SingleCompetitionControls>
-        </template>
-        <template v-if="competitionListsState >= 2">
-            <MultipleCompetitionsControls/>
-        </template>
-<!--        <h2 class="text-center">Тестовая зона</h2>-->
-<!--        <TestButtons></TestButtons>-->
-        <AuthWindowModal :isTokenValid @getToken="receiveToken" :id="'enterTokenModalTest'"/>
+    <template v-if="competitionListsState === 0">
+        <ListSelectorNotification class="pb-3"/>
+    </template>
+    <template v-if="competitionListsState === 1">
+        <SingleCompetitionControls :competition="selectedCompetitions"/>
+    </template>
+    <template v-if="competitionListsState >= 2">
+        <MultipleCompetitionsControls :competitions="selectedCompetitions"
+                                      @selectedCompetitionsUpdated="selectedCompetitionsUpdated"/>
+    </template>
+    <!--        <h2 class="text-center">Тестовая зона</h2>-->
+    <!--        <TestButtons></TestButtons>-->
+    <AuthWindowModal :isTokenValid @getToken="receiveToken" :id="'enterTokenModalTest'"/>
 </template>
 
 <script>
@@ -75,17 +76,20 @@ export default {
             return String(returnName + ", uuid: " + returnKey);
         },
 
-        numberOfElementsTotal() {
-            //console.log("Number of elements total: ", this.selectedCompetitions);
-            for (const elem of Object.values(this.selectedCompetitions)) {
-                console.log("elem: ",elem);
-            }
-        }
+        // numberOfElementsTotal() {
+        //     //console.log("Number of elements total: ", this.selectedCompetitions);
+        //     for (const elem of Object.values(this.selectedCompetitions)) {
+        //         console.log("elem: ",elem);
+        //     }
+        // }
     },
 
     methods: {
+        selectedCompetitionsUpdated(selectedLists) {
+            this.selectedCompetitions = selectedLists;
+        },
+
         competitionListsStateUpdated(selectedStatus, selectedCompetitions, parentGroupName) {
-            console.log("Selected status in APP: ", selectedStatus);
             this.selectedCompetitions[parentGroupName] = selectedCompetitions;
 
             let tempSize = 0;
@@ -93,9 +97,7 @@ export default {
                 tempSize += elem.size;
             }
             this.competitionListsState = tempSize;
-
-
-            console.log("selectedCompetitions: ", this.selectedCompetitions);
+            //console.log("selectedCompetitions: ", this.selectedCompetitions);
         },
 
         receiveToken(receivedToken) {

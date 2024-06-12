@@ -48,7 +48,7 @@ export default {
         console.log("isTokenValid: ", this.isTokenValid);
         this.authModal = new bootstrap.Modal('#authWindowModal', {});
         if (!this.isTokenValid) {
-            console.log("Modal mounted");
+            //console.log("Modal mounted");
             this.OpenModal();
             this.autoResize();
         }
