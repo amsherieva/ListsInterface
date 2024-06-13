@@ -55,7 +55,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -93,7 +93,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -148,7 +148,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -186,7 +186,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -242,7 +242,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -280,7 +280,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -296,6 +296,100 @@
 
                                                 </template>
                                             </MyAccordionItem>
+
+                                            <!--Applicants list (Detailed quota)-->
+                                            <MyAccordionItem edu-level="Bak" list-type="ApplicantsQuota"
+                                                             budget-or-contract="Target"
+                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
+                                                       style="display:block;">Списки
+                                                        подавших заявление (ДЦК)</p>
+                                                </template>
+                                                <template v-slot:bodyContent>
+
+                                                    <CheckableAccordion edu-level="Bak" list-type="ApplicantsQuota"
+                                                                        budget-or-contract="Target">
+                                                        <template v-slot:accordeonBody>
+                                                            <template v-if="BakApplicantsQuotaTarget">
+                                                                <template v-if="BakApplicantsQuotaTarget.size > 0">
+                                                                    <div class="programs"
+                                                                         v-for="competition in BakApplicantsQuotaTarget.values()">
+                                                                        <CheckableProgram
+                                                                            :item-name="competition.uuid"
+                                                                            :is-selected="competition.Selected"
+                                                                            :belongs-to="'BakApplicantsQuotaTarget'"
+                                                                            class="flex-fill"
+                                                                            @onCheckboxClicked="checkableProgramClicked">
+                                                                            <template v-slot:Code>
+                                                                                {{ competition.direction_code }}
+                                                                            </template>
+                                                                            <template v-slot:Name>
+                                                                                {{
+                                                                                    competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                }}
+                                                                            </template>
+                                                                        </CheckableProgram>
+                                                                    </div>
+                                                                </template>
+                                                                <p v-else
+                                                                   style="font-family: Roboto-Regular,serif; margin-bottom: 5px;">
+                                                                    Списки не найдены.</p>
+                                                            </template>
+                                                            <p v-else>Загрузка списков...</p>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
+                                                </template>
+                                            </MyAccordionItem>
+
+                                            <!--Contest list (Detailed quota)-->
+                                            <MyAccordionItem edu-level="Bak" list-type="ContestQuota"
+                                                             budget-or-contract="Target"
+                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
+                                                       style="display:block;">Конкурсные списки (ДЦК)</p>
+                                                </template>
+                                                <template v-slot:bodyContent>
+
+                                                    <CheckableAccordion edu-level="Bak" list-type="ContestQuota"
+                                                                        budget-or-contract="Target">
+                                                        <template v-slot:accordeonBody>
+                                                            <template v-if="BakContestQuotaTarget">
+                                                                <template v-if="BakContestQuotaTarget.size > 0">
+                                                                    <div class="programs"
+                                                                         v-for="competition in BakContestQuotaTarget.values()">
+                                                                        <CheckableProgram
+                                                                            :item-name="competition.uuid"
+                                                                            :is-selected="competition.Selected"
+                                                                            :belongs-to="'BakContestQuotaTarget'"
+                                                                            class="flex-fill"
+                                                                            @onCheckboxClicked="checkableProgramClicked">
+                                                                            <template v-slot:Code>
+                                                                                {{ competition.direction_code }}
+                                                                            </template>
+                                                                            <template v-slot:Name>
+                                                                                {{
+                                                                                    competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                }}
+                                                                            </template>
+                                                                        </CheckableProgram>
+                                                                    </div>
+                                                                </template>
+                                                                <p v-else
+                                                                   style="font-family: Roboto-Regular,serif; margin-bottom: 5px;">
+                                                                    Списки не найдены.</p>
+                                                            </template>
+                                                            <p v-else>Загрузка списков...</p>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
+                                                </template>
+                                            </MyAccordionItem>
+
                                         </template>
                                     </CheckableAccordion>
                                 </template>
@@ -349,7 +443,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -387,7 +481,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -442,7 +536,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -480,7 +574,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -536,7 +630,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -574,7 +668,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -590,6 +684,100 @@
 
                                                 </template>
                                             </MyAccordionItem>
+
+                                            <!--Applicants list (Detailed quota)-->
+                                            <MyAccordionItem edu-level="Mag" list-type="ApplicantsQuota"
+                                                             budget-or-contract="Target"
+                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
+                                                       style="display:block;">Списки
+                                                        подавших заявление (ДЦК)</p>
+                                                </template>
+                                                <template v-slot:bodyContent>
+
+                                                    <CheckableAccordion edu-level="Mag" list-type="ApplicantsQuota"
+                                                                        budget-or-contract="Target">
+                                                        <template v-slot:accordeonBody>
+                                                            <template v-if="MagApplicantsQuotaTarget">
+                                                                <template v-if="MagApplicantsQuotaTarget.size > 0">
+                                                                    <div class="programs"
+                                                                         v-for="competition in MagApplicantsQuotaTarget.values()">
+                                                                        <CheckableProgram
+                                                                            :item-name="competition.uuid"
+                                                                            :is-selected="competition.Selected"
+                                                                            :belongs-to="'MagApplicantsQuotaTarget'"
+                                                                            class="flex-fill"
+                                                                            @onCheckboxClicked="checkableProgramClicked">
+                                                                            <template v-slot:Code>
+                                                                                {{ competition.direction_code }}
+                                                                            </template>
+                                                                            <template v-slot:Name>
+                                                                                {{
+                                                                                    competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                }}
+                                                                            </template>
+                                                                        </CheckableProgram>
+                                                                    </div>
+                                                                </template>
+                                                                <p v-else
+                                                                   style="font-family: Roboto-Regular,serif; margin-bottom: 5px;">
+                                                                    Списки не найдены.</p>
+                                                            </template>
+                                                            <p v-else>Загрузка списков...</p>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
+                                                </template>
+                                            </MyAccordionItem>
+
+                                            <!--Contest list (Detailed quota)-->
+                                            <MyAccordionItem edu-level="Mag" list-type="ContestQuota"
+                                                             budget-or-contract="Target"
+                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
+                                                       style="display:block;">Конкурсные списки (ДЦК)</p>
+                                                </template>
+                                                <template v-slot:bodyContent>
+
+                                                    <CheckableAccordion edu-level="Mag" list-type="ContestQuota"
+                                                                        budget-or-contract="Target">
+                                                        <template v-slot:accordeonBody>
+                                                            <template v-if="MagContestQuotaTarget">
+                                                                <template v-if="MagContestQuotaTarget.size > 0">
+                                                                    <div class="programs"
+                                                                         v-for="competition in MagContestQuotaTarget.values()">
+                                                                        <CheckableProgram
+                                                                            :item-name="competition.uuid"
+                                                                            :is-selected="competition.Selected"
+                                                                            :belongs-to="'MagContestQuotaTarget'"
+                                                                            class="flex-fill"
+                                                                            @onCheckboxClicked="checkableProgramClicked">
+                                                                            <template v-slot:Code>
+                                                                                {{ competition.direction_code }}
+                                                                            </template>
+                                                                            <template v-slot:Name>
+                                                                                {{
+                                                                                    competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                }}
+                                                                            </template>
+                                                                        </CheckableProgram>
+                                                                    </div>
+                                                                </template>
+                                                                <p v-else
+                                                                   style="font-family: Roboto-Regular,serif; margin-bottom: 5px;">
+                                                                    Списки не найдены.</p>
+                                                            </template>
+                                                            <p v-else>Загрузка списков...</p>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
+                                                </template>
+                                            </MyAccordionItem>
+
                                         </template>
                                     </CheckableAccordion>
                                 </template>
@@ -644,7 +832,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -682,7 +870,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -738,7 +926,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -776,7 +964,7 @@
                                                                                     </template>
                                                                                     <template v-slot:Name>
                                                                                         {{
-                                                                                            competition.competition_group + (competition.edu_form ? ( " (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
                                                                                         }}
                                                                                     </template>
                                                                                 </CheckableProgram>
@@ -792,6 +980,100 @@
 
                                                 </template>
                                             </MyAccordionItem>
+
+                                            <!--Applicants list (Detailed quota)-->
+                                            <MyAccordionItem edu-level="Asp" list-type="ApplicantsQuota"
+                                                             budget-or-contract="Target"
+                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
+                                                       style="display:block;">Списки
+                                                        подавших заявление (ДЦК)</p>
+                                                </template>
+                                                <template v-slot:bodyContent>
+
+                                                    <CheckableAccordion edu-level="Asp" list-type="ApplicantsQuota"
+                                                                        budget-or-contract="Target">
+                                                        <template v-slot:accordeonBody>
+                                                            <template v-if="AspApplicantsQuotaTarget">
+                                                                <template v-if="AspApplicantsQuotaTarget.size > 0">
+                                                                    <div class="programs"
+                                                                         v-for="competition in AspApplicantsQuotaTarget.values()">
+                                                                        <CheckableProgram
+                                                                            :item-name="competition.uuid"
+                                                                            :is-selected="competition.Selected"
+                                                                            :belongs-to="'AspApplicantsQuotaTarget'"
+                                                                            class="flex-fill"
+                                                                            @onCheckboxClicked="checkableProgramClicked">
+                                                                            <template v-slot:Code>
+                                                                                {{ competition.direction_code }}
+                                                                            </template>
+                                                                            <template v-slot:Name>
+                                                                                {{
+                                                                                    competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                }}
+                                                                            </template>
+                                                                        </CheckableProgram>
+                                                                    </div>
+                                                                </template>
+                                                                <p v-else
+                                                                   style="font-family: Roboto-Regular,serif; margin-bottom: 5px;">
+                                                                    Списки не найдены.</p>
+                                                            </template>
+                                                            <p v-else>Загрузка списков...</p>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
+                                                </template>
+                                            </MyAccordionItem>
+
+                                            <!--Contest list (Detailed quota)-->
+                                            <MyAccordionItem edu-level="Asp" list-type="ContestQuota"
+                                                             budget-or-contract="Target"
+                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
+                                                <template v-slot:buttonContent>
+                                                    <p class="direction-info__name direction-info__body ps-3"
+                                                       style="display:block;">Конкурсные списки (ДЦК)</p>
+                                                </template>
+                                                <template v-slot:bodyContent>
+
+                                                    <CheckableAccordion edu-level="Asp" list-type="ContestQuota"
+                                                                        budget-or-contract="Target">
+                                                        <template v-slot:accordeonBody>
+                                                            <template v-if="AspContestQuotaTarget">
+                                                                <template v-if="AspContestQuotaTarget.size > 0">
+                                                                    <div class="programs"
+                                                                         v-for="competition in AspContestQuotaTarget.values()">
+                                                                        <CheckableProgram
+                                                                            :item-name="competition.uuid"
+                                                                            :is-selected="competition.Selected"
+                                                                            :belongs-to="'AspContestQuotaTarget'"
+                                                                            class="flex-fill"
+                                                                            @onCheckboxClicked="checkableProgramClicked">
+                                                                            <template v-slot:Code>
+                                                                                {{ competition.direction_code }}
+                                                                            </template>
+                                                                            <template v-slot:Name>
+                                                                                {{
+                                                                                    competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                                }}
+                                                                            </template>
+                                                                        </CheckableProgram>
+                                                                    </div>
+                                                                </template>
+                                                                <p v-else
+                                                                   style="font-family: Roboto-Regular,serif; margin-bottom: 5px;">
+                                                                    Списки не найдены.</p>
+                                                            </template>
+                                                            <p v-else>Загрузка списков...</p>
+
+                                                        </template>
+                                                    </CheckableAccordion>
+
+                                                </template>
+                                            </MyAccordionItem>
+
                                         </template>
                                     </CheckableAccordion>
                                 </template>
@@ -846,23 +1128,31 @@ export default {
         },
 
         BakApplicantsContract() {
-            return this.getCurrentCompetitions('BakApplicantsContract')
+            return this.getCurrentCompetitions('BakApplicantsContract');
         },
 
         BakContestBudget() {
-            return this.getCurrentCompetitions('BakContestBudget')
+            return this.getCurrentCompetitions('BakContestBudget');
         },
 
         BakContestContract() {
-            return this.getCurrentCompetitions('BakContestContract')
+            return this.getCurrentCompetitions('BakContestContract');
         },
 
         BakEnrolledBudget() {
-            return this.getCurrentCompetitions('BakEnrolledBudget')
+            return this.getCurrentCompetitions('BakEnrolledBudget');
         },
 
         BakEnrolledContract() {
-            return this.getCurrentCompetitions('BakEnrolledContract')
+            return this.getCurrentCompetitions('BakEnrolledContract');
+        },
+
+        BakApplicantsQuotaTarget() {
+            return this.getCurrentCompetitions('BakApplicantsQuotaTarget');
+        },
+
+        BakContestQuotaTarget() {
+            return this.getCurrentCompetitions('BakContestQuotaTarget');
         },
 
 
@@ -891,6 +1181,14 @@ export default {
             return this.getCurrentCompetitions('MagEnrolledContract')
         },
 
+        MagApplicantsQuotaTarget() {
+            return this.getCurrentCompetitions('MagApplicantsQuotaTarget');
+        },
+
+        MagContestQuotaTarget() {
+            return this.getCurrentCompetitions('MagContestQuotaTarget');
+        },
+
 
         // Asp
         AspContestBudget() {
@@ -907,6 +1205,14 @@ export default {
 
         AspEnrolledContract() {
             return this.getCurrentCompetitions('AspEnrolledContract')
+        },
+
+        AspApplicantsQuotaTarget() {
+            return this.getCurrentCompetitions('AspApplicantsQuotaTarget');
+        },
+
+        AspContestQuotaTarget() {
+            return this.getCurrentCompetitions('AspContestQuotaTarget');
         },
     },
     components: {MyAccordionItem, CheckableProgram, CheckableAccordion},
@@ -935,10 +1241,13 @@ export default {
 
         tempMap.set("Applicants", 1);
         tempMap.set("Contest", 2);
+        tempMap.set("ApplicantsQuota", 4);
         tempMap.set("Enrolled", 5);
+        tempMap.set("ContestQuota", 6);
 
         tempMap.set("Budget", 1);
         tempMap.set("Contract", 2);
+        tempMap.set("Target", 3);
 
         this.callEnum = tempMap;
     },
