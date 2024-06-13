@@ -153,7 +153,6 @@ export default {
     },
 
     updated() {
-
         for (const [key, elem] of Object.entries(this.competition)) {
             if (elem.size > 0) {
                 let nameSplit = key.split(/(?=[A-Z])/);
