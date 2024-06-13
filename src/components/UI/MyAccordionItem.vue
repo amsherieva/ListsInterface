@@ -18,6 +18,7 @@
                     @click="OnButtonClicked">
                 <slot name="buttonContent"></slot>
             </button>
+<!--            <button type="button" class="btn-close justify-content-center align-content-center p-0 pe-4" aria-label="Close" style="width: 1rem; height: 1rem;" ></button>-->
         </h2>
         <div :id="'panelsListSelector-collapse' + eduLevel + listType + budgetOrContract"
              class="accordion-collapse collapse"

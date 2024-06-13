@@ -4,7 +4,7 @@
             <div class="col-lg-7 col p-0 mx-auto">
                 <div class="row justify-content-center">
                     <div v-if="selectedCompetitions">
-                        <MultipleSelectedCompetitionsDisplay/>
+                        <MultipleSelectedCompetitionsDisplay :competitions :namingMap/>
                     </div>
                     <div class="col-lg-4 col-md-5 col-6">
                         <button class="btn-b" data-bs-toggle="modal" data-bs-target="#publishListsModal">Опубликовать
@@ -120,6 +120,9 @@ export default {
 
     props: {
         competitions: {
+            required: true,
+        },
+        namingMap: {
             required: true,
         }
     },
