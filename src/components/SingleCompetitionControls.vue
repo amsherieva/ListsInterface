@@ -90,7 +90,18 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-10">
-                        <button class="btn-b btn-block" @click="updateCompetition">Обновить сейчас</button>
+                        <button class="btn-b btn-block" data-bs-toggle="modal" data-bs-target="#updateListModal">
+                            Обновить сейчас
+                        </button>
+                        <ConfirmationPopup :id="'updateListModal'"
+                                           @positiveButtonClicked="updateCompetition()">
+                            <template v-slot:title>
+                                Внимание!
+                            </template>
+                            <template v-slot:body>
+                                Вы уверены, что хотите обновить выбранный Вами список? Обновление списка займет около 7 секунд.
+                            </template>
+                        </ConfirmationPopup>
                     </div>
                 </div>
             </div>
@@ -191,8 +202,14 @@ export default {
         },
 
         async updateCompetition() {
-            const newRevisionTime = new Date().toISOString();
-            console.log("New time: ", newRevisionTime);
+            try {
+                const response = await axiosInstance.post("/api/junk/lists/generate", {
+                    lists: [this.selectedCompetition.uuid]
+                });
+                console.log("updateCompetition response", response);
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
         },
 
         deleteListsFromSelected() {

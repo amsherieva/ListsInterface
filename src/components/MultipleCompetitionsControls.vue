@@ -67,12 +67,12 @@
                         <button class="btn-b btn-block" data-bs-toggle="modal" data-bs-target="#updateListsModal">
                             Обновить сейчас
                         </button>
-                        <ConfirmationPopup :id="'updateListsModal'">
+                        <ConfirmationPopup :id="'updateListsModal'" @positiveButtonClicked="updateCompetitions">
                             <template v-slot:title>
                                 Внимание!
                             </template>
                             <template v-slot:body>
-                                Вы уверены, что хотите обновить все выбранные Вами списки?
+                                Вы уверены, что хотите обновить все выбранные Вами списки? Обновление списков займет около 7 секунд.
                             </template>
                         </ConfirmationPopup>
                     </div>
@@ -191,8 +191,15 @@ export default {
         },
 
         async updateCompetitions() {
-            const newRevisionTime = new Date().toISOString();
-            console.log("New time: ", newRevisionTime);
+            try {
+                const arr = this.collectIDs();
+                const response = await axiosInstance.post("/api/junk/lists/generate", {
+                    lists: arr
+                });
+                console.log("updateCompetitions response", response);
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
         },
     },
 }
