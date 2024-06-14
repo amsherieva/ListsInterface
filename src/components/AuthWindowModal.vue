@@ -8,7 +8,7 @@
             <template v-slot:body>
                 <template v-if="!isTokenValid && !isFirstTime">
                     <div class="alert alert-danger d-flex align-items-center" role="alert">
-<!--                        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>-->
+                        <!--                        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>-->
                         <div>
                             Введен невалидный токен!
                         </div>
@@ -92,10 +92,20 @@ export default {
             return errorCode;
         },
 
+        isASCII(str) {
+            return /^[\x00-\x7F]*$/.test(str);
+        },
+
         async getToken() {
+            if (!this.isASCII(this.enteredToken)) {
+                this.enteredToken = "";
+                this.isFirstTime = false;
+                return;
+            }
+
             sessionStorage.setItem("token", this.enteredToken);
             const testRequestResponse = await this.testGetRequest();
-            console.log("testRequestResponse: ",testRequestResponse);
+            console.log("testRequestResponse: ", testRequestResponse);
             if (testRequestResponse === 500 || testRequestResponse === "ERR_NETWORK") {
                 sessionStorage.removeItem("token");
                 //const failedModal = new bootstrap.Modal(document.getElementById(this.idFailed));
