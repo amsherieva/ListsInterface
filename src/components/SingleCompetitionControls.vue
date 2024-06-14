@@ -147,7 +147,7 @@ export default {
             const dateStr = this.selectedCompetition.generated_at;
             //console.log(dateStr);
             const date = new Date(new Date(dateStr).getTime() + this.selectedCompetition.update_interval * 60000);
-            return ("0" + date.getHours()).slice(-2) + ":" + date.getMinutes();
+            return ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
         }
     },
 
