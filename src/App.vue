@@ -43,13 +43,16 @@ export default {
         this.isTokenValid = (sessionStorage.getItem("isTokenValid") === 'true');
 
         this.namingMap = new Map();
+
         this.namingMap.set("Bak", "Бакалавриат");
         this.namingMap.set("Mag", "Магистратура");
         this.namingMap.set("Asp", "Аспирантура");
 
         this.namingMap.set("Applicants", "Списки подавших заявление");
         this.namingMap.set("Contest", "Конкурсные списки");
+        this.namingMap.set("ApplicantsQuota", "Списки подавших заявление (ДЦК)");
         this.namingMap.set("Enrolled", "Списки зачисленных");
+        this.namingMap.set("ContestQuota", "Конкурсные списки (ДЦК)");
 
         this.namingMap.set("Budget", "Бюджет");
         this.namingMap.set("Contract", "Контракт");
