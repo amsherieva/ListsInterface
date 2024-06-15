@@ -10,7 +10,7 @@
                                    @deleteListsFromSelected="deleteListsFromSelected"/>
     </template>
     <template v-if="competitionListsState >= 2">
-        <MultipleCompetitionsControls :competitions="selectedCompetitions"
+        <MultipleCompetitionsControls :competitions="selectedCompetitions" :namingMap
                                       @selectedCompetitionsUpdated="selectedCompetitionsUpdated"/>
     </template>
     <!--        <h2 class="text-center">Тестовая зона</h2>-->
