@@ -112,9 +112,11 @@ export default {
                 //failedModal.show();
             } else {
                 console.log("Token is valid");
+                this.isFirstTime = true;
                 this.$emit("getToken", this.enteredToken);
             }
             this.enteredToken = "";
+            this.autoResize();
         },
 
         autoResize() {
