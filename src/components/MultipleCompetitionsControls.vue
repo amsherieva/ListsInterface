@@ -83,8 +83,28 @@
                         {{ toastText }}
                     </template>
                 </ToastNotification>
+
+                <hr>
+                <div class="row mt-3">
+                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">
+                        <p>Период автообновления для всех выбранных списков: <u v-if="commonUpdateInterval === -1">не&nbsp;установлено</u><u v-else>{{updateIntervalText}}</u></p>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">
+                        <button class="btn-b" data-bs-toggle="modal" data-bs-target="#modifyCommonUpdateInterval"><i class="bi bi-pencil-square">&nbsp;</i>Редактировать</button>
+                        <ConfirmationPopup :id="'modifyCommonUpdateInterval'" @positiveButtonClicked="modifyUpdateInterval">
+                            <template v-slot:title>
+                                Новый период автообновления
+                            </template>
+                            <template v-slot:body>
+                                <p>Укажите время в минутах:</p>
+                                <input type="number" class="form-control" v-model="enteredUpdateInterval">
+                            </template>
+                        </ConfirmationPopup>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -114,7 +134,25 @@ export default {
             selectedCompetitions: null,
 
             successNotification: true,
-            toastText: ""
+            toastText: "",
+            commonUpdateInterval: -1,
+            enteredUpdateInterval: "",
+        }
+    },
+
+    computed: {
+        updateIntervalText() {
+            let text = String(this.commonUpdateInterval) + " ";
+            if (this.commonUpdateInterval >= 11 && this.commonUpdateInterval <= 19) text += "минут";
+
+            else if (this.commonUpdateInterval % 10 >= 5
+                && this.commonUpdateInterval % 10 <= 9
+                || this.commonUpdateInterval % 10 == 0) text += "минут";
+
+            else if (this.commonUpdateInterval % 10 == 1) text += "минута";
+
+            else if (this.commonUpdateInterval % 10 >= 2 && this.commonUpdateInterval % 10 <= 4) text += "минуты";
+            return text;
         }
     },
 
@@ -205,16 +243,36 @@ export default {
                 console.error('Ошибка при получении данных:', error);
             }
         },
+
+        async modifyUpdateInterval() {
+            try {
+                const arr = this.collectIDs();
+                const response = await axiosInstance.patch("/api/junk/lists", {
+                    lists: arr,
+                    update_interval: this.enteredUpdateInterval
+                });
+                // // console.log("modifyUpdateInterval response", response);
+                for (const competitionGroup of Object.values(this.selectedCompetitions)) {
+                    if (competitionGroup.size > 0) {
+                        competitionGroup.forEach((competition) => {
+                            competition.update_interval = response.data.changes.update_interval;
+                        })
+                    }
+                }
+                this.commonUpdateInterval = response.data.changes.update_interval;
+                this.showNotification(true);
+                this.$emit('selectedCompetitionsUpdated', this.selectedCompetitions);
+                this.enteredUpdateInterval = "";
+            } catch (error) {
+                this.showNotification(false);
+                console.error('Ошибка при получении данных:', error);
+            }
+        },
     },
 }
 </script>
 
 <style scoped>
-.direction-info__name {
-    font-family: Roboto-Medium;
-    font-size: calc(1rem + 0.2vw);
-}
-
 .btn-b {
     display: inline-block;
     width: 100%;
@@ -243,6 +301,17 @@ export default {
 
     transition: ease 0.1s;
     outline: none;
+}
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }
 </style>
