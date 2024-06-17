@@ -78,10 +78,16 @@
                     </div>
                 </div>
 
+                <ToastNotification :id="'multipleSelectedCompetitionToast'" :successNotification>
+                    <template v-slot:toastBody>
+                        {{ toastText }}
+                    </template>
+                </ToastNotification>
+
                 <hr>
                 <div class="row mt-4">
                     <div class="col-xl-6 col-lg-8 col-md-8 mt-1">
-                        <p>Последнее время обновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>
+                        <p>Последнее время обновления для всех выбранных списков: <u v-if="!allListsUpdateTime">не&nbsp;установлено</u><u v-else>{{allListsUpdateTime}}</u></p>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">
                         <button class="btn-b"><i
@@ -110,10 +116,12 @@
 import ConfirmationPopup from "@/components/UI/ConfirmationPopup.vue";
 import MultipleSelectedCompetitionsDisplay from "@/components/MultipleSelectedCompetitionsDisplay.vue";
 import axiosInstance from "@/axiosConfig";
+import ToastNotification from "@/components/UI/ToastNotification.vue";
+import { Toast } from "bootstrap/dist/js/bootstrap.bundle.js";
 
 export default {
     name: "MultipleCompetitionsControls",
-    components: {ConfirmationPopup, MultipleSelectedCompetitionsDisplay},
+    components: {ToastNotification, ConfirmationPopup, MultipleSelectedCompetitionsDisplay},
 
     props: {
         competitions: {
@@ -126,8 +134,33 @@ export default {
 
     data() {
         return {
-            selectedCompetitions: null
+            selectedCompetitions: null,
+
+            successNotification: true,
+            toastText: ""
         }
+    },
+
+    computed: {
+        allListsUpdateTime() {
+            if (!this.selectedCompetitions) return 0;
+            let updateTime = [...Object.values(this.selectedCompetitions)[0].values()][0].active_revision_generated_at;
+            for (const competitionGroup of Object.values(this.selectedCompetitions)) {
+                if (competitionGroup.size > 0 && updateTime !== 0) {
+                    competitionGroup.forEach((competition) => {
+                        if (competition.active_revision_generated_at !== updateTime) {
+                            updateTime = 0;
+                        }
+                    })
+                }
+            }
+            if (updateTime !== 0) {
+                const date = new Date(new Date(updateTime).getTime());
+                return ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) + " " + ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
+            } else {
+                return 0;
+            }
+        },
     },
 
     mounted() {
@@ -135,6 +168,16 @@ export default {
     },
 
     methods: {
+        showNotification(successNotification) {
+            // Call for toast notification
+            if (successNotification) this.toastText = "Операция выполнена успешно";
+            else this.toastText = "Что-то пошло не так!";
+            this.successNotification = successNotification;
+            const toast = document.getElementById('multipleSelectedCompetitionToast');
+            const liveToast = new Toast(toast);
+            liveToast.show()
+        },
+
         async publishCompetitions(status) {
             try {
                 const arr = this.collectIDs();
@@ -150,8 +193,10 @@ export default {
                         })
                     }
                 }
+                this.showNotification(true);
                 this.$emit('selectedCompetitionsUpdated', this.selectedCompetitions);
             } catch (error) {
+                this.showNotification(false);
                 console.error('Ошибка при получении данных:', error);
             }
         },
@@ -184,8 +229,10 @@ export default {
                         })
                     }
                 }
+                this.showNotification(true);
                 this.$emit('selectedCompetitionsUpdated', this.selectedCompetitions);
             } catch (error) {
+                this.showNotification(false);
                 console.error('Ошибка при получении данных:', error);
             }
         },
@@ -197,8 +244,9 @@ export default {
                     lists: arr
                 });
                 // // console.log("updateCompetitions response", response);
-
+                this.showNotification(true);
             } catch (error) {
+                this.showNotification(false);
                 console.error('Ошибка при получении данных:', error);
             }
         },
@@ -242,8 +290,4 @@ export default {
     outline: none;
 
 }
-
-/* .btn-b:active {
-    background-color: #f9f9f9;
-} */
 </style>
