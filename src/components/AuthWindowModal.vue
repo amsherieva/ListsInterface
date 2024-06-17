@@ -45,7 +45,7 @@ export default {
     },
 
     mounted() {
-        console.log("isTokenValid: ", this.isTokenValid);
+        // // console.log("isTokenValid: ", this.isTokenValid);
         this.authModal = new bootstrap.Modal('#authWindowModal', {});
         if (!this.isTokenValid) {
             //console.log("Modal mounted");
@@ -56,13 +56,13 @@ export default {
 
     watch: {
         isTokenValid(newVal) {
-            console.log("isTokenValid new value: ", this.isTokenValid);
+            // // console.log("isTokenValid new value: ", this.isTokenValid);
             if (newVal) {
-                console.log("CloseModal called");
+                //console.log("CloseModal called");
                 this.CloseModal();
             }
             if (!newVal) {
-                console.log("OpenModal called");
+                //console.log("OpenModal called");
                 this.OpenModal();
             }
         }
@@ -78,7 +78,7 @@ export default {
         },
 
         async testGetRequest() {
-            console.log("Token test");
+            //console.log("Token test");
             let errorCode = 0;
             try {
                 const response = await axiosInstance.get("/api/junk/lists/1/1/1");
@@ -105,13 +105,13 @@ export default {
 
             sessionStorage.setItem("token", this.enteredToken);
             const testRequestResponse = await this.testGetRequest();
-            console.log("testRequestResponse: ", testRequestResponse);
+            //console.log("testRequestResponse: ", testRequestResponse);
             if (testRequestResponse === 500 || testRequestResponse === "ERR_NETWORK") {
                 sessionStorage.removeItem("token");
                 //const failedModal = new bootstrap.Modal(document.getElementById(this.idFailed));
                 //failedModal.show();
             } else {
-                console.log("Token is valid");
+                //console.log("Token is valid");
                 this.isFirstTime = true;
                 this.$emit("getToken", this.enteredToken);
             }

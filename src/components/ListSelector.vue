@@ -1466,7 +1466,7 @@ export default {
                 const checkbox = document.getElementById(bigCheckboxName);
                 checkbox.checked = this.checkableGroups[bigCheckboxName];
 
-                console.log("this.dataArrays[bigCheckboxName]: ", this.dataArrays[bigCheckboxName]);
+                //console.log("this.dataArrays[bigCheckboxName]: ", this.dataArrays[bigCheckboxName]);
 
                 this.dataArrays[bigCheckboxName].forEach((value, key) => {
                     if (value.Selected !== this.checkableGroups[bigCheckboxName]) {
@@ -1485,7 +1485,7 @@ export default {
                 const listType = tempArr[1];
                 const budgetOrContract = tempArr[2];
 
-                console.log("Get list at: ", eduLevel + listType + budgetOrContract);
+                //console.log("Get list at: ", eduLevel + listType + budgetOrContract);
                 const ans = await this.getListOfLists(this.callEnum.get(eduLevel), this.callEnum.get(listType), this.callEnum.get(budgetOrContract));
                 let index = 0;
                 ans.forEach((value, key) => {
@@ -1502,11 +1502,11 @@ export default {
         },
 
         async OnAccordionButtonClicked(event, eduLevel, listType, budgetOrContract) {
-            console.log("OnAccordionButtonClicked: ", eduLevel, listType, budgetOrContract);
+            //console.log("OnAccordionButtonClicked: ", eduLevel, listType, budgetOrContract);
             const accordionCommonName = eduLevel + listType + budgetOrContract;
             //console.log("Map at: ", eduLevel + listType + budgetOrContract);
             if (!this.callEnum.get(accordionCommonName)) {
-                console.log("Get list at: ", eduLevel + listType + budgetOrContract);
+                //console.log("Get list at: ", eduLevel + listType + budgetOrContract);
                 const ans = await this.getListOfLists(this.callEnum.get(eduLevel), this.callEnum.get(listType), this.callEnum.get(budgetOrContract));
                 let index = 0;
                 ans.forEach((value, key) => {

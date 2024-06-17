@@ -16,6 +16,6 @@ axiosInstance.interceptors.request.use((config) => {
     }
     return config;
 });
-console.log("Token: ", sessionStorage.getItem("token"));
+//console.log("Token: ", sessionStorage.getItem("token"));
 
 export default axiosInstance;

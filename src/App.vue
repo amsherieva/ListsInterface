@@ -17,7 +17,7 @@
     <!--        <TestButtons></TestButtons>-->
     <AuthWindowModal :isTokenValid @getToken="receiveToken" :id="'enterTokenModalTest'"/>
 
-    <Footer/>
+<!--    <Footer/>-->
 
 </template>
 
@@ -60,12 +60,6 @@ export default {
 
         this.namingMap.set("Budget", "Бюджет");
         this.namingMap.set("Contract", "Контракт");
-
-        //const temp = await this.getRequest("/api/dictionaries")
-        //this.dictionaries = new Map(Object.entries(temp));
-        //console.log([...this.dictionaries.keys()]); // Получить все ключи
-        //console.log([...this.dictionaries.values()]); // Получить все значения
-        //console.log([...this.dictionaries.entries()]); // Получить все записи (ключ, значение)
     },
 
     data() {
@@ -113,37 +107,6 @@ export default {
             sessionStorage.removeItem("token");
             this.isTokenValid = false;
             sessionStorage.setItem("isTokenValid", this.isTokenValid);
-        },
-
-        async testPostRequest() {
-            try {
-                const response = await axiosInstance.post('/api/dictionaries');
-                console.log('Ответ сервера:', response.data);
-            } catch (error) {
-                console.error('Ошибка при отправке данных:', error);
-            }
-        },
-
-        async getRequest(url) {
-            console.log(url)
-            try {
-                const response = await axiosInstance.get(url);
-                console.log('Ответ сервера:', response.data);
-                this.testItems = response.data;
-                return response.data;
-            } catch (error) {
-                console.error('Ошибка при отправке данных:', error);
-            }
-        },
-
-        async testGetRequest() {
-            try {
-                const response = await axiosInstance.get("/api/lists/1/1");
-                this.testItems = response.data;
-                console.log("Список чего-то: ", this.testItems);
-            } catch (error) {
-                console.error('Ошибка при получении данных:', error);
-            }
         },
 
         deleteListsFromSelected() {

@@ -145,7 +145,7 @@ export default {
                     lists: arr,
                     hidden: status
                 });
-                console.log("publishCompetition response", response);
+                // // console.log("publishCompetition response", response);
                 for (const competitionGroup of Object.values(this.selectedCompetitions)) {
                     if (competitionGroup.size > 0) {
                         competitionGroup.forEach((competition) => {
@@ -179,7 +179,7 @@ export default {
                     lists: arr,
                     locked: status
                 });
-                console.log("freezeCompetitions response", response);
+                // // console.log("freezeCompetitions response", response);
                 for (const competitionGroup of Object.values(this.selectedCompetitions)) {
                     if (competitionGroup.size > 0) {
                         competitionGroup.forEach((competition) => {
@@ -199,7 +199,7 @@ export default {
                 const response = await axiosInstance.post("/api/junk/lists/generate", {
                     lists: arr
                 });
-                console.log("updateCompetitions response", response);
+                // // console.log("updateCompetitions response", response);
             } catch (error) {
                 console.error('Ошибка при получении данных:', error);
             }

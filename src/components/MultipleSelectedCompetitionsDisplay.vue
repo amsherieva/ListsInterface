@@ -127,7 +127,7 @@ export default {
     },
 
     mounted() {
-        console.log("Competitions in MultipleSelectedCompetitionsDisplay", Object.entries(this.competitions));
+        //console.log("Competitions in MultipleSelectedCompetitionsDisplay", Object.entries(this.competitions));
     },
 
     updated() {

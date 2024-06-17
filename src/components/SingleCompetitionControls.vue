@@ -323,7 +323,7 @@ export default {
                     lists: [this.selectedCompetition.uuid],
                     hidden: status
                 });
-                console.log("publishCompetition response", response);
+                // // console.log("publishCompetition response", response);
                 this.selectedCompetition.hidden = response.data.changes.hidden;
             } catch (error) {
                 console.error('Ошибка при получении данных:', error);
@@ -336,7 +336,7 @@ export default {
                     lists: [this.selectedCompetition.uuid],
                     locked: status
                 });
-                console.log("freezeCompetition response", response);
+                // // console.log("freezeCompetition response", response);
                 this.selectedCompetition.locked = response.data.changes.locked;
             } catch (error) {
                 console.error('Ошибка при получении данных:', error);
@@ -348,7 +348,7 @@ export default {
                 const response = await axiosInstance.post("/api/junk/lists/generate", {
                     lists: [this.selectedCompetition.uuid]
                 });
-                console.log("updateCompetition response", response);
+                // // console.log("updateCompetition response", response);
             } catch (error) {
                 console.error('Ошибка при получении данных:', error);
             }
@@ -360,13 +360,13 @@ export default {
 
         async modifyLastUpdateTime() {
             const updateTime = new Date(this.enteredLastUpdateTime).toISOString();
-            console.log("modifyLastUpdateTime: ", updateTime);
+            // // console.log("modifyLastUpdateTime: ", updateTime);
             try {
                 const response = await axiosInstance.patch("/api/junk/revisions", {
                     revisions: [this.selectedCompetition.active_revision_id],
                     generated_at: updateTime
                 });
-                console.log("modifyLastUpdateTime response", response);
+                // // console.log("modifyLastUpdateTime response", response);
                 this.selectedCompetition.active_revision_generated_at = response.data.generated_at;
                 this.enteredLastUpdateTime = "";
             } catch (error) {
@@ -381,7 +381,7 @@ export default {
                     lists: [this.selectedCompetition.uuid],
                     update_interval: this.enteredUpdateInterval
                 });
-                console.log("modifyUpdateInterval response", response);
+                // // console.log("modifyUpdateInterval response", response);
                 this.selectedCompetition.update_interval = response.data.changes.update_interval;
                 this.enteredUpdateInterval = "";
             } catch (error) {
@@ -411,7 +411,7 @@ export default {
                     lists: [this.selectedCompetition.uuid],
                     active_revision_id: this.enteredRevisionDatetime
                 });
-                console.log("modifyCurrentRevisionDatetime response", response);
+                // // console.log("modifyCurrentRevisionDatetime response", response);
                 if (response.data.changes.active_revision_id) {
                     this.selectedCompetition.active_revision_id = response.data.changes.active_revision_id;
                     this.selectedCompetition.active_revision_generated_at = this.revisionNamesList.get(this.enteredRevisionDatetime).generated_at;

@@ -2,7 +2,7 @@ const url = 'https://lists.priem.etu.ru/public';
 
 export const getListCompetitions = async (campaign, typeList) => {
     try {
-        console.log("Trying to connect to: " + `${url}/competitions/${campaign}/${typeList}`);
+        //console.log("Trying to connect to: " + `${url}/competitions/${campaign}/${typeList}`);
         const response = await fetch(`${url}/competitions/${campaign}/${typeList}`);
         const { data } = await response.json();
         //console.log("Data: ", data);
