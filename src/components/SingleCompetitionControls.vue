@@ -110,6 +110,11 @@
                     </div>
                 </div>
 
+                <ToastNotification :id="'liveToast'" :success-notification="false">
+                    <template v-slot:toastBody>
+                        {{ toastText }}
+                    </template>
+                </ToastNotification>
 
                 <hr>
                 <div class="row mt-4">
@@ -189,10 +194,12 @@
 import axiosInstance from "@/axiosConfig";
 import ConfirmationPopup from "@/components/UI/ConfirmationPopup.vue";
 import SelectedCompetitionDisplay from "@/components/SelectedCompetitionDisplay.vue";
+import ToastNotification from "@/components/UI/ToastNotification.vue";
+import { Toast } from "bootstrap/dist/js/bootstrap.bundle.js";
 
 export default {
     name: 'SingleCompetitionControls',
-    components: {ConfirmationPopup, SelectedCompetitionDisplay},
+    components: {ConfirmationPopup, SelectedCompetitionDisplay, ToastNotification},
 
     props: {
         competition: {
@@ -221,6 +228,8 @@ export default {
             enteredRevisionDatetime: "",
 
             revisionNamesList: {},
+
+            toastText: ""
         }
     },
 
@@ -382,6 +391,13 @@ export default {
                     update_interval: this.enteredUpdateInterval
                 });
                 // // console.log("modifyUpdateInterval response", response);
+
+                // Call for toast notification
+                this.toastText = "Операция выполнена успешно";
+                const toast = document.getElementById('liveToast');
+                const liveToast = new Toast(toast);
+                liveToast.show()
+
                 this.selectedCompetition.update_interval = response.data.changes.update_interval;
                 this.enteredUpdateInterval = "";
             } catch (error) {

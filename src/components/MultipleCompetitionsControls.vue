@@ -78,30 +78,27 @@
                     </div>
                 </div>
 
-<!--                <hr style="color: #0152A3; border-width:2px;">-->
-<!--                <div class="row mt-4">-->
-<!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
-<!--                        <p>Последнее время обновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>-->
-<!--                    </div>-->
-<!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
-<!--                        <button class="btn-b"><i-->
-<!--                            class="bi bi-pencil-square">&nbsp;</i>Редактировать-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <hr>-->
+                <hr>
+                <div class="row mt-4">
+                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">
+                        <p>Последнее время обновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">
+                        <button class="btn-b"><i
+                            class="bi bi-pencil-square">&nbsp;</i>Редактировать
+                        </button>
+                    </div>
+                </div>
+                <hr>
 
-<!--                <div class="row mt-3">-->
-<!--                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">-->
-<!--                        <p>Период автообновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>-->
-<!--                    </div>-->
-<!--                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">-->
-<!--                        <button class="btn-b"><i class="bi bi-pencil-square">&nbsp;</i>Редактировать</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <p class="mt-4">-->
-<!--                    <button class="btn-b btn-block">Сохранить внесенные изменения</button>-->
-<!--                </p>-->
+                <div class="row mt-3">
+                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">
+                        <p>Период автообновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">
+                        <button class="btn-b"><i class="bi bi-pencil-square">&nbsp;</i>Редактировать</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -200,6 +197,7 @@ export default {
                     lists: arr
                 });
                 // // console.log("updateCompetitions response", response);
+
             } catch (error) {
                 console.error('Ошибка при получении данных:', error);
             }
