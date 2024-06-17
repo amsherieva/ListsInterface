@@ -110,7 +110,7 @@
                     </div>
                 </div>
 
-                <ToastNotification :id="'liveToast'" :success-notification="false">
+                <ToastNotification :id="'singleSelectedCompetitionToast'" :successNotification>
                     <template v-slot:toastBody>
                         {{ toastText }}
                     </template>
@@ -152,7 +152,6 @@
                             </template>
                             <template v-slot:body>
                                 <p>Укажите время в минутах:</p>
-                                <!--                                <input type="text" @keydown="isNumber">-->
                                 <input type="number" class="form-control" v-model="enteredUpdateInterval">
                             </template>
                         </ConfirmationPopup>
@@ -229,7 +228,8 @@ export default {
 
             revisionNamesList: {},
 
-            toastText: ""
+            toastText: "",
+            successNotification: true,
         }
     },
 
@@ -326,6 +326,16 @@ export default {
             return text;
         },
 
+        showNotification(successNotification) {
+            // Call for toast notification
+            if (successNotification) this.toastText = "Операция выполнена успешно";
+            else this.toastText = "Что-то пошло не так!";
+            this.successNotification = successNotification;
+            const toast = document.getElementById('singleSelectedCompetitionToast');
+            const liveToast = new Toast(toast);
+            liveToast.show()
+        },
+
         async publishCompetition(status) {
             try {
                 const response = await axiosInstance.patch("/api/junk/lists", {
@@ -333,8 +343,10 @@ export default {
                     hidden: status
                 });
                 // // console.log("publishCompetition response", response);
+                this.showNotification(true);
                 this.selectedCompetition.hidden = response.data.changes.hidden;
             } catch (error) {
+                this.showNotification(false);
                 console.error('Ошибка при получении данных:', error);
             }
         },
@@ -346,8 +358,10 @@ export default {
                     locked: status
                 });
                 // // console.log("freezeCompetition response", response);
+                this.showNotification(true);
                 this.selectedCompetition.locked = response.data.changes.locked;
             } catch (error) {
+                this.showNotification(false);
                 console.error('Ошибка при получении данных:', error);
             }
         },
@@ -358,7 +372,9 @@ export default {
                     lists: [this.selectedCompetition.uuid]
                 });
                 // // console.log("updateCompetition response", response);
+                this.showNotification(true);
             } catch (error) {
+                this.showNotification(false);
                 console.error('Ошибка при получении данных:', error);
             }
         },
@@ -376,9 +392,11 @@ export default {
                     generated_at: updateTime
                 });
                 // // console.log("modifyLastUpdateTime response", response);
+                this.showNotification(true);
                 this.selectedCompetition.active_revision_generated_at = response.data.generated_at;
                 this.enteredLastUpdateTime = "";
             } catch (error) {
+                this.showNotification(false);
                 console.error('Ошибка при получении данных:', error);
             }
         },
@@ -391,16 +409,11 @@ export default {
                     update_interval: this.enteredUpdateInterval
                 });
                 // // console.log("modifyUpdateInterval response", response);
-
-                // Call for toast notification
-                this.toastText = "Операция выполнена успешно";
-                const toast = document.getElementById('liveToast');
-                const liveToast = new Toast(toast);
-                liveToast.show()
-
+                this.showNotification(true);
                 this.selectedCompetition.update_interval = response.data.changes.update_interval;
                 this.enteredUpdateInterval = "";
             } catch (error) {
+                this.showNotification(false);
                 console.error('Ошибка при получении данных:', error);
             }
         },
@@ -433,7 +446,9 @@ export default {
                     this.selectedCompetition.active_revision_generated_at = this.revisionNamesList.get(this.enteredRevisionDatetime).generated_at;
                     this.selectedCompetition.locked = response.data.changes.locked;
                 }
+                this.showNotification(true);
             } catch (error) {
+                this.showNotification(false);
                 console.error('Ошибка при получении данных:', error);
             }
         },
