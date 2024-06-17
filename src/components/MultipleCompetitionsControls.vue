@@ -83,31 +83,8 @@
                         {{ toastText }}
                     </template>
                 </ToastNotification>
-
-                <hr>
-                <div class="row mt-4">
-                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">
-                        <p>Последнее время обновления для всех выбранных списков: <u v-if="!allListsUpdateTime">не&nbsp;установлено</u><u v-else>{{allListsUpdateTime}}</u></p>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">
-                        <button class="btn-b"><i
-                            class="bi bi-pencil-square">&nbsp;</i>Редактировать
-                        </button>
-                    </div>
-                </div>
-                <hr>
-
-                <div class="row mt-3">
-                    <div class="col-xl-6 col-lg-8 col-md-8 mt-1">
-                        <p>Период автообновления для всех выбранных списков: <u>не&nbsp;установлено</u></p>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">
-                        <button class="btn-b"><i class="bi bi-pencil-square">&nbsp;</i>Редактировать</button>
-                    </div>
-                </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -139,28 +116,6 @@ export default {
             successNotification: true,
             toastText: ""
         }
-    },
-
-    computed: {
-        allListsUpdateTime() {
-            if (!this.selectedCompetitions) return 0;
-            let updateTime = [...Object.values(this.selectedCompetitions)[0].values()][0].active_revision_generated_at;
-            for (const competitionGroup of Object.values(this.selectedCompetitions)) {
-                if (competitionGroup.size > 0 && updateTime !== 0) {
-                    competitionGroup.forEach((competition) => {
-                        if (competition.active_revision_generated_at !== updateTime) {
-                            updateTime = 0;
-                        }
-                    })
-                }
-            }
-            if (updateTime !== 0) {
-                const date = new Date(new Date(updateTime).getTime());
-                return ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) + " " + ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
-            } else {
-                return 0;
-            }
-        },
     },
 
     mounted() {
