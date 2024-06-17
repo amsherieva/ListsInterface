@@ -16,6 +16,9 @@
     <!--        <h2 class="text-center">Тестовая зона</h2>-->
     <!--        <TestButtons></TestButtons>-->
     <AuthWindowModal :isTokenValid @getToken="receiveToken" :id="'enterTokenModalTest'"/>
+
+    <Footer/>
+
 </template>
 
 <script>
@@ -26,6 +29,7 @@ import CheckableProgram from "@/components/UI/CheckableProgram.vue";
 import MultipleCompetitionsControls from "@/components/MultipleCompetitionsControls.vue";
 import AuthWindowModal from "@/components/AuthWindowModal.vue";
 import SingleCompetitionControls from "@/components/SingleCompetitionControls.vue";
+import Footer from "@/components/Footer.vue";
 // axios
 import axiosInstance from "@/axiosConfig";
 import TestButtons from "@/components/Test2.vue";
@@ -35,7 +39,7 @@ export default {
         TestButtons,
         AuthWindowModal,
         CheckableProgram,
-        Header, ListSelector, ListSelectorNotification, MultipleCompetitionsControls, SingleCompetitionControls
+        Header, ListSelector, ListSelectorNotification, MultipleCompetitionsControls, SingleCompetitionControls, Footer
     },
 
     async created() {

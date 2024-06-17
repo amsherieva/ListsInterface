@@ -1,14 +1,16 @@
 <template>
-    <h2 class="d-flex">Выбранный список:</h2>
-    <p style="margin-bottom: 5px;">{{ campaignType }} <i class="bi bi-chevron-right"></i> {{ listType }} <i
-        class="bi bi-chevron-right"></i> {{ finSource }} <i class="bi bi-chevron-right"></i></p>
-    <div class="row" style="margin-bottom: 15px;">
-        <div class="col-sm-11 col-10">
-            <p>{{ listCode }} {{ listName }}</p>
-        </div>
-        <div class="col-sm-1 col-2">
-            <button type="button" class="btn-close justify-content-center align-content-center" aria-label="Close"
-                    @click="deleteListsFromSelected"></button>
+    <div class="SelectedCompetitionDisplay">
+        <h2 class="d-flex">Выбранный список:</h2>
+        <p style="margin-bottom: 5px;">{{ campaignType }} <i class="bi bi-chevron-right"></i> {{ listType }} <i
+            class="bi bi-chevron-right"></i> {{ finSource }} <i class="bi bi-chevron-right"></i></p>
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-sm-11 col-10">
+                <p>{{ listCode }} {{ listName }}</p>
+            </div>
+            <div class="col-sm-1 col-2">
+                <button type="button" class="btn-close justify-content-center align-content-center" aria-label="Close"
+                        @click="deleteListsFromSelected"></button>
+            </div>
         </div>
     </div>
 </template>
@@ -39,7 +41,7 @@ export default {
 
     methods: {
         deleteListsFromSelected() {
-            this.$emit("deleteListsFromSelected");
+            this.$emit("deleteListFromSelected");
         },
     }
 }
