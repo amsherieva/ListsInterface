@@ -1,7 +1,7 @@
 <template>
     <div class="list-selector">
         <div class="row container-fluid mx-auto mt-4 mb-4">
-            <div class="col-lg-7 col p-0 mx-auto">
+            <div class="col-lg-7 p-0 mx-auto">
                 <div class="d-flex justify-content-evenly">
                     <!-- Bak, Mag & Asp accordion -->
                     <CheckableAccordion edu-level="BakMagAsp">

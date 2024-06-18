@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="row container-fluid mx-auto">
-            <div class="col-lg-7 col p-0 mx-auto">
+            <div class="col-lg-7 p-0 mx-auto">
                 <div class="p-2 px-md-3 d-flex justify-content-center align-items-center">
                     <div class="flex-shrink-1">
                         <a href="https://etu.ru/" target="_blank"
