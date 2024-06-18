@@ -1,23 +1,26 @@
 <template>
-    <Header :token="apiToken" @deleteToken="deleteToken"/>
-    <ListSelector :clearTrigger @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
+    <div class="wrapper">
+        <div class="main">
+            <Header :token="apiToken" @deleteToken="deleteToken"/>
+            <ListSelector :clearTrigger @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
 
-    <template v-if="competitionListsState === 0">
-        <ListSelectorNotification class="pb-3"/>
-    </template>
-    <template v-if="competitionListsState === 1">
-        <SingleCompetitionControls :competition="selectedCompetitions" :namingMap
-                                   @deleteListsFromSelected="deleteListsFromSelected"/>
-    </template>
-    <template v-if="competitionListsState >= 2">
-        <MultipleCompetitionsControls :competitions="selectedCompetitions" :namingMap
-                                      @selectedCompetitionsUpdated="selectedCompetitionsUpdated"/>
-    </template>
-    <!--        <h2 class="text-center">Тестовая зона</h2>-->
-    <!--        <TestButtons></TestButtons>-->
-    <AuthWindowModal :isTokenValid @getToken="receiveToken" :id="'enterTokenModalTest'"/>
-
-<!--    <Footer/>-->
+            <template v-if="competitionListsState === 0">
+                <ListSelectorNotification class="pb-3"/>
+            </template>
+            <template v-if="competitionListsState === 1">
+                <SingleCompetitionControls :competition="selectedCompetitions" :namingMap
+                                           @deleteListsFromSelected="deleteListsFromSelected"/>
+            </template>
+            <template v-if="competitionListsState >= 2">
+                <MultipleCompetitionsControls :competitions="selectedCompetitions" :namingMap
+                                              @selectedCompetitionsUpdated="selectedCompetitionsUpdated"/>
+            </template>
+            <!--        <h2 class="text-center">Тестовая зона</h2>-->
+            <!--        <TestButtons></TestButtons>-->
+            <AuthWindowModal :isTokenValid @getToken="receiveToken" :id="'enterTokenModalTest'"/>
+        </div>
+        <Footer class="mt-5"/>
+    </div>
 
 </template>
 
@@ -119,6 +122,16 @@ export default {
 </script>
 
 <style>
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex: 1 1 auto;
+}
+
 @font-face {
     font-family: 'Roboto-Black';
     src: url('/src/assets/fonts/Roboto-Black.ttf');
