@@ -17,7 +17,7 @@
             </template>
             <!--        <h2 class="text-center">Тестовая зона</h2>-->
             <!--        <TestButtons></TestButtons>-->
-            <AuthWindowModal :isTokenValid @getToken="receiveToken" :id="'Test'"/>
+            <AuthWindowModal :isTokenValid @getToken="receiveToken" :id="'enterTokenModal'"/>
         </div>
         <Footer class="mt-5"/>
     </div>
