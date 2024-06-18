@@ -1,7 +1,7 @@
 <template>
     <div class="auth-window">
 
-        <ConfirmationPopup id="authWindowModal" @positiveButtonClicked="getToken" :isNecessary='true'>
+        <ConfirmationPopup id="authWindowModal" @positiveButtonClicked="getToken" :isNecessary='true' ref="popup">
             <template v-slot:title>
                 Добро пожаловать!
             </template>
@@ -16,7 +16,7 @@
                 </template>
                 <p>Пожалуйста, введите токен:</p>
                 <textarea type="text" class="form-control" placeholder="Token" v-model="enteredToken"
-                          @input="autoResize" ref="textarea" style="resize: none; overflow: hidden;"/>
+                          @input="autoResize" @keyup.enter="enterPressed" ref="textarea" style="resize: none; overflow: hidden;"/>
             </template>
         </ConfirmationPopup>
 
@@ -128,6 +128,15 @@ export default {
                 textarea.style.height = `${textarea.scrollHeight}px`; // Установить высоту по содержимому
             }
         },
+
+        enterPressed() {
+            const basePopup = this.$refs.popup;
+            if (basePopup) {
+                basePopup.clickOnPositiveButton()
+            } else {
+                console.error("Child component reference is undefined");
+            }
+        }
     },
 }
 </script>

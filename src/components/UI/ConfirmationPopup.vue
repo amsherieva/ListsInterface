@@ -1,3 +1,41 @@
+<script setup>
+import {toRefs} from "vue";
+
+const props = defineProps({
+    id: {
+        type: String,
+        required: true,
+    },
+    usePositiveResponseButton: {
+        type: Boolean,
+        default: true,
+    },
+    useNegativeResponseButton: {
+        type: Boolean,
+        default: false,
+    },
+    isNecessary: {
+        type: Boolean,
+        default: false,
+    }
+})
+
+const { id } = toRefs(props);
+
+function clickOnPositiveButton() {
+    const positiveButton = document.getElementById(id.value + '_positiveButton');
+    positiveButton.click();
+}
+
+defineExpose({
+    id: String,
+    usePositiveResponseButton: Boolean,
+    useNegativeResponseButton: Boolean,
+    isNecessary: Boolean,
+    clickOnPositiveButton,
+});
+</script>
+
 <template>
     <div class="confirmation-popup">
         <div class="modal fade" :id tabindex="-1" aria-hidden="true" :aria-labelledby="id + 'Label'"
@@ -20,7 +58,8 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                         </template>
                         <template v-if="usePositiveResponseButton">
-                            <button type="button" class="btn btn-primary" v-bind="isNecessary ? {} : dismissableButton"
+                            <button :id="id + '_positiveButton'" type="button" class="btn btn-primary"
+                                    v-bind="isNecessary ? {} : dismissableButton"
                                     @click="positiveButtonClicked">Продолжить
                             </button>
                         </template>
@@ -41,24 +80,24 @@
 export default {
     name: "ConfirmationPopup",
 
-    props: {
-        id: {
-            type: String,
-            required: true,
-        },
-        usePositiveResponseButton: {
-            type: Boolean,
-            default: true,
-        },
-        useNegativeResponseButton: {
-            type: Boolean,
-            default: false,
-        },
-        isNecessary: {
-            type: Boolean,
-            default: false,
-        }
-    },
+    // props: {
+    //     // id: {
+    //     //     type: String,
+    //     //     required: true,
+    //     // },
+    //     usePositiveResponseButton: {
+    //         type: Boolean,
+    //         default: true,
+    //     },
+    //     useNegativeResponseButton: {
+    //         type: Boolean,
+    //         default: false,
+    //     },
+    //     isNecessary: {
+    //         type: Boolean,
+    //         default: false,
+    //     }
+    // },
 
     computed: {
         necessaryAttributes() {
@@ -68,23 +107,22 @@ export default {
             };
         },
 
-        dismissableButton(){
+        dismissableButton() {
             return {
-                'data-bs-dismiss':"modal"
+                'data-bs-dismiss': "modal"
             }
         }
     },
 
     methods: {
-
         positiveButtonClicked(event) {
             this.$emit('positiveButtonClicked', event);
         },
 
         negativeButtonClicked(event) {
             this.$emit('negativeButtonClicked', event);
-        }
-    }
+        },
+    },
 }
 </script>
 
