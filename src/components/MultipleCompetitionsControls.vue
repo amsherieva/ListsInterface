@@ -3,9 +3,9 @@
         <div class="row container-fluid mx-auto">
             <div class="col-lg-7 col p-0 mx-auto">
                 <div class="row justify-content-center">
-<!--                    <div v-if="selectedCompetitions">-->
-<!--                        <MultipleSelectedCompetitionsDisplay :competitions :namingMap/>-->
-<!--                    </div>-->
+                    <p class="actions-header">Действия</p>
+                    <div class="alert alert-primary d-flex after-actions-alert" role="alert"><i
+                        class="bi bi-exclamation-triangle-fill">&nbsp;&nbsp;&nbsp;</i>Для появления расширенных опций выберите одно направление</div>
                     <div class="col-lg-4 col-md-5 col-6">
                         <button class="btn-b" data-bs-toggle="modal" data-bs-target="#publishListsModal">Опубликовать
                             списки
@@ -87,7 +87,7 @@
                 <hr>
                 <div class="row mt-3">
                     <div class="col-xl-6 col-lg-8 col-md-8 mt-1">
-                        <p>Период автообновления для всех выбранных списков: <u v-if="commonUpdateInterval === -1">не&nbsp;установлено</u><u v-else>{{updateIntervalText}}</u></p>
+                        <p>Период автообновления для всех выбранных списков: <u v-if="commonUpdateInterval === -1"></u><u v-else>{{updateIntervalText}}</u></p>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 justify-content-center">
                         <button class="btn-b" data-bs-toggle="modal" data-bs-target="#modifyCommonUpdateInterval"><i class="bi bi-pencil-square">&nbsp;</i>Редактировать</button>
@@ -273,6 +273,17 @@ export default {
 </script>
 
 <style scoped>
+.actions-header {
+    font-family: Roboto-Medium;
+    font-size: calc(1.5rem + 0.3vw);
+}
+
+.after-actions-alert {
+    font-family: Roboto-Medium;
+    color: #404040;
+    font-size: calc(1rem + 0.1vw);
+}
+
 .btn-b {
     display: inline-block;
     width: 100%;
