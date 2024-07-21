@@ -14,12 +14,16 @@
             <span class="direction-info">
                 <slot name="Name"></slot>
             </span>
+            <a :id="itemName + '_tooltip'" data-bs-toggle="tooltip" data-bs-placement="top" v-bind="tooltipText" data-bs-html="true">
+                <i style="color: grey" class="bi bi-question-circle-fill ms-1"></i>
+            </a>
         </label>
     </div>
 </template>
 
 <script>
 import {ref, watch} from "vue";
+import bootstrap from "bootstrap/dist/js/bootstrap.bundle";
 
 export default {
     name: 'CheckableProgram',
@@ -35,6 +39,12 @@ export default {
         belongsTo: {
             type: String,
             required: true
+        },
+        lastUpdateTime: {
+            required: true,
+        },
+        updateInterval: {
+            required: true,
         }
     },
     setup(props) {
@@ -52,9 +62,46 @@ export default {
         }
     },
 
+    mounted() {
+        const tooltipElement = document.getElementById(this.itemName + '_tooltip')
+        this.tooltip = new bootstrap.Tooltip(tooltipElement);
+    },
+
     data() {
         return {
             isProgramSelected: this.isSelected,
+            tooltip: {
+                type: Object,
+            }
+        }
+    },
+
+    computed: {
+        UpdateTimeText() {
+            const dateStr = this.lastUpdateTime;
+            const date = new Date(new Date(dateStr).getTime());
+            return ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) + " " + ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
+        },
+
+        UpdateIntervalText() {
+            const interval = this.updateInterval;
+            let text = String(interval) + " ";
+            if (interval >= 11 && interval <= 19) text += "минут";
+
+            else if (interval % 10 >= 5
+                && interval % 10 <= 9
+                || interval % 10 == 0) text += "минут";
+
+            else if (interval % 10 == 1) text += "минута";
+
+            else if (interval % 10 >= 2 && interval % 10 <= 4) text += "минуты";
+            return text;
+        },
+
+        tooltipText() {
+            return {
+                'data-bs-title':"Период автообновления: <br>" + this.UpdateIntervalText + ";<br> Последнее обновление: " + this.UpdateTimeText
+            }
         }
     },
 
@@ -90,5 +137,9 @@ export default {
 
 .direction-info__body {
     font-size: calc(1rem + 0.2vw);
+}
+
+.tooltip-inner {
+    white-space:pre-wrap;
 }
 </style>

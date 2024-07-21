@@ -48,6 +48,8 @@
                                                                                     :item-name="competition.uuid"
                                                                                     :is-selected="competition.Selected"
                                                                                     :belongs-to="'BakApplicantsBudget'"
+                                                                                    :update-interval="competition.update_interval"
+                                                                                    :last-update-time="competition.generated_at"
                                                                                     class="flex-fill"
                                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                                     <template v-slot:Code>
