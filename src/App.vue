@@ -40,7 +40,7 @@ export default {
             this.isTokenValid = true;
             sessionStorage.setItem("token", this.apiToken);
             sessionStorage.setItem("isTokenValid", this.isTokenValid);
-            this.$router.push('/logged');
+            this.$router.push('/levelSelector');
         },
 
         deleteToken() {

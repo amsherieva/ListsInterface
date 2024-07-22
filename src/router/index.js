@@ -8,12 +8,12 @@ const routes = [
     component: UnselectedView
   },
   {
-    path: '/logged',
+    path: '/levelSelector',
     name: 'logged',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoggedView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/LevelSelectorView.vue')
   },
   {
     path: '/bak',
@@ -21,7 +21,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoggedView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/BakView.vue')
   },
   {
     path: '/mag',
@@ -29,7 +29,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoggedView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/MagView.vue')
   },
   {
     path: '/asp',
@@ -37,7 +37,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoggedView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/AspView.vue')
   },
 ]
 

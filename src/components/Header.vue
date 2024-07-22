@@ -4,12 +4,14 @@
             <div class="col-lg-7 p-0 mx-auto">
                 <div class="p-2 px-md-3 d-flex justify-content-center align-items-center">
                     <div class="flex-shrink-1">
-                        <a href="https://etu.ru/" target="_blank"
-                        ><img src="@/assets/image/logo-fin.svg" alt="" style="height: 50px;"
-                        /></a>
+                        <a href="" @click="goToMainPage">
+                            <img src="@/assets/image/logo-fin.svg" alt="" style="height: 50px;"/>
+                        </a>
                     </div>
                     <div class="px-2 me-auto">
+                        <a href="" @click="goToMainPage" style="text-decoration: none;">
                         <h1 class="p-0 m-0">Интерфейс списков</h1>
+                        </a>
                     </div>
                     <div class="ms-auto ">
                         <button type="button" class="btn p-0 border-0 text-nowrap" id="deleteTokenButton"
@@ -51,6 +53,10 @@ export default {
         deleteToken() {
             this.$emit("deleteToken");
             this.enteredToken = "";
+        },
+
+        goToMainPage() {
+            this.$router.push('/levelSelector');
         }
     }
 };
