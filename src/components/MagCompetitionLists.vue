@@ -1,6 +1,6 @@
 <template>
     <div class="list-selector">
-        <div class="row container-fluid mx-auto mt-4 mb-4">
+        <div class="row container-fluid mx-auto mt-3 mb-4">
             <div class="col-lg-7 p-0 mx-auto">
                 <div class="d-flex justify-content-evenly">
                     <CheckableAccordion edu-level="Mag" list-type="Applicants">
@@ -37,6 +37,8 @@
                                                                     :item-name="competition.uuid"
                                                                     :is-selected="competition.Selected"
                                                                     :belongs-to="'MagApplicantsBudget'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
                                                                     class="flex-fill"
                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                     <template v-slot:Code>
@@ -75,6 +77,8 @@
                                                                     :item-name="competition.uuid"
                                                                     :is-selected="competition.Selected"
                                                                     :belongs-to="'MagApplicantsContract'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
                                                                     class="flex-fill"
                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                     <template v-slot:Code>
@@ -130,6 +134,8 @@
                                                                     :item-name="competition.uuid"
                                                                     :is-selected="competition.Selected"
                                                                     :belongs-to="'MagContestBudget'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
                                                                     class="flex-fill"
                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                     <template v-slot:Code>
@@ -168,6 +174,8 @@
                                                                     :item-name="competition.uuid"
                                                                     :is-selected="competition.Selected"
                                                                     :belongs-to="'MagContestContract'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
                                                                     class="flex-fill"
                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                     <template v-slot:Code>
@@ -224,6 +232,8 @@
                                                                     :item-name="competition.uuid"
                                                                     :is-selected="competition.Selected"
                                                                     :belongs-to="'MagEnrolledBudget'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
                                                                     class="flex-fill"
                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                     <template v-slot:Code>
@@ -262,6 +272,8 @@
                                                                     :item-name="competition.uuid"
                                                                     :is-selected="competition.Selected"
                                                                     :belongs-to="'MagEnrolledContract'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
                                                                     class="flex-fill"
                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                     <template v-slot:Code>
@@ -287,7 +299,7 @@
                             </MyAccordionItem>
 
                             <!--Applicants list (Detailed quota)-->
-                            <MyAccordionItem edu-level="Mag" list-type="ApplicantsQuota"
+                            <MyAccordionItem edu-level="Mag" list-type="Applicants_quota"
                                              budget-or-contract="Target"
                                              @onAccordionButtonClicked="OnAccordionButtonClicked">
                                 <template v-slot:buttonContent>
@@ -297,17 +309,19 @@
                                 </template>
                                 <template v-slot:bodyContent>
 
-                                    <CheckableAccordion edu-level="Mag" list-type="ApplicantsQuota"
+                                    <CheckableAccordion edu-level="Mag" list-type="Applicants_quota"
                                                         budget-or-contract="Target">
                                         <template v-slot:accordeonBody>
-                                            <template v-if="MagApplicantsQuotaTarget">
-                                                <template v-if="MagApplicantsQuotaTarget.size > 0">
+                                            <template v-if="MagApplicants_quotaTarget">
+                                                <template v-if="MagApplicants_quotaTarget.size > 0">
                                                     <div class="programs"
-                                                         v-for="competition in MagApplicantsQuotaTarget.values()">
+                                                         v-for="competition in MagApplicants_quotaTarget.values()">
                                                         <CheckableProgram
                                                             :item-name="competition.uuid"
                                                             :is-selected="competition.Selected"
-                                                            :belongs-to="'MagApplicantsQuotaTarget'"
+                                                            :belongs-to="'MagApplicants_quotaTarget'"
+                                                            :update-interval="competition.update_interval"
+                                                            :last-update-time="competition.generated_at"
                                                             class="flex-fill"
                                                             @onCheckboxClicked="checkableProgramClicked">
                                                             <template v-slot:Code>
@@ -334,7 +348,7 @@
                             </MyAccordionItem>
 
                             <!--Contest list (Detailed quota)-->
-                            <MyAccordionItem edu-level="Mag" list-type="ContestQuota"
+                            <MyAccordionItem edu-level="Mag" list-type="Contest_quota"
                                              budget-or-contract="Target"
                                              @onAccordionButtonClicked="OnAccordionButtonClicked">
                                 <template v-slot:buttonContent>
@@ -343,17 +357,19 @@
                                 </template>
                                 <template v-slot:bodyContent>
 
-                                    <CheckableAccordion edu-level="Mag" list-type="ContestQuota"
+                                    <CheckableAccordion edu-level="Mag" list-type="Contest_quota"
                                                         budget-or-contract="Target">
                                         <template v-slot:accordeonBody>
-                                            <template v-if="MagContestQuotaTarget">
-                                                <template v-if="MagContestQuotaTarget.size > 0">
+                                            <template v-if="MagContest_quotaTarget">
+                                                <template v-if="MagContest_quotaTarget.size > 0">
                                                     <div class="programs"
-                                                         v-for="competition in MagContestQuotaTarget.values()">
+                                                         v-for="competition in MagContest_quotaTarget.values()">
                                                         <CheckableProgram
                                                             :item-name="competition.uuid"
                                                             :is-selected="competition.Selected"
-                                                            :belongs-to="'MagContestQuotaTarget'"
+                                                            :belongs-to="'MagContest_quotaTarget'"
+                                                            :update-interval="competition.update_interval"
+                                                            :last-update-time="competition.generated_at"
                                                             class="flex-fill"
                                                             @onCheckboxClicked="checkableProgramClicked">
                                                             <template v-slot:Code>
@@ -372,6 +388,103 @@
                                                     Списки не найдены.</p>
                                             </template>
                                             <p v-else>Загрузка списков...</p>
+
+                                        </template>
+                                    </CheckableAccordion>
+
+                                </template>
+                            </MyAccordionItem>
+
+                            <MyAccordionItem edu-level="Mag" list-type="Contest_insider">
+                                <template v-slot:buttonContent>
+                                    <p class="direction-info__name direction-info__body ps-3"
+                                       style="display:block;">Внутренние конкурсные списки</p>
+                                </template>
+                                <template v-slot:bodyContent>
+
+                                    <CheckableAccordion edu-level="Mag" list-type="Contest_insider"
+                                                        budget-or-contract="BudgetAndContract">
+                                        <template v-slot:accordeonBody>
+
+                                            <!-- Budget -->
+                                            <MyAccordionItem edu-level="Mag" list-type="Contest_insider"
+                                                             budget-or-contract="Budget"
+                                                             checkbox-name="MagContest_insiderBudget"
+                                                             v-model="checkableGroups['MagContest_insiderBudget']"
+                                                             @change="OnBigCheckboxClick"
+                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
+                                                <template v-slot:buttonContent>
+                                                    <label
+                                                        class="direction-info__name direction-info__body flex-fill">Бюджет</label>
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    <div>
+                                                        <template v-if="MagContest_insiderBudget">
+                                                            <div class="programs"
+                                                                 v-for="competition in MagContest_insiderBudget.values()">
+                                                                <CheckableProgram
+                                                                    :item-name="competition.uuid"
+                                                                    :is-selected="competition.Selected"
+                                                                    :belongs-to="'MagContest_insiderBudget'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
+                                                                    class="flex-fill"
+                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                    <template v-slot:Code>
+                                                                        {{ competition.direction_code }}
+                                                                    </template>
+                                                                    <template v-slot:Name>
+                                                                        {{
+                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                        }}
+                                                                    </template>
+                                                                </CheckableProgram>
+                                                            </div>
+                                                        </template>
+                                                        <p v-else>Загрузка списков...</p>
+                                                    </div>
+                                                </template>
+                                            </MyAccordionItem>
+
+                                            <!-- Contract -->
+                                            <MyAccordionItem edu-level="Mag" list-type="Contest_insider"
+                                                             budget-or-contract="Contract"
+                                                             checkbox-name="MagContest_insiderContract"
+                                                             v-model="checkableGroups['MagContest_insiderContract']"
+                                                             @change="OnBigCheckboxClick"
+                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
+                                                <template v-slot:buttonContent>
+                                                    <label
+                                                        class="direction-info__name direction-info__body flex-fill">Контракт</label>
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    <div>
+                                                        <template v-if="MagContest_insiderContract">
+                                                            <div class="programs"
+                                                                 v-for="competition in MagContest_insiderContract.values()">
+                                                                <CheckableProgram
+                                                                    :item-name="competition.uuid"
+                                                                    :is-selected="competition.Selected"
+                                                                    :belongs-to="'MagContest_insiderContract'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
+                                                                    class="flex-fill"
+                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                    <template v-slot:Code>
+                                                                        {{ competition.direction_code }}
+                                                                    </template>
+                                                                    <template v-slot:Name>
+                                                                        {{
+                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                        }}
+                                                                    </template>
+                                                                </CheckableProgram>
+                                                            </div>
+                                                        </template>
+                                                        <p v-else>Загрузка списков...</p>
+                                                    </div>
+                                                </template>
+                                            </MyAccordionItem>
 
                                         </template>
                                     </CheckableAccordion>
@@ -444,12 +557,20 @@ export default {
             return this.getCurrentCompetitions('MagEnrolledContract')
         },
 
-        MagApplicantsQuotaTarget() {
-            return this.getCurrentCompetitions('MagApplicantsQuotaTarget');
+        MagApplicants_quotaTarget() {
+            return this.getCurrentCompetitions('MagApplicants_quotaTarget');
         },
 
-        MagContestQuotaTarget() {
-            return this.getCurrentCompetitions('MagContestQuotaTarget');
+        MagContest_quotaTarget() {
+            return this.getCurrentCompetitions('MagContest_quotaTarget');
+        },
+
+        MagContest_insiderBudget() {
+            return this.getCurrentCompetitions('MagContest_insiderBudget')
+        },
+
+        MagContest_insiderContract() {
+            return this.getCurrentCompetitions('MagContest_insiderContract')
         },
     },
 
@@ -472,9 +593,10 @@ export default {
 
         tempMap.set("Applicants", 1);
         tempMap.set("Contest", 2);
-        tempMap.set("ApplicantsQuota", 4);
+        tempMap.set("Contest_insider", 3);
+        tempMap.set("Applicants_quota", 4);
         tempMap.set("Enrolled", 5);
-        tempMap.set("ContestQuota", 6);
+        tempMap.set("Contest_quota", 6);
 
         tempMap.set("Budget", 1);
         tempMap.set("Contract", 2);

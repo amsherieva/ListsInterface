@@ -1,5 +1,5 @@
 <template>
-    <div class="row container-fluid mx-auto mt-md-5 pt-lg-3 mt-4 mb-4">
+    <div class="row container-fluid mx-auto mt-sm-5 pt-lg-3 mt-4 mb-4">
         <div class="col-lg-4 col-md-7 p-0 mx-auto">
             <div class="d-flex justify-content-evenly">
                 <button class="btn-b py-2" @click="goToBak"><b><span

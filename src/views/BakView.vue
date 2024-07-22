@@ -1,7 +1,7 @@
 <template>
     <div class="row container-fluid mx-auto">
         <div class="col-lg-7 col p-0 mx-auto">
-            <p class="actions-header mb-0 mt-3">Бакалавриат</p>
+            <p class="actions-header mb-0 mt-4">Бакалавриат</p>
         </div>
     </div>
     <BakCompetitionLists :clearTrigger @onCompetitionListsStateUpdate="competitionListsStateUpdated"/>
@@ -17,6 +17,8 @@
         <MultipleCompetitionsControls :competitions="selectedCompetitions" :namingMap
                                       @selectedCompetitionsUpdated="selectedCompetitionsUpdated"/>
     </template>
+
+    <HighPriorityFileLoader/>
 </template>
 
 <script>
@@ -26,10 +28,12 @@ import MultipleCompetitionsControls from "@/components/MultipleCompetitionsContr
 import ListSelectorNotification from "@/components/ListSelectorNotification.vue";
 import ListSelector from "@/components/ListSelector.vue";
 import BakCompetitionLists from "@/components/BakCompetitionLists.vue";
+import HighPriorityFileLoader from "@/components/HighPriorityFileLoader.vue";
 
 export default {
     name: "BakView",
     components: {
+        HighPriorityFileLoader,
         BakCompetitionLists,
         ListSelector, ListSelectorNotification, MultipleCompetitionsControls, SingleCompetitionControls},
 
@@ -40,12 +44,14 @@ export default {
 
         this.namingMap.set("Applicants", "Списки подавших заявление");
         this.namingMap.set("Contest", "Конкурсные списки");
-        this.namingMap.set("ApplicantsQuota", "Списки подавших заявление (ДЦК)");
+        this.namingMap.set("Applicants_quota", "Списки подавших заявление (ДЦК)");
         this.namingMap.set("Enrolled", "Списки зачисленных");
-        this.namingMap.set("ContestQuota", "Конкурсные списки (ДЦК)");
+        this.namingMap.set("Contest_quota", "Конкурсные списки (ДЦК)");
+        this.namingMap.set("Contest_insider", "Внутренние конкурсные списки");
 
         this.namingMap.set("Budget", "Бюджет");
         this.namingMap.set("Contract", "Контракт");
+        this.namingMap.set("Target", "Целевое");
     },
 
     data() {
@@ -84,7 +90,8 @@ export default {
 
 <style>
 .actions-header {
+    color: #06326e;
     font-family: Roboto-Medium;
-    font-size: calc(1.6rem + 0.3vw);
+    font-size: calc(1.6rem + 0.4vw);
 }
 </style>

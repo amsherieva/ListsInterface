@@ -1,6 +1,6 @@
 <template>
     <div class="list-selector">
-        <div class="row container-fluid mx-auto mt-4 mb-4">
+        <div class="row container-fluid mx-auto mt-3 mb-4">
             <div class="col-lg-7 p-0 mx-auto">
                 <div class="d-flex justify-content-evenly">
                     <CheckableAccordion edu-level="Bak" list-type="Applicants">
@@ -77,6 +77,8 @@
                                                                     :item-name="competition.uuid"
                                                                     :is-selected="competition.Selected"
                                                                     :belongs-to="'BakApplicantsContract'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
                                                                     class="flex-fill"
                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                     <template v-slot:Code>
@@ -132,6 +134,8 @@
                                                                     :item-name="competition.uuid"
                                                                     :is-selected="competition.Selected"
                                                                     :belongs-to="'BakContestBudget'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
                                                                     class="flex-fill"
                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                     <template v-slot:Code>
@@ -170,6 +174,8 @@
                                                                     :item-name="competition.uuid"
                                                                     :is-selected="competition.Selected"
                                                                     :belongs-to="'BakContestContract'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
                                                                     class="flex-fill"
                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                     <template v-slot:Code>
@@ -226,6 +232,8 @@
                                                                     :item-name="competition.uuid"
                                                                     :is-selected="competition.Selected"
                                                                     :belongs-to="'BakEnrolledBudget'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
                                                                     class="flex-fill"
                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                     <template v-slot:Code>
@@ -264,6 +272,8 @@
                                                                     :item-name="competition.uuid"
                                                                     :is-selected="competition.Selected"
                                                                     :belongs-to="'BakEnrolledContract'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
                                                                     class="flex-fill"
                                                                     @onCheckboxClicked="checkableProgramClicked">
                                                                     <template v-slot:Code>
@@ -289,7 +299,7 @@
                             </MyAccordionItem>
 
                             <!--Applicants list (Detailed quota)-->
-                            <MyAccordionItem edu-level="Bak" list-type="ApplicantsQuota"
+                            <MyAccordionItem edu-level="Bak" list-type="Applicants_quota"
                                              budget-or-contract="Target"
                                              @onAccordionButtonClicked="OnAccordionButtonClicked">
                                 <template v-slot:buttonContent>
@@ -299,17 +309,19 @@
                                 </template>
                                 <template v-slot:bodyContent>
 
-                                    <CheckableAccordion edu-level="Bak" list-type="ApplicantsQuota"
+                                    <CheckableAccordion edu-level="Bak" list-type="Applicants_quota"
                                                         budget-or-contract="Target">
                                         <template v-slot:accordeonBody>
-                                            <template v-if="BakApplicantsQuotaTarget">
-                                                <template v-if="BakApplicantsQuotaTarget.size > 0">
+                                            <template v-if="BakApplicants_quotaTarget">
+                                                <template v-if="BakApplicants_quotaTarget.size > 0">
                                                     <div class="programs"
-                                                         v-for="competition in BakApplicantsQuotaTarget.values()">
+                                                         v-for="competition in BakApplicants_quotaTarget.values()">
                                                         <CheckableProgram
                                                             :item-name="competition.uuid"
                                                             :is-selected="competition.Selected"
-                                                            :belongs-to="'BakApplicantsQuotaTarget'"
+                                                            :belongs-to="'BakApplicants_quotaTarget'"
+                                                            :update-interval="competition.update_interval"
+                                                            :last-update-time="competition.generated_at"
                                                             class="flex-fill"
                                                             @onCheckboxClicked="checkableProgramClicked">
                                                             <template v-slot:Code>
@@ -336,7 +348,7 @@
                             </MyAccordionItem>
 
                             <!--Contest list (Detailed quota)-->
-                            <MyAccordionItem edu-level="Bak" list-type="ContestQuota"
+                            <MyAccordionItem edu-level="Bak" list-type="Contest_quota"
                                              budget-or-contract="Target"
                                              @onAccordionButtonClicked="OnAccordionButtonClicked">
                                 <template v-slot:buttonContent>
@@ -345,17 +357,19 @@
                                 </template>
                                 <template v-slot:bodyContent>
 
-                                    <CheckableAccordion edu-level="Bak" list-type="ContestQuota"
+                                    <CheckableAccordion edu-level="Bak" list-type="Contest_quota"
                                                         budget-or-contract="Target">
                                         <template v-slot:accordeonBody>
-                                            <template v-if="BakContestQuotaTarget">
-                                                <template v-if="BakContestQuotaTarget.size > 0">
+                                            <template v-if="BakContest_quotaTarget">
+                                                <template v-if="BakContest_quotaTarget.size > 0">
                                                     <div class="programs"
-                                                         v-for="competition in BakContestQuotaTarget.values()">
+                                                         v-for="competition in BakContest_quotaTarget.values()">
                                                         <CheckableProgram
                                                             :item-name="competition.uuid"
                                                             :is-selected="competition.Selected"
-                                                            :belongs-to="'BakContestQuotaTarget'"
+                                                            :belongs-to="'BakContest_quotaTarget'"
+                                                            :update-interval="competition.update_interval"
+                                                            :last-update-time="competition.generated_at"
                                                             class="flex-fill"
                                                             @onCheckboxClicked="checkableProgramClicked">
                                                             <template v-slot:Code>
@@ -374,6 +388,104 @@
                                                     Списки не найдены.</p>
                                             </template>
                                             <p v-else>Загрузка списков...</p>
+
+                                        </template>
+                                    </CheckableAccordion>
+
+                                </template>
+                            </MyAccordionItem>
+
+                            <!--Enrolled list-->
+                            <MyAccordionItem edu-level="Bak" list-type="Contest_insider">
+                                <template v-slot:buttonContent>
+                                    <p class="direction-info__name direction-info__body ps-3"
+                                       style="display:block;">Внутренние конкурсные списки</p>
+                                </template>
+                                <template v-slot:bodyContent>
+
+                                    <CheckableAccordion edu-level="Bak" list-type="Contest_insider"
+                                                        budget-or-contract="BudgetAndContract">
+                                        <template v-slot:accordeonBody>
+
+                                            <!-- Budget -->
+                                            <MyAccordionItem edu-level="Bak" list-type="Contest_insider"
+                                                             budget-or-contract="Budget"
+                                                             checkbox-name="BakContest_insiderBudget"
+                                                             v-model="checkableGroups['BakContest_insiderBudget']"
+                                                             @change="OnBigCheckboxClick"
+                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
+                                                <template v-slot:buttonContent>
+                                                    <label
+                                                        class="direction-info__name direction-info__body flex-fill">Бюджет</label>
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    <div>
+                                                        <template v-if="BakContest_insiderBudget">
+                                                            <div class="programs"
+                                                                 v-for="competition in BakContest_insiderBudget.values()">
+                                                                <CheckableProgram
+                                                                    :item-name="competition.uuid"
+                                                                    :is-selected="competition.Selected"
+                                                                    :belongs-to="'BakContest_insiderBudget'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
+                                                                    class="flex-fill"
+                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                    <template v-slot:Code>
+                                                                        {{ competition.direction_code }}
+                                                                    </template>
+                                                                    <template v-slot:Name>
+                                                                        {{
+                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                        }}
+                                                                    </template>
+                                                                </CheckableProgram>
+                                                            </div>
+                                                        </template>
+                                                        <p v-else>Загрузка списков...</p>
+                                                    </div>
+                                                </template>
+                                            </MyAccordionItem>
+
+                                            <!-- Contract -->
+                                            <MyAccordionItem edu-level="Bak" list-type="Contest_insider"
+                                                             budget-or-contract="Contract"
+                                                             checkbox-name="BakContest_insiderContract"
+                                                             v-model="checkableGroups['BakContest_insiderContract']"
+                                                             @change="OnBigCheckboxClick"
+                                                             @onAccordionButtonClicked="OnAccordionButtonClicked">
+                                                <template v-slot:buttonContent>
+                                                    <label
+                                                        class="direction-info__name direction-info__body flex-fill">Контракт</label>
+                                                </template>
+                                                <template v-slot:bodyContent>
+                                                    <div>
+                                                        <template v-if="BakContest_insiderContract">
+                                                            <div class="programs"
+                                                                 v-for="competition in BakContest_insiderContract.values()">
+                                                                <CheckableProgram
+                                                                    :item-name="competition.uuid"
+                                                                    :is-selected="competition.Selected"
+                                                                    :belongs-to="'BakContest_insiderContract'"
+                                                                    :update-interval="competition.update_interval"
+                                                                    :last-update-time="competition.generated_at"
+                                                                    class="flex-fill"
+                                                                    @onCheckboxClicked="checkableProgramClicked">
+                                                                    <template v-slot:Code>
+                                                                        {{ competition.direction_code }}
+                                                                    </template>
+                                                                    <template v-slot:Name>
+                                                                        {{
+                                                                            competition.competition_group + (competition.edu_form ? (" (" + competition.edu_form.toLowerCase() + ")") : "")
+                                                                        }}
+                                                                    </template>
+                                                                </CheckableProgram>
+                                                            </div>
+                                                        </template>
+                                                        <p v-else>Загрузка списков...</p>
+                                                    </div>
+                                                </template>
+                                            </MyAccordionItem>
 
                                         </template>
                                     </CheckableAccordion>
@@ -446,12 +558,20 @@ export default {
             return this.getCurrentCompetitions('BakEnrolledContract');
         },
 
-        BakApplicantsQuotaTarget() {
-            return this.getCurrentCompetitions('BakApplicantsQuotaTarget');
+        BakApplicants_quotaTarget() {
+            return this.getCurrentCompetitions('BakApplicants_quotaTarget');
         },
 
-        BakContestQuotaTarget() {
-            return this.getCurrentCompetitions('BakContestQuotaTarget');
+        BakContest_quotaTarget() {
+            return this.getCurrentCompetitions('BakContest_quotaTarget');
+        },
+
+        BakContest_insiderBudget() {
+            return this.getCurrentCompetitions('BakContest_insiderBudget')
+        },
+
+        BakContest_insiderContract() {
+            return this.getCurrentCompetitions('BakContest_insiderContract')
         },
     },
 
@@ -474,9 +594,10 @@ export default {
 
         tempMap.set("Applicants", 1);
         tempMap.set("Contest", 2);
-        tempMap.set("ApplicantsQuota", 4);
+        tempMap.set("Contest_insider", 3);
+        tempMap.set("Applicants_quota", 4);
         tempMap.set("Enrolled", 5);
-        tempMap.set("ContestQuota", 6);
+        tempMap.set("Contest_quota", 6);
 
         tempMap.set("Budget", 1);
         tempMap.set("Contract", 2);

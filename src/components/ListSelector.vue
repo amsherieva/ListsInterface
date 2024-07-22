@@ -300,7 +300,7 @@
                                             </MyAccordionItem>
 
                                             <!--Applicants list (Detailed quota)-->
-                                            <MyAccordionItem edu-level="Bak" list-type="ApplicantsQuota"
+                                            <MyAccordionItem edu-level="Bak" list-type="Applicants_quota"
                                                              budget-or-contract="Target"
                                                              @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                 <template v-slot:buttonContent>
@@ -310,17 +310,17 @@
                                                 </template>
                                                 <template v-slot:bodyContent>
 
-                                                    <CheckableAccordion edu-level="Bak" list-type="ApplicantsQuota"
+                                                    <CheckableAccordion edu-level="Bak" list-type="Applicants_quota"
                                                                         budget-or-contract="Target">
                                                         <template v-slot:accordeonBody>
-                                                            <template v-if="BakApplicantsQuotaTarget">
-                                                                <template v-if="BakApplicantsQuotaTarget.size > 0">
+                                                            <template v-if="BakApplicants_quotaTarget">
+                                                                <template v-if="BakApplicants_quotaTarget.size > 0">
                                                                     <div class="programs"
-                                                                         v-for="competition in BakApplicantsQuotaTarget.values()">
+                                                                         v-for="competition in BakApplicants_quotaTarget.values()">
                                                                         <CheckableProgram
                                                                             :item-name="competition.uuid"
                                                                             :is-selected="competition.Selected"
-                                                                            :belongs-to="'BakApplicantsQuotaTarget'"
+                                                                            :belongs-to="'BakApplicants_quotaTarget'"
                                                                             class="flex-fill"
                                                                             @onCheckboxClicked="checkableProgramClicked">
                                                                             <template v-slot:Code>
@@ -347,7 +347,7 @@
                                             </MyAccordionItem>
 
                                             <!--Contest list (Detailed quota)-->
-                                            <MyAccordionItem edu-level="Bak" list-type="ContestQuota"
+                                            <MyAccordionItem edu-level="Bak" list-type="Contest_quota"
                                                              budget-or-contract="Target"
                                                              @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                 <template v-slot:buttonContent>
@@ -356,17 +356,17 @@
                                                 </template>
                                                 <template v-slot:bodyContent>
 
-                                                    <CheckableAccordion edu-level="Bak" list-type="ContestQuota"
+                                                    <CheckableAccordion edu-level="Bak" list-type="Contest_quota"
                                                                         budget-or-contract="Target">
                                                         <template v-slot:accordeonBody>
-                                                            <template v-if="BakContestQuotaTarget">
-                                                                <template v-if="BakContestQuotaTarget.size > 0">
+                                                            <template v-if="BakContest_quotaTarget">
+                                                                <template v-if="BakContest_quotaTarget.size > 0">
                                                                     <div class="programs"
-                                                                         v-for="competition in BakContestQuotaTarget.values()">
+                                                                         v-for="competition in BakContest_quotaTarget.values()">
                                                                         <CheckableProgram
                                                                             :item-name="competition.uuid"
                                                                             :is-selected="competition.Selected"
-                                                                            :belongs-to="'BakContestQuotaTarget'"
+                                                                            :belongs-to="'BakContest_quotaTarget'"
                                                                             class="flex-fill"
                                                                             @onCheckboxClicked="checkableProgramClicked">
                                                                             <template v-slot:Code>
@@ -688,7 +688,7 @@
                                             </MyAccordionItem>
 
                                             <!--Applicants list (Detailed quota)-->
-                                            <MyAccordionItem edu-level="Mag" list-type="ApplicantsQuota"
+                                            <MyAccordionItem edu-level="Mag" list-type="Applicants_quota"
                                                              budget-or-contract="Target"
                                                              @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                 <template v-slot:buttonContent>
@@ -698,17 +698,17 @@
                                                 </template>
                                                 <template v-slot:bodyContent>
 
-                                                    <CheckableAccordion edu-level="Mag" list-type="ApplicantsQuota"
+                                                    <CheckableAccordion edu-level="Mag" list-type="Applicants_quota"
                                                                         budget-or-contract="Target">
                                                         <template v-slot:accordeonBody>
-                                                            <template v-if="MagApplicantsQuotaTarget">
-                                                                <template v-if="MagApplicantsQuotaTarget.size > 0">
+                                                            <template v-if="MagApplicants_quotaTarget">
+                                                                <template v-if="MagApplicants_quotaTarget.size > 0">
                                                                     <div class="programs"
-                                                                         v-for="competition in MagApplicantsQuotaTarget.values()">
+                                                                         v-for="competition in MagApplicants_quotaTarget.values()">
                                                                         <CheckableProgram
                                                                             :item-name="competition.uuid"
                                                                             :is-selected="competition.Selected"
-                                                                            :belongs-to="'MagApplicantsQuotaTarget'"
+                                                                            :belongs-to="'MagApplicants_quotaTarget'"
                                                                             class="flex-fill"
                                                                             @onCheckboxClicked="checkableProgramClicked">
                                                                             <template v-slot:Code>
@@ -735,7 +735,7 @@
                                             </MyAccordionItem>
 
                                             <!--Contest list (Detailed quota)-->
-                                            <MyAccordionItem edu-level="Mag" list-type="ContestQuota"
+                                            <MyAccordionItem edu-level="Mag" list-type="Contest_quota"
                                                              budget-or-contract="Target"
                                                              @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                 <template v-slot:buttonContent>
@@ -744,17 +744,17 @@
                                                 </template>
                                                 <template v-slot:bodyContent>
 
-                                                    <CheckableAccordion edu-level="Mag" list-type="ContestQuota"
+                                                    <CheckableAccordion edu-level="Mag" list-type="Contest_quota"
                                                                         budget-or-contract="Target">
                                                         <template v-slot:accordeonBody>
-                                                            <template v-if="MagContestQuotaTarget">
-                                                                <template v-if="MagContestQuotaTarget.size > 0">
+                                                            <template v-if="MagContest_quotaTarget">
+                                                                <template v-if="MagContest_quotaTarget.size > 0">
                                                                     <div class="programs"
-                                                                         v-for="competition in MagContestQuotaTarget.values()">
+                                                                         v-for="competition in MagContest_quotaTarget.values()">
                                                                         <CheckableProgram
                                                                             :item-name="competition.uuid"
                                                                             :is-selected="competition.Selected"
-                                                                            :belongs-to="'MagContestQuotaTarget'"
+                                                                            :belongs-to="'MagContest_quotaTarget'"
                                                                             class="flex-fill"
                                                                             @onCheckboxClicked="checkableProgramClicked">
                                                                             <template v-slot:Code>
@@ -984,7 +984,7 @@
                                             </MyAccordionItem>
 
                                             <!--Applicants list (Detailed quota)-->
-                                            <MyAccordionItem edu-level="Asp" list-type="ApplicantsQuota"
+                                            <MyAccordionItem edu-level="Asp" list-type="Applicants_quota"
                                                              budget-or-contract="Target"
                                                              @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                 <template v-slot:buttonContent>
@@ -994,17 +994,17 @@
                                                 </template>
                                                 <template v-slot:bodyContent>
 
-                                                    <CheckableAccordion edu-level="Asp" list-type="ApplicantsQuota"
+                                                    <CheckableAccordion edu-level="Asp" list-type="Applicants_quota"
                                                                         budget-or-contract="Target">
                                                         <template v-slot:accordeonBody>
-                                                            <template v-if="AspApplicantsQuotaTarget">
-                                                                <template v-if="AspApplicantsQuotaTarget.size > 0">
+                                                            <template v-if="AspApplicants_quotaTarget">
+                                                                <template v-if="AspApplicants_quotaTarget.size > 0">
                                                                     <div class="programs"
-                                                                         v-for="competition in AspApplicantsQuotaTarget.values()">
+                                                                         v-for="competition in AspApplicants_quotaTarget.values()">
                                                                         <CheckableProgram
                                                                             :item-name="competition.uuid"
                                                                             :is-selected="competition.Selected"
-                                                                            :belongs-to="'AspApplicantsQuotaTarget'"
+                                                                            :belongs-to="'AspApplicants_quotaTarget'"
                                                                             class="flex-fill"
                                                                             @onCheckboxClicked="checkableProgramClicked">
                                                                             <template v-slot:Code>
@@ -1031,7 +1031,7 @@
                                             </MyAccordionItem>
 
                                             <!--Contest list (Detailed quota)-->
-                                            <MyAccordionItem edu-level="Asp" list-type="ContestQuota"
+                                            <MyAccordionItem edu-level="Asp" list-type="Contest_quota"
                                                              budget-or-contract="Target"
                                                              @onAccordionButtonClicked="OnAccordionButtonClicked">
                                                 <template v-slot:buttonContent>
@@ -1040,17 +1040,17 @@
                                                 </template>
                                                 <template v-slot:bodyContent>
 
-                                                    <CheckableAccordion edu-level="Asp" list-type="ContestQuota"
+                                                    <CheckableAccordion edu-level="Asp" list-type="Contest_quota"
                                                                         budget-or-contract="Target">
                                                         <template v-slot:accordeonBody>
-                                                            <template v-if="AspContestQuotaTarget">
-                                                                <template v-if="AspContestQuotaTarget.size > 0">
+                                                            <template v-if="AspContest_quotaTarget">
+                                                                <template v-if="AspContest_quotaTarget.size > 0">
                                                                     <div class="programs"
-                                                                         v-for="competition in AspContestQuotaTarget.values()">
+                                                                         v-for="competition in AspContest_quotaTarget.values()">
                                                                         <CheckableProgram
                                                                             :item-name="competition.uuid"
                                                                             :is-selected="competition.Selected"
-                                                                            :belongs-to="'AspContestQuotaTarget'"
+                                                                            :belongs-to="'AspContest_quotaTarget'"
                                                                             class="flex-fill"
                                                                             @onCheckboxClicked="checkableProgramClicked">
                                                                             <template v-slot:Code>
@@ -1149,12 +1149,12 @@ export default {
             return this.getCurrentCompetitions('BakEnrolledContract');
         },
 
-        BakApplicantsQuotaTarget() {
-            return this.getCurrentCompetitions('BakApplicantsQuotaTarget');
+        BakApplicants_quotaTarget() {
+            return this.getCurrentCompetitions('BakApplicants_quotaTarget');
         },
 
-        BakContestQuotaTarget() {
-            return this.getCurrentCompetitions('BakContestQuotaTarget');
+        BakContest_quotaTarget() {
+            return this.getCurrentCompetitions('BakContest_quotaTarget');
         },
 
 
@@ -1183,12 +1183,12 @@ export default {
             return this.getCurrentCompetitions('MagEnrolledContract')
         },
 
-        MagApplicantsQuotaTarget() {
-            return this.getCurrentCompetitions('MagApplicantsQuotaTarget');
+        MagApplicants_quotaTarget() {
+            return this.getCurrentCompetitions('MagApplicants_quotaTarget');
         },
 
-        MagContestQuotaTarget() {
-            return this.getCurrentCompetitions('MagContestQuotaTarget');
+        MagContest_quotaTarget() {
+            return this.getCurrentCompetitions('MagContest_quotaTarget');
         },
 
 
@@ -1209,12 +1209,12 @@ export default {
             return this.getCurrentCompetitions('AspEnrolledContract')
         },
 
-        AspApplicantsQuotaTarget() {
-            return this.getCurrentCompetitions('AspApplicantsQuotaTarget');
+        AspApplicants_quotaTarget() {
+            return this.getCurrentCompetitions('AspApplicants_quotaTarget');
         },
 
-        AspContestQuotaTarget() {
-            return this.getCurrentCompetitions('AspContestQuotaTarget');
+        AspContest_quotaTarget() {
+            return this.getCurrentCompetitions('AspContest_quotaTarget');
         },
     },
     components: {MyAccordionItem, CheckableProgram, CheckableAccordion},
@@ -1243,9 +1243,9 @@ export default {
 
         tempMap.set("Applicants", 1);
         tempMap.set("Contest", 2);
-        tempMap.set("ApplicantsQuota", 4);
+        tempMap.set("Applicants_quota", 4);
         tempMap.set("Enrolled", 5);
-        tempMap.set("ContestQuota", 6);
+        tempMap.set("Contest_quota", 6);
 
         tempMap.set("Budget", 1);
         tempMap.set("Contract", 2);

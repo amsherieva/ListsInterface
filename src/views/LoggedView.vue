@@ -44,9 +44,9 @@ export default {
 
         this.namingMap.set("Applicants", "Списки подавших заявление");
         this.namingMap.set("Contest", "Конкурсные списки");
-        this.namingMap.set("ApplicantsQuota", "Списки подавших заявление (ДЦК)");
+        this.namingMap.set("Applicants_quota", "Списки подавших заявление (ДЦК)");
         this.namingMap.set("Enrolled", "Списки зачисленных");
-        this.namingMap.set("ContestQuota", "Конкурсные списки (ДЦК)");
+        this.namingMap.set("Contest_quota", "Конкурсные списки (ДЦК)");
 
         this.namingMap.set("Budget", "Бюджет");
         this.namingMap.set("Contract", "Контракт");
