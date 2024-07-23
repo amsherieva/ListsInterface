@@ -24,14 +24,12 @@
 import SingleCompetitionControls from "@/components/SingleCompetitionControls.vue";
 import MultipleCompetitionsControls from "@/components/MultipleCompetitionsControls.vue";
 import ListSelectorNotification from "@/components/ListSelectorNotification.vue";
-import ListSelector from "@/components/ListSelector.vue";
 import MagCompetitionLists from "@/components/MagCompetitionLists.vue";
 
 export default {
     name: "MagView",
     components: {
-        MagCompetitionLists,
-        ListSelector, ListSelectorNotification, MultipleCompetitionsControls, SingleCompetitionControls},
+        MagCompetitionLists, ListSelectorNotification, MultipleCompetitionsControls, SingleCompetitionControls},
 
     async created() {
         this.namingMap = new Map();

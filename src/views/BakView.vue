@@ -18,7 +18,7 @@
                                       @selectedCompetitionsUpdated="selectedCompetitionsUpdated"/>
     </template>
 
-    <HighPriorityFileLoader/>
+    <HighPriorityFileLoader :campaign-type="1"/>
 </template>
 
 <script>
@@ -26,7 +26,6 @@
 import SingleCompetitionControls from "@/components/SingleCompetitionControls.vue";
 import MultipleCompetitionsControls from "@/components/MultipleCompetitionsControls.vue";
 import ListSelectorNotification from "@/components/ListSelectorNotification.vue";
-import ListSelector from "@/components/ListSelector.vue";
 import BakCompetitionLists from "@/components/BakCompetitionLists.vue";
 import HighPriorityFileLoader from "@/components/HighPriorityFileLoader.vue";
 
@@ -34,8 +33,7 @@ export default {
     name: "BakView",
     components: {
         HighPriorityFileLoader,
-        BakCompetitionLists,
-        ListSelector, ListSelectorNotification, MultipleCompetitionsControls, SingleCompetitionControls},
+        BakCompetitionLists, ListSelectorNotification, MultipleCompetitionsControls, SingleCompetitionControls},
 
     async created() {
         this.namingMap = new Map();

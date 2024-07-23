@@ -24,14 +24,12 @@
 import SingleCompetitionControls from "@/components/SingleCompetitionControls.vue";
 import MultipleCompetitionsControls from "@/components/MultipleCompetitionsControls.vue";
 import ListSelectorNotification from "@/components/ListSelectorNotification.vue";
-import ListSelector from "@/components/ListSelector.vue";
 import AspCompetitionLists from "@/components/AspCompetitionLists.vue";
 
 export default {
     name: "AspView",
     components: {
-        AspCompetitionLists,
-        ListSelector, ListSelectorNotification, MultipleCompetitionsControls, SingleCompetitionControls
+        AspCompetitionLists, ListSelectorNotification, MultipleCompetitionsControls, SingleCompetitionControls
     },
 
     async created() {

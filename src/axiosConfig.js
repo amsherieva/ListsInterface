@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Create axios instance
-const axiosInstance = axios.create({
+const  axiosInstance = axios.create({
     baseURL: "https://lists.priem.etu.ru",
     headers: {
         "Content-Type": "application/json",
