@@ -4,7 +4,7 @@
             <h3 class="mb-3">Высший приоритет</h3>
             <p>Выберите тип списка:</p>
             <div class="row">
-                <div class="col-md-6">
+                <div class=" col-xl-6 col-lg-9 col-sm-8">
                     <select class="form-select form-select-lg mb-4" v-model="selectedCommonListType">
                         <template v-if="campaignType !== 3">
                             <option value=1>Список подавших заявление</option>
