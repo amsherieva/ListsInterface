@@ -1,10 +1,11 @@
 <template>
     <div class="row container-fluid mx-auto mt-3 mb-4">
         <div class="col-lg-7 p-0 mx-auto">
-            <h3>Высший приоритет</h3>
+            <h3 class="mb-3">Высший приоритет</h3>
+            <p>Выберите тип списка:</p>
             <div class="row">
                 <div class="col-md-6">
-                    <select class="form-select form-select-lg mt-3 mb-4" v-model="selectedCommonListType">
+                    <select class="form-select form-select-lg mb-4" v-model="selectedCommonListType">
                         <template v-if="campaignType !== 3">
                             <option value=1>Список подавших заявление</option>
                         </template>
@@ -33,13 +34,22 @@
             </div>
         </div>
     </div>
+
+    <ToastNotification :id="'highPriorityFileLoaderToast_' + campaignType" :successNotification>
+        <template v-slot:toastBody>
+            {{ toastText }}
+        </template>
+    </ToastNotification>
 </template>
 
 <script>
 import axiosInstance from "@/axiosConfig";
+import ToastNotification from "@/components/UI/ToastNotification.vue";
+import { Toast } from "bootstrap/dist/js/bootstrap.bundle.js";
 
 export default {
     name: "HighPriorityFileLoader",
+    components: {ToastNotification},
 
     props: {
         campaignType: {
@@ -60,6 +70,8 @@ export default {
 
     data() {
         return {
+            toastText: "",
+            successNotification: true,
             selectedCommonListType: -1,
             selectedMinistryFile: null,
             selectedOriginalFile: null,
@@ -73,6 +85,16 @@ export default {
 
         handleOriginalFileUpload(event) {
             this.selectedOriginalFile = event.target.files[0];
+        },
+
+        showNotification(successNotification) {
+            // Call for toast notification
+            if (successNotification) this.toastText = "Операция выполнена успешно";
+            else this.toastText = "Что-то пошло не так!";
+            this.successNotification = successNotification;
+            const toast = document.getElementById("highPriorityFileLoaderToast_" + this.campaignType);
+            const liveToast = new Toast(toast);
+            liveToast.show()
         },
 
         async uploadFile(isMinistry) {
@@ -93,43 +115,12 @@ export default {
                     }
                 });
                 console.log('File uploaded successfully:', response.data);
+                this.showNotification(true);
             } catch (error) {
+                this.showNotification(false);
                 console.error('Ошибка при получении данных:', error);
             }
         },
-
-        GetLoadedFile(isMinistry) {
-            const idString = isMinistry ? "MinistryFormFile" : "OriginalFormFile"
-            const fileInput = document.getElementById(idString).files[0];
-
-            const formData = new FormData();
-            formData.append("file", fileInput);
-
-            console.log("Selected File: ", formData.get("file"));
-        },
-
-        async SendFile(isMinistry) {
-            try {
-                const address = "/api/recommendations/" + this.campaignType + "/" + this.selectedCommonListType + "/" + (isMinistry ? "ministry" : "original");
-                console.log("Address: ", address);
-
-                const formData = new FormData();
-                formData.append("file", fileInput);
-
-                // const response = await axiosInstance.post(address, {
-                //     formData
-                // }, {
-                //     headers: {
-                //         "Content-Type": "multipart/form-data"
-                //     }
-                // });
-
-                // const response = await axiosInstance.postForm(address, document.getElementById(idString).files);
-                // console.log("SendFile response", response);
-            } catch (error) {
-                console.error('Ошибка при получении данных:', error);
-            }
-        }
     }
 }
 </script>

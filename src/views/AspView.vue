@@ -17,6 +17,8 @@
         <MultipleCompetitionsControls :competitions="selectedCompetitions" :namingMap
                                       @selectedCompetitionsUpdated="selectedCompetitionsUpdated"/>
     </template>
+
+    <HighPriorityFileLoader :campaign-type="3"/>
 </template>
 
 <script>
@@ -25,10 +27,12 @@ import SingleCompetitionControls from "@/components/SingleCompetitionControls.vu
 import MultipleCompetitionsControls from "@/components/MultipleCompetitionsControls.vue";
 import ListSelectorNotification from "@/components/ListSelectorNotification.vue";
 import AspCompetitionLists from "@/components/AspCompetitionLists.vue";
+import HighPriorityFileLoader from "@/components/HighPriorityFileLoader.vue";
 
 export default {
     name: "AspView",
     components: {
+        HighPriorityFileLoader,
         AspCompetitionLists, ListSelectorNotification, MultipleCompetitionsControls, SingleCompetitionControls
     },
 
