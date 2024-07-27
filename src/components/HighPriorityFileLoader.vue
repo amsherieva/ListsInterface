@@ -23,6 +23,7 @@
                     <button class="btn-b" :disabled="!isMinistryButtonsActive" @click="uploadFile(true)"><i class="bi bi-upload">&nbsp;</i>Загрузить</button>
                 </div>
             </div>
+            <button class="btn-b btn-red mb-4" :disabled="!isDeleteButtonActive" @click="deleteRecommendation(true)"><i class="bi bi-trash3">&nbsp;</i>Удалить рекомендации</button>
             <p>ВП по оригиналам</p>
             <div class="row justify-content-center">
                 <div class="col-lg-9 col-md-8 col-sm-8 mb-3">
@@ -32,6 +33,7 @@
                     <button class="btn-b" :disabled="!isOriginalButtonsActive" @click="uploadFile(false)"><i class="bi bi-upload">&nbsp;</i>Загрузить</button>
                 </div>
             </div>
+            <button class="btn-b btn-red" :disabled="!isDeleteButtonActive" @click="deleteRecommendation(false)"><i class="bi bi-trash3">&nbsp;</i>Удалить рекомендации</button>
         </div>
     </div>
 
@@ -65,7 +67,11 @@ export default {
 
         isOriginalButtonsActive() {
             return ((this.selectedCommonListType > 0) && (this.selectedOriginalFile));
-        }
+        },
+
+        isDeleteButtonActive() {
+            return (this.selectedCommonListType > 0);
+        },
     },
 
     data() {
@@ -104,7 +110,7 @@ export default {
             }
 
             const address = "/api/recommendations/" + this.campaignType + "/" + this.selectedCommonListType + "/" + (isMinistry ? "ministry" : "original");
-            console.log("Address: ", address);
+            //console.log("Address: ", address);
 
             try {
                 const response = await axiosInstance.post(address, {
@@ -121,6 +127,19 @@ export default {
                 console.error('Ошибка при получении данных:', error);
             }
         },
+
+        async deleteRecommendation(isMinistry) {
+            const address = "/api/recommendations/" + this.campaignType + "/" + this.selectedCommonListType + "/" + (isMinistry ? "ministry" : "original");
+
+            try {
+                const response = await axiosInstance.delete(address, {});
+                console.log('File deleted successfully:', response.data);
+                this.showNotification(true);
+            } catch (error) {
+                this.showNotification(false);
+                console.error('Ошибка при получении данных:', error);
+            }
+        }
     }
 }
 </script>
@@ -160,6 +179,19 @@ p {
     color: #0152A3;
     background-color: #eee;
 
+    transition: ease 0.1s;
+    outline: none;
+}
+
+.btn-red {
+    border: 2px #dc3545 solid;
+    color: #dc3545;
+}
+.btn-red:hover,
+.btn-red:focus,
+.btn-red:active {
+    color: #dc3545;
+    background-color: #eee;
     transition: ease 0.1s;
     outline: none;
 }
